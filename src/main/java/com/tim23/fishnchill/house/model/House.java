@@ -17,7 +17,7 @@ public class House {
 
     private String description;
 
-    //TO-DO
+    //TODO image storage, probably a list of strings (urls)
 //    public Images;
 
     @OneToMany(mappedBy = "house", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

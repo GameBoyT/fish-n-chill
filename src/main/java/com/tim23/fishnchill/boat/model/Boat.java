@@ -26,6 +26,6 @@ public class Boat {
 
     private String vhf;
 
-    private String fishfinder;
+    private String fishFinder;
 
 }
