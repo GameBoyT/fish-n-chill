@@ -1,14 +1,20 @@
 package com.tim23.fishnchill.boat.model;
 
 import com.tim23.fishnchill.general.model.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Boat extends BaseEntity {
-//    @Id
-//    private Long id;
 
     private String name;
 

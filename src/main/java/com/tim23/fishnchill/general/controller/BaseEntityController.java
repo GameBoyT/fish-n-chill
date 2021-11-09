@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/entities", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BaseEntityController {
     @Autowired
     private BaseEntityService baseEntityService;
@@ -25,15 +23,11 @@ public class BaseEntityController {
 //        return new ResponseEntity<>("keke", HttpStatus.OK);
 //    }
 
-    @GetMapping("/entity")
-    public ResponseEntity<BaseEntity> findEntityById () {
-//        System.out.println(baseEntityService.findById(1L));
-        return new ResponseEntity<>(baseEntityService.findById(1L), HttpStatus.OK);
-    }
+//    @GetMapping("/entities")
+//    @ResponseStatus(HttpStatus.OK)
+//    @ResponseBody
+//    public BaseEntity findEntityById () {
+//        return baseEntityService.findById(1L);
+//    }
 
-    @GetMapping("/cottages")
-    public ResponseEntity<List<Cottage>> findHousesByName (){
-        System.out.println(baseEntityService.findCottagesByName("ime"));
-        return new ResponseEntity<>(baseEntityService.findCottagesByName("ime"), HttpStatus.OK);
-    }
 }

@@ -10,8 +10,4 @@ import java.util.List;
 public interface BaseEntityRepository extends JpaRepository<BaseEntity, Long> {
 //    @Query(value = "SELECT a FROM BaseEntity a WHERE a.id = ?1")
 //    List<House> findHousesByName(Long EntityId);
-
-    @Query(value = "SELECT a FROM Cottage a WHERE a.name = ?1")
-    List<Cottage> findCottagesByName(String houseName);
-
 }

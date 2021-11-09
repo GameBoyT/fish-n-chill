@@ -19,3 +19,5 @@ INSERT INTO BASE_ENTITY (id, type) VALUES (1, 0);
 -- INSERT INTO BASE_ENTITY (id, type) VALUES (2, 1);
 
 INSERT INTO COTTAGE (id, name, address, description, owner_id) VALUES (1, 'ime', 'adresa', 'opis', 2);
+
+INSERT INTO RESERVATION (duration, maximal_guests, price, entity_id, user_id) VALUES (235, 5, 35, 1, 1);

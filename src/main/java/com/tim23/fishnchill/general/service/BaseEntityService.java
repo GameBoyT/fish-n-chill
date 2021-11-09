@@ -16,7 +16,5 @@ public class BaseEntityService {
     public BaseEntity findById(Long id){
         return baseEntityRepository.getById(id);
     }
-    public List<Cottage> findCottagesByName(String name)  {
-        return baseEntityRepository.findCottagesByName(name);
-    }
+
 }
