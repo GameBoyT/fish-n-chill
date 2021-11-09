@@ -29,4 +29,7 @@ public class House {
     @OneToMany(mappedBy = "house", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Rating> ratings = new HashSet<Rating>();
 
+    @OneToMany(mappedBy = "house", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<HouseReservation> houseReservations = new HashSet<HouseReservation>();
+
 }

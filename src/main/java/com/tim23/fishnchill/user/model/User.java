@@ -7,14 +7,19 @@ import javax.persistence.*;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tim23.fishnchill.boat.model.BoatReservation;
+import com.tim23.fishnchill.house.model.HouseReservation;
 import com.tim23.fishnchill.house.model.Rating;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import static javax.persistence.InheritanceType.JOINED;
 
 // POJO koji implementira Spring Security UserDetails interfejs koji specificira
 // osnovne osobine Spring korisnika (koje role ima, da li je nalog zakljucan, istekao, da li su kredencijali istekli)
 @Entity
 @Table(name="USERS")
+@Inheritance(strategy=JOINED)
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +57,14 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Rating> ratings = new HashSet<Rating>();
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings = new HashSet<Rating>();
+    private Set<HouseReservation> houseReservations = new HashSet<HouseReservation>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<BoatReservation> boatReservations = new HashSet<BoatReservation>();
 
     public Long getId() {
         return id;
