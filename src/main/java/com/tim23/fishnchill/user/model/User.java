@@ -7,9 +7,8 @@ import javax.persistence.*;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tim23.fishnchill.boat.model.BoatReservation;
-import com.tim23.fishnchill.house.model.HouseReservation;
-import com.tim23.fishnchill.house.model.Rating;
+import com.tim23.fishnchill.general.model.Rating;
+import com.tim23.fishnchill.general.model.Reservation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -57,14 +56,11 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Rating> ratings = new HashSet<Rating>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Rating> ratings = new HashSet<Rating>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<HouseReservation> houseReservations = new HashSet<HouseReservation>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BoatReservation> boatReservations = new HashSet<BoatReservation>();
+    private Set<Reservation> reservations = new HashSet<Reservation>();
 
     public Long getId() {
         return id;

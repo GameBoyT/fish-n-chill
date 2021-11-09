@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.house.model;
+package com.tim23.fishnchill.cottage.model;
 
 import javax.persistence.*;
 
@@ -10,5 +10,5 @@ public class Room {
     private Integer numberOfBeds;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private House house;
+    private Cottage cottage;
 }

@@ -1,16 +1,18 @@
 package com.tim23.fishnchill.boat.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.tim23.fishnchill.general.model.BaseEntity;
+
+import javax.persistence.*;
+
 
 @Entity
-public class Boat {
-    @Id
-    private Long id;
+public class Boat extends BaseEntity {
+//    @Id
+//    private Long id;
 
     private String name;
 
-    private String type;
+//    private String boatType;
 
     private String length;
 
