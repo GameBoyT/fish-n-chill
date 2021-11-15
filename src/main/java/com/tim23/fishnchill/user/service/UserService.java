@@ -41,9 +41,10 @@ public class UserService {
 		u.setUsername(registrationDTO.getUsername());
 		// pre nego sto postavimo lozinku u atribut hesiramo je
 		u.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
-		u.setFirstName(registrationDTO.getFirstname());
-		u.setLastName(registrationDTO.getLastname());
-		u.setEnabled(true);
+		u.setFirstName(registrationDTO.getFirstName());
+		u.setLastName(registrationDTO.getLastName());
+		u.setEmail(registrationDTO.getEmail());
+		u.setEnabled(false);
 
 		List<Authority> auth = authService.findByname("ROLE_USER");
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
