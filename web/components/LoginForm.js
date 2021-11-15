@@ -1,48 +1,37 @@
-import React, { useState } from 'react'
+import { Formik, Field, Form } from 'formik';
 
-const LoginForm = ({
-  handleLogin
-}) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    handleLogin({
-      username,
-      password
-    })
-
-    setUsername('')
-    setPassword('')
-  }
-
-  return (
-    <div>
-      <h2>Login</h2>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            id='username'
-            value={username}
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            id='password'
-            type="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button id='login-button' type="submit">login</button>
-      </form>
-    </div>
-  )
-}
+const LoginForm = ({ handleLogin }) => (
+  <div>
+    <h1>Login</h1>
+    <Formik
+      initialValues={{
+        username: '',
+        password: '',
+      }}
+      onSubmit={async (values) => {
+        handleLogin(values)
+      }}
+    >
+      <Form>
+        <label htmlFor="username">Username</label>
+        <Field
+          id="username"
+          name="username"
+          placeholder="username"
+          type="text"
+        />
+        
+        <label htmlFor="password">Password</label>
+        <Field
+          id="password"
+          name="password"
+          placeholder="password"
+          type="password"
+        />
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
+  </div>
+)
 
 export default LoginForm

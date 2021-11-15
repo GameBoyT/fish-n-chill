@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.tim23.fishnchill.user.exception.ResourceConflictException;
 import com.tim23.fishnchill.security.TokenUtils;
-import com.tim23.fishnchill.user.DTO.AuthenticationDTO;
+import com.tim23.fishnchill.user.DTO.LoginDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,13 +47,11 @@ public class AuthenticationController {
 	// Prvi endpoint koji pogadja korisnik kada se loguje.
 	// Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
 	@PostMapping("/login")
-	public ResponseEntity<UserTokenStateDTO> createAuthenticationToken(@RequestBody AuthenticationDTO authenticationRequest,
-																	   HttpServletResponse response) {
+	public ResponseEntity<UserTokenStateDTO> createAuthenticationToken(@RequestBody LoginDTO loginDTO) {
 
-		// 
 		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
-						authenticationRequest.getPassword()));
+				.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
+						loginDTO.getPassword()));
 
 		// Ubaci korisnika u trenutni security kontekst
 		SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -69,7 +67,7 @@ public class AuthenticationController {
 
 	// Endpoint za registraciju novog korisnika
 	@PostMapping("/signup")
-	public ResponseEntity<User> addUser(@RequestBody RegistrationDTO registrationDTO, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<User> addUser(@RequestBody RegistrationDTO registrationDTO) {
 
 		User existUser = this.userService.findByUsername(registrationDTO.getUsername());
 		if (existUser != null) {
@@ -77,8 +75,6 @@ public class AuthenticationController {
 		}
 
 		User user = this.userService.save(registrationDTO);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(user.getId()).toUri());
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 
