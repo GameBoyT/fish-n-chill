@@ -1,6 +1,9 @@
 package com.tim23.fishnchill.cottage;
 
+import com.tim23.fishnchill.boat.BoatDTO;
 import com.tim23.fishnchill.cottage.model.Cottage;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +14,12 @@ public class CottageService {
     @Autowired
     private CottageRepository cottageRepository;
 
-    public List<Cottage> findAll()
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public List<CottageDTO> findAll()
     {
-        return cottageRepository.findAll();
+        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(cottageRepository.findAll(), typeToken.getType());
     }
 }

@@ -24,6 +24,22 @@ public class BaseEntity {
 
     private EntityType type;
 
+    private String name;
+
+    private String description;
+
+    private Integer capacity;
+
+    private String rules;
+
+    private String cancellationTerms;
+
+    private Double rating;
+
+    //TODO mozda neki availability za dostupnoste, kao neka lista parova datuma od kojeg do kojeg je slobodan
+
+    //TODO Cjenovnik
+
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Rating> ratings = new HashSet<>();
 
@@ -32,5 +48,8 @@ public class BaseEntity {
 
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tag> tags = new HashSet<>();
+
+    @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Image> images = new HashSet<>();
 }
 

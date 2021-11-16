@@ -22,14 +22,7 @@ import java.util.Set;
 @Entity
 public class Cottage extends BaseEntity {
 
-    private String name;
-
     private String address;
-
-    private String description;
-
-    //TODO image storage, probably a list of strings (urls)
-//    public Images;
 
     @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Room> rooms = new HashSet<>();

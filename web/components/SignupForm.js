@@ -11,7 +11,7 @@ const SignupSchema = Yup.object({
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
 });
 
-const SignupForm = ({ handleSingup }) => (
+const SignupForm = ({ handleSignup }) => (
   <div>
     <h1>Signup</h1>
     <Formik
@@ -27,7 +27,7 @@ const SignupForm = ({ handleSingup }) => (
       onSubmit={async (values) => {
         alert(JSON.stringify(values, null, 2));
         console.log(values)
-        handleSingup(values)
+        handleSignup(values)
       }}
     >
       <Form>
