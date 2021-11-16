@@ -1,7 +1,7 @@
 package com.tim23.fishnchill.boat.model;
 
 import com.tim23.fishnchill.general.model.BaseEntity;
-import com.tim23.fishnchill.user.model.BoatOwner;
+import com.tim23.fishnchill.user.model.BusinessOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,4 @@ public class Boat extends BaseEntity {
     private String fishFinder;
 
     //TODO Pecaroska oprema
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private BoatOwner owner;
 }
