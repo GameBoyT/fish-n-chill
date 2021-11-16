@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.general;
+package com.tim23.fishnchill.general.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

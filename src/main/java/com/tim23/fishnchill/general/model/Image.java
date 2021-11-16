@@ -1,6 +1,5 @@
 package com.tim23.fishnchill.general.model;
 
-import com.tim23.fishnchill.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

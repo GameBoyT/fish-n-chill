@@ -1,13 +1,10 @@
 package com.tim23.fishnchill.general.controller;
 
-import com.tim23.fishnchill.cottage.model.Cottage;
-import com.tim23.fishnchill.general.ReservationDTO;
-import com.tim23.fishnchill.general.model.Reservation;
+import com.tim23.fishnchill.general.DTO.ReservationDTO;
 import com.tim23.fishnchill.general.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.fishing.model;
+package com.tim23.fishnchill.fishing;
 
 import com.tim23.fishnchill.general.model.BaseEntity;
 import lombok.AllArgsConstructor;

@@ -23,6 +23,7 @@ INSERT INTO BUSINESS_OWNER (id) VALUES (4);
 
 INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (0, 'ime', 'opis', 2);
 INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (1, 'boat', 'description', 3);
+INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (2, 'fishing', 'fishingDescription', 4);
 
 INSERT INTO COTTAGE (id, address) VALUES (1, 'adresa');
 
@@ -32,5 +33,6 @@ INSERT INTO BOAT_SPECIFICATION (boat_type, length, engine_id, engine_power, max_
 
 INSERT INTO BOAT (id, boat_specification_id) VALUES (2, 1);
 
+INSERT INTO FISHING (id, biography) VALUES (3, 'biografija');
 
 -- INSERT INTO BOAT (duration, maximal_guests, price, entity_id, user_id) VALUES (235, 5, 35, 1, 1);
