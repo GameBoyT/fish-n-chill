@@ -1,4 +1,5 @@
 import { Formik, Field, Form } from 'formik'
+import { Box, Typography, Button, Container } from '@mui/material'
 import { TextField } from 'formik-mui'
 import * as Yup from 'yup'
 
@@ -10,46 +11,102 @@ const SignupSchema = Yup.object({
 })
 
 const SignupForm = ({ handleSignup }) => (
-  <div>
-    <h1>Signup</h1>
-    <Formik
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        username: '',
-        password: '',
-        passwordConfirmation: '',
-        email: '',
-      }}
-      validationSchema={SignupSchema}
-      onSubmit={async (values) => {
-        alert(JSON.stringify(values, null, 2))
-        console.log(values)
-        handleSignup(values)
+  <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
-      <Form>
-        <label htmlFor="firstName">First Name</label>
-        <Field id="firstName" component={TextField} name="firstName" placeholder="first name" />
-
-        <label htmlFor="lastName">Last Name</label>
-        <Field id="lastName" name="lastName" placeholder="last name" />
-
-        <label htmlFor="username">Username</label>
-        <Field id="username" name="username" placeholder="username" type="text" />
-
-        <label htmlFor="password">Password</label>
-        <Field id="password" name="password" placeholder="password" type="password" />
-
-        <label htmlFor="passwordConfirmation">Confirm Password</label>
-        <Field id="passwordConfirmation" name="passwordConfirmation" placeholder="password" type="password" />
-
-        <label htmlFor="email">Email</label>
-        <Field id="email" name="email" placeholder="email@abc.com" type="email" />
-        <button type="submit">Submit</button>
-      </Form>
-    </Formik>
-  </div>
+      <Typography component="h1" variant="h5">
+        Sign up
+      </Typography>
+      <Formik
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          email: '',
+          username: '',
+          password: '',
+          passwordConfirmation: '',
+        }}
+        validationSchema={SignupSchema}
+        onSubmit={async (values) => {
+          alert(JSON.stringify(values, null, 2))
+          console.log(values)
+          handleSignup(values)
+        }}
+      >
+        <Form>
+          <Field
+            id="firstName"
+            margin="normal"
+            required
+            fullWidth
+            component={TextField}
+            label="first name"
+            name="firstName"
+            type="text"
+          />
+          <Field
+            id="lastName"
+            margin="normal"
+            required
+            fullWidth
+            component={TextField}
+            label="last name"
+            name="lastName"
+            type="text"
+          />
+          <Field
+            id="email"
+            margin="normal"
+            required
+            fullWidth
+            component={TextField}
+            label="email"
+            name="email"
+            type="email"
+          />
+          <Field
+            id="username"
+            margin="normal"
+            required
+            fullWidth
+            component={TextField}
+            label="username"
+            name="username"
+            type="text"
+          />
+          <Field
+            id="password"
+            required
+            fullWidth
+            margin="normal"
+            component={TextField}
+            label="password"
+            name="password"
+            type="password"
+          />
+          <Field
+            id="passwordConfirmation"
+            required
+            fullWidth
+            margin="normal"
+            component={TextField}
+            label="passwordConfirmation"
+            name="passwordConfirmation"
+            type="password"
+          />
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            Sign Up
+          </Button>
+        </Form>
+      </Formik>
+    </Box>
+  </Container>
 )
 
 export default SignupForm
