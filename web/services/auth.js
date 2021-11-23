@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:8080/api/auth'
+const baseUrl = process.env.NEXT_PUBLIC_API_URL + 'auth'
 
 let token = null
 let config = null
@@ -30,4 +30,6 @@ const remove = async (id) => {
   await axios.delete(baseUrl + id, config)
 }
 
-export { getAll, setToken, create, update, remove }
+const AuthService = { getAll, setToken, create, update, remove }
+
+export default AuthService
