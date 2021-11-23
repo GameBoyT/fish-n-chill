@@ -1,4 +1,4 @@
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik'
 
 const LoginForm = ({ handleLogin }) => (
   <div>
@@ -14,20 +14,10 @@ const LoginForm = ({ handleLogin }) => (
     >
       <Form>
         <label htmlFor="username">Username</label>
-        <Field
-          id="username"
-          name="username"
-          placeholder="username"
-          type="text"
-        />
-        
+        <Field id="username" name="username" placeholder="username" type="text" />
+
         <label htmlFor="password">Password</label>
-        <Field
-          id="password"
-          name="password"
-          placeholder="password"
-          type="password"
-        />
+        <Field id="password" name="password" placeholder="password" type="password" />
         <button type="submit">Submit</button>
       </Form>
     </Formik>
