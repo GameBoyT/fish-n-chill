@@ -1,5 +1,4 @@
 import LoginForm from '../components/LoginForm'
-import authService from '../services/auth'
 import loginService from '../services/login'
 
 const Login = () => {
@@ -7,9 +6,8 @@ const Login = () => {
     try {
       const loggedInUser = await loginService.login(credentials)
       window.localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
-      authService.setToken(loggedInUser.token)
 
-      console.log('gud')
+      console.log('login successful')
     } catch (exception) {
       console.log(exception)
     }

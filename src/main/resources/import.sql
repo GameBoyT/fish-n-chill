@@ -21,8 +21,8 @@ INSERT INTO BUSINESS_OWNER (id) VALUES (2);
 INSERT INTO BUSINESS_OWNER (id) VALUES (3);
 INSERT INTO BUSINESS_OWNER (id) VALUES (4);
 
-INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (0, 'ime', 'opis', 2);
-INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (1, 'boat', 'description', 3);
+INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (0, 'cottageName', 'cottageDescription', 2);
+INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (1, 'boat', 'boatDescription', 3);
 INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (2, 'fishing', 'fishingDescription', 4);
 
 INSERT INTO COTTAGE (id, address) VALUES (1, 'adresa');
