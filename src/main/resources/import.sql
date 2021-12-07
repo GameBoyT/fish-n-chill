@@ -21,9 +21,11 @@ INSERT INTO BUSINESS_OWNER (id) VALUES (2);
 INSERT INTO BUSINESS_OWNER (id) VALUES (3);
 INSERT INTO BUSINESS_OWNER (id) VALUES (4);
 
-INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (0, 'ime', 'opis', 2);
-INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (1, 'boat', 'description', 3);
+INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (0, 'cottageName', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos, cupiditate! Odio, aliquam soluta vel, eum illum corrupti incidunt nobis porro mollitia itaque reiciendis. Aut, minus dolore! Delectus pariatur praesentium dolorem? In at, quibusdam vero eligendi provident veritatis ipsam suscipit nisi similique nulla est magni harum. Cumque maiores eos alias, aperiam ea deleniti voluptatem culpa a perferendis accusantium, necessitatibus velit laborum', 2);
+INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (1, 'boat', 'boatDescription', 3);
 INSERT INTO BASE_ENTITY (type, name, description, owner_id) VALUES (2, 'fishing', 'fishingDescription', 4);
+
+INSERT INTO IMAGE (url, entity_id) VALUES ('/images/cottage1.jpg', 1);
 
 INSERT INTO COTTAGE (id, address) VALUES (1, 'adresa');
 
