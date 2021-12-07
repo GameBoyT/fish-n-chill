@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import CottageProfile from '../../components/CottageProfile'
 import cottageService from '../../services/cottage'
 
 const Cottage = () => {
@@ -14,7 +15,11 @@ const Cottage = () => {
     router.isReady ? fetchData() : console.log('router not ready')
   }, [slug])
 
-  return <>{cottage.name}</>
+  return (
+    <>
+      <CottageProfile cottage={cottage} />
+    </>
+  )
 }
 
 export default Cottage

@@ -27,6 +27,7 @@ public class BaseEntity {
 
     private String name;
 
+    @Column(columnDefinition="TEXT")
     private String description;
 
     private Integer capacity;

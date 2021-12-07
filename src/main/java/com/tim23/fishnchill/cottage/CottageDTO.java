@@ -1,6 +1,11 @@
 package com.tim23.fishnchill.cottage;
 
+import com.tim23.fishnchill.general.DTO.ImageDTO;
+import com.tim23.fishnchill.general.model.Image;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,4 +19,6 @@ public class CottageDTO {
     private String address;
 
     private String description;
+
+    private Set<ImageDTO> images = new HashSet<>();
 }
