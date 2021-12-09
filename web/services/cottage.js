@@ -6,6 +6,11 @@ const getAll = async () => {
   return res.data
 }
 
+const getByNameContaining = async (name) => {
+  const res = await axios.get(baseUrl + "name/" + name);
+  return res.data
+}
+
 const getById = async (id) => {
   const res = await axios.get(baseUrl + id)
   return res.data
@@ -27,6 +32,7 @@ const remove = async (id) => {
 
 const cottageService = {
   getAll,
+  getByNameContaining,
   getById,
   create,
   update,
