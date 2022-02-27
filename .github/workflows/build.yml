@@ -12,7 +12,6 @@ jobs:
     services:
       db:
         image: postgres:13
-        container_name: db
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
