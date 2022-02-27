@@ -51,4 +51,5 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+          spring.datasource.url: "jdbc:postgresql://db:5432/test"
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=GameBoyT_fish-n-chill
