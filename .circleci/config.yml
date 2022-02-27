@@ -7,6 +7,7 @@ jobs:
       - image: cimg/postgres:13.5
         environment:
           POSTGRES_DB: test
+          POSTGRES_PASSWORD: root
     steps:
       - checkout
       - run:
