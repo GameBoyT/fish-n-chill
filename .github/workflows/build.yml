@@ -12,6 +12,7 @@ jobs:
     services:
       db:
         image: postgres:13
+        container_name: db
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -46,10 +47,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          POSTGRES_HOST: postgres
+          POSTGRES_HOST: localhost
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
-          spring.datasource.url: "jdbc:postgresql://db:5432/test"
+          SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/test
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=GameBoyT_fish-n-chill
