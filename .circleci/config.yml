@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: cimg/openjdk:17.0
         environment:
+          PGHOST: 127.0.0.1
           POSTGRES_DB: circle_test
           POSTGRES_HOST: localhost
           POSTGRES_USER: root
