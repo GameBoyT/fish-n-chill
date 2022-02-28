@@ -16,8 +16,7 @@ public class CottageService {
     private ModelMapper modelMapper;
 
     public List<CottageDTO> findAll() {
-        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {
-        };
+        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findAll(), typeToken.getType());
     }
 
@@ -26,8 +25,7 @@ public class CottageService {
     }
 
     public List<CottageDTO> findByNameContaining(String name) {
-        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {
-        };
+        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findByNameContainingIgnoreCase(name), typeToken.getType());
     }
 }

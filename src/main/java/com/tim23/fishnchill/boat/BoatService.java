@@ -16,8 +16,7 @@ public class BoatService {
     private ModelMapper modelMapper;
 
     public List<BoatDTO> findAll() {
-        TypeToken<List<BoatDTO>> typeToken = new TypeToken<>() {
-        };
+        TypeToken<List<BoatDTO>> typeToken = new TypeToken<>() {};
         return modelMapper.map(boatRepository.findAll(), typeToken.getType());
     }
 }

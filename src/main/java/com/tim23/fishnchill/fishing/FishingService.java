@@ -16,8 +16,7 @@ public class FishingService {
     private ModelMapper modelMapper;
 
     public List<FishingDTO> findAll() {
-        TypeToken<List<FishingDTO>> typeToken = new TypeToken<>() {
-        };
+        TypeToken<List<FishingDTO>> typeToken = new TypeToken<>() {};
         return modelMapper.map(fishingRepository.findAll(), typeToken.getType());
     }
 }

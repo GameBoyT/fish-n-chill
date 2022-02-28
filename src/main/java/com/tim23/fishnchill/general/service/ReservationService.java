@@ -18,8 +18,7 @@ public class ReservationService {
     private ModelMapper modelMapper;
 
     public List<ReservationDTO> findAll() {
-        TypeToken<List<ReservationDTO>> typeToken = new TypeToken<>() {
-        };
+        TypeToken<List<ReservationDTO>> typeToken = new TypeToken<>() {};
         return modelMapper.map(reservationRepository.findAll(), typeToken.getType());
     }
 
