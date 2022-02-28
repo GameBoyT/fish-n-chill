@@ -1,10 +1,5 @@
 package com.tim23.fishnchill.user.controller;
 
-import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 // Primer kontrolera cijim metodama mogu pristupiti samo autorizovani korisnici
 @RestController

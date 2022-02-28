@@ -16,7 +16,7 @@ public class FishingController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<FishingDTO> findAll () {
+    public List<FishingDTO> findAll() {
         return fishingService.findAll();
     }
 }

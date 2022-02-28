@@ -1,24 +1,22 @@
 package com.tim23.fishnchill.user.model;
 
-import java.sql.Timestamp;
-import java.util.*;
-
-import javax.persistence.*;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tim23.fishnchill.general.model.Rating;
 import com.tim23.fishnchill.general.model.Reservation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.*;
+
 import static javax.persistence.InheritanceType.JOINED;
 
 // POJO koji implementira Spring Security UserDetails interfejs koji specificira
 // osnovne osobine Spring korisnika (koje role ima, da li je nalog zakljucan, istekao, da li su kredencijali istekli)
 @Entity
-@Table(name="USERS")
-@Inheritance(strategy=JOINED)
+@Table(name = "USERS")
+@Inheritance(strategy = JOINED)
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;

@@ -2,7 +2,6 @@ package com.tim23.fishnchill.boat;
 
 import com.tim23.fishnchill.general.model.Image;
 import com.tim23.fishnchill.general.model.Tag;
-import com.tim23.fishnchill.general.model.enums.EntityType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

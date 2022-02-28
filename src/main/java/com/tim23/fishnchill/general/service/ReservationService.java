@@ -17,14 +17,12 @@ public class ReservationService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<ReservationDTO> findAll()
-    {
+    public List<ReservationDTO> findAll() {
         TypeToken<List<ReservationDTO>> typeToken = new TypeToken<>() {};
         return modelMapper.map(reservationRepository.findAll(), typeToken.getType());
     }
 
-    public ReservationDTO findOne(Long id)
-    {
+    public ReservationDTO findOne(Long id) {
         return modelMapper.map(reservationRepository.getById(id), ReservationDTO.class);
     }
 }

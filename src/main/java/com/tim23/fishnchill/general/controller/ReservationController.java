@@ -18,7 +18,7 @@ public class ReservationController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<ReservationDTO> findAll (){
+    public List<ReservationDTO> findAll() {
         return reservationService.findAll();
     }
 
@@ -26,7 +26,7 @@ public class ReservationController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ReservationDTO findOne (@PathVariable("id") Long id){
+    public ReservationDTO findOne(@PathVariable("id") Long id) {
         return reservationService.findOne(id);
     }
 

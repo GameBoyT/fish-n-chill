@@ -7,7 +7,7 @@ const getAll = async () => {
 }
 
 const getByNameContaining = async (name) => {
-  const res = await axios.get(baseUrl + "name/" + name);
+  const res = await axios.get(baseUrl + 'name/' + name)
   return res.data
 }
 
