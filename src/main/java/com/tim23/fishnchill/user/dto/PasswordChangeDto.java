@@ -1,16 +1,16 @@
-package com.tim23.fishnchill.user.DTO;
+package com.tim23.fishnchill.user.dto;
 
-public class PasswordChangeDTO {
+public class PasswordChangeDto {
     private String oldPassword;
 
     private String newPassword;
 
-    public PasswordChangeDTO(String oldPassword, String newPassword) {
+    public PasswordChangeDto(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }
 
-    public PasswordChangeDTO() {
+    public PasswordChangeDto() {
     }
 
     public String getOldPassword() {

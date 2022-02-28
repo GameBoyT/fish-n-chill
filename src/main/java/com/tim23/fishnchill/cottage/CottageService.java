@@ -15,17 +15,17 @@ public class CottageService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<CottageDTO> findAll() {
-        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {};
+    public List<CottageDto> findAll() {
+        TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findAll(), typeToken.getType());
     }
 
-    public CottageDTO findOne(Long id) {
-        return modelMapper.map(cottageRepository.getById(id), CottageDTO.class);
+    public CottageDto findOne(Long id) {
+        return modelMapper.map(cottageRepository.getById(id), CottageDto.class);
     }
 
-    public List<CottageDTO> findByNameContaining(String name) {
-        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {};
+    public List<CottageDto> findByNameContaining(String name) {
+        TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findByNameContainingIgnoreCase(name), typeToken.getType());
     }
 }

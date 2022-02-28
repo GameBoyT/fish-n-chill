@@ -1,10 +1,10 @@
 package com.tim23.fishnchill.user.controller;
 
 import com.tim23.fishnchill.security.TokenUtils;
-import com.tim23.fishnchill.user.DTO.LoginDTO;
-import com.tim23.fishnchill.user.DTO.PasswordChangeDTO;
-import com.tim23.fishnchill.user.DTO.RegistrationDTO;
-import com.tim23.fishnchill.user.DTO.UserTokenStateDTO;
+import com.tim23.fishnchill.user.dto.LoginDto;
+import com.tim23.fishnchill.user.dto.PasswordChangeDto;
+import com.tim23.fishnchill.user.dto.RegistrationDto;
+import com.tim23.fishnchill.user.dto.UserTokenStateDto;
 import com.tim23.fishnchill.user.exception.ResourceConflictException;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;
@@ -44,7 +44,7 @@ public class AuthenticationController {
     // Prvi endpoint koji pogadja korisnik kada se loguje.
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
     @PostMapping("/login")
-    public ResponseEntity<UserTokenStateDTO> createAuthenticationToken(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<UserTokenStateDto> createAuthenticationToken(@RequestBody LoginDto loginDTO) {
 
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
@@ -59,12 +59,12 @@ public class AuthenticationController {
         int expiresIn = tokenUtils.getExpiredIn();
 
         // Vrati token kao odgovor na uspesnu autentifikaciju
-        return ResponseEntity.ok(new UserTokenStateDTO(jwt, expiresIn));
+        return ResponseEntity.ok(new UserTokenStateDto(jwt, expiresIn));
     }
 
     // Endpoint za registraciju novog korisnika
     @PostMapping("/signup")
-    public ResponseEntity<User> addUser(@RequestBody RegistrationDTO registrationDTO) {
+    public ResponseEntity<User> addUser(@RequestBody RegistrationDto registrationDTO) {
 
         User existUser = this.userService.findByUsername(registrationDTO.getUsername());
         if (existUser != null) {
@@ -77,7 +77,7 @@ public class AuthenticationController {
 
     // U slucaju isteka vazenja JWT tokena, endpoint koji se poziva da se token osvezi
     @PostMapping(value = "/refresh")
-    public ResponseEntity<UserTokenStateDTO> refreshAuthenticationToken(HttpServletRequest request) {
+    public ResponseEntity<UserTokenStateDto> refreshAuthenticationToken(HttpServletRequest request) {
 
         String token = tokenUtils.getToken(request);
         String username = this.tokenUtils.getUsernameFromToken(token);
@@ -87,16 +87,16 @@ public class AuthenticationController {
             String refreshedToken = tokenUtils.refreshToken(token);
             int expiresIn = tokenUtils.getExpiredIn();
 
-            return ResponseEntity.ok(new UserTokenStateDTO(refreshedToken, expiresIn));
+            return ResponseEntity.ok(new UserTokenStateDto(refreshedToken, expiresIn));
         } else {
-            UserTokenStateDTO userTokenStateDTO = new UserTokenStateDTO();
+            UserTokenStateDto userTokenStateDTO = new UserTokenStateDto();
             return ResponseEntity.badRequest().body(userTokenStateDTO);
         }
     }
 
-    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
+    @PostMapping(value = "/change-password")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDTO passwordChangeDTO) {
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDto passwordChangeDTO) {
         userDetailsService.changePassword(passwordChangeDTO.getOldPassword(), passwordChangeDTO.getNewPassword());
 
         Map<String, String> result = new HashMap<>();

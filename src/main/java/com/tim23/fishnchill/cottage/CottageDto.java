@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.cottage;
 
-import com.tim23.fishnchill.general.DTO.ImageDTO;
+import com.tim23.fishnchill.general.dto.ImageDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CottageDTO {
+public class CottageDto {
     private Long id;
 
     private String name;
@@ -22,5 +22,5 @@ public class CottageDTO {
 
     private String description;
 
-    private Set<ImageDTO> images = new HashSet<>();
+    private Set<ImageDto> images = new HashSet<>();
 }

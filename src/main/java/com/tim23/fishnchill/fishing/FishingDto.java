@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.boat;
+package com.tim23.fishnchill.fishing;
 
 import com.tim23.fishnchill.general.model.Image;
 import com.tim23.fishnchill.general.model.Tag;
@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoatDTO {
+public class FishingDto {
     private Long id;
 
     private String name;
@@ -29,11 +29,9 @@ public class BoatDTO {
 
     private Double rating;
 
+    private String biography;
+
     private Long ownerId;
-
-    private Long boatSpecificationId;
-
-    private String boatEnginePower;
 
     private Set<Image> images = new HashSet<>();
 

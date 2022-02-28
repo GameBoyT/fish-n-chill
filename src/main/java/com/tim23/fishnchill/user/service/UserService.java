@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.user.service;
 
-import com.tim23.fishnchill.user.DTO.RegistrationDTO;
+import com.tim23.fishnchill.user.dto.RegistrationDto;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;
@@ -36,7 +36,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User save(RegistrationDTO registrationDTO) {
+    public User save(RegistrationDto registrationDTO) {
         User u = new User();
         u.setUsername(registrationDTO.getUsername());
         // pre nego sto postavimo lozinku u atribut hesiramo je
@@ -46,7 +46,7 @@ public class UserService {
         u.setEmail(registrationDTO.getEmail());
         u.setEnabled(false);
 
-        List<Authority> auth = authService.findByname("ROLE_USER");
+        List<Authority> auth = authService.findByName("ROLE_USER");
         // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
         u.setAuthorities(auth);
 

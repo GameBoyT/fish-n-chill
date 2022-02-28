@@ -17,39 +17,39 @@ public class TokenUtils {
 
     // Izdavac tokena
     @Value("fishNChill")
-    private String APP_NAME;
+    private String appName;
 
     // Tajna koju samo backend aplikacija treba da zna kako bi mogla da generise i proveri JWT https://jwt.io/
     @Value("somesecret")
-    public String SECRET;
+    public String secret;
 
     // Period vazenja
     @Value("300000000")
-    private int EXPIRES_IN;
+    private int expiresIn;
 
     // Naziv headera kroz koji ce se prosledjivati JWT u komunikaciji server-klijent
     @Value("Authorization")
-    private String AUTH_HEADER;
+    private String authHeader;
 
     // Moguce je generisati JWT za razlicite klijente (npr. web i mobilni klijenti nece imati isto trajanje JWT, JWT za mobilne klijente ce trajati duze jer se mozda aplikacija redje koristi na taj nacin)
-    private static final String AUDIENCE_UNKNOWN = "unknown";
+//    private static final String AUDIENCE_UNKNOWN = "unknown";
     private static final String AUDIENCE_WEB = "web";
     private static final String AUDIENCE_MOBILE = "mobile";
     private static final String AUDIENCE_TABLET = "tablet";
 
     // Algoritam za potpisivanje JWT
-    private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
+    private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
     // Funkcija za generisanje JWT token
     public String generateToken(String username) {
         return Jwts.builder()
-                .setIssuer(APP_NAME)
+                .setIssuer(appName)
                 .setSubject(username)
                 .setAudience(generateAudience())
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
                 // .claim("key", value) //moguce je postavljanje proizvoljnih podataka u telo JWT tokena
-                .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
+                .signWith(SIGNATURE_ALGORITHM, secret).compact();
     }
 
     private String generateAudience() {
@@ -67,7 +67,7 @@ public class TokenUtils {
     }
 
     private Date generateExpirationDate() {
-        return new Date(new Date().getTime() + EXPIRES_IN);
+        return new Date(new Date().getTime() + expiresIn);
     }
 
     // Funkcija za refresh JWT tokena
@@ -79,7 +79,7 @@ public class TokenUtils {
             refreshedToken = Jwts.builder()
                     .setClaims(claims)
                     .setExpiration(generateExpirationDate())
-                    .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
+                    .signWith(SIGNATURE_ALGORITHM, secret).compact();
         } catch (Exception e) {
             refreshedToken = null;
         }
@@ -147,7 +147,7 @@ public class TokenUtils {
     }
 
     public int getExpiredIn() {
-        return EXPIRES_IN;
+        return expiresIn;
     }
 
     // Funkcija za preuzimanje JWT tokena iz zahteva
@@ -164,7 +164,7 @@ public class TokenUtils {
     }
 
     public String getAuthHeaderFromHeader(HttpServletRequest request) {
-        return request.getHeader(AUTH_HEADER);
+        return request.getHeader(authHeader);
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
@@ -186,7 +186,7 @@ public class TokenUtils {
         Claims claims;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(SECRET)
+                    .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
