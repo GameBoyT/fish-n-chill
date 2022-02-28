@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImageDTO {
+public class ImageDto {
     private Long id;
 
     private String url;

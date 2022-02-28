@@ -16,7 +16,7 @@ public class BoatController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<BoatDTO> findAll() {
+    public List<BoatDto> findAll() {
         return boatService.findAll();
     }
 }

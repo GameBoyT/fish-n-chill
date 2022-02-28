@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.user.service;
 
-import com.tim23.fishnchill.user.DTO.RegistrationDTO;
+import com.tim23.fishnchill.user.DTO.RegistrationDto;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;
@@ -36,7 +36,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User save(RegistrationDTO registrationDTO) {
+    public User save(RegistrationDto registrationDTO) {
         User u = new User();
         u.setUsername(registrationDTO.getUsername());
         // pre nego sto postavimo lozinku u atribut hesiramo je

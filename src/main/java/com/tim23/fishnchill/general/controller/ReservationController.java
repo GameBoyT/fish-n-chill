@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.general.controller;
 
-import com.tim23.fishnchill.general.DTO.ReservationDTO;
+import com.tim23.fishnchill.general.DTO.ReservationDto;
 import com.tim23.fishnchill.general.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class ReservationController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<ReservationDTO> findAll() {
+    public List<ReservationDto> findAll() {
         return reservationService.findAll();
     }
 
@@ -26,7 +26,7 @@ public class ReservationController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ReservationDTO findOne(@PathVariable("id") Long id) {
+    public ReservationDto findOne(@PathVariable("id") Long id) {
         return reservationService.findOne(id);
     }
 
