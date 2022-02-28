@@ -15,9 +15,9 @@ public class FishingService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<FishingDTO> findAll()
-    {
-        TypeToken<List<FishingDTO>> typeToken = new TypeToken<>() {};
+    public List<FishingDTO> findAll() {
+        TypeToken<List<FishingDTO>> typeToken = new TypeToken<>() {
+        };
         return modelMapper.map(fishingRepository.findAll(), typeToken.getType());
     }
 }

@@ -1,6 +1,5 @@
 package com.tim23.fishnchill.boat;
 
-import com.tim23.fishnchill.boat.model.Boat;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,9 @@ public class BoatService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<BoatDTO> findAll()
-    {
-        TypeToken<List<BoatDTO>> typeToken = new TypeToken<>() {};
+    public List<BoatDTO> findAll() {
+        TypeToken<List<BoatDTO>> typeToken = new TypeToken<>() {
+        };
         return modelMapper.map(boatRepository.findAll(), typeToken.getType());
     }
 }

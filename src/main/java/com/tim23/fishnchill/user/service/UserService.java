@@ -15,42 +15,42 @@ import java.util.List;
 @Service
 public class UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private AuthorityService authService;
+    @Autowired
+    private AuthorityService authService;
 
-	public User findByUsername(String username) throws UsernameNotFoundException {
-		return userRepository.findByUsername(username);
-	}
+    public User findByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+    }
 
-	public User findById(Long id) throws AccessDeniedException {
-		return userRepository.findById(id).orElseGet(null);
-	}
+    public User findById(Long id) throws AccessDeniedException {
+        return userRepository.findById(id).orElseGet(null);
+    }
 
-	public List<User> findAll() throws AccessDeniedException {
-		return userRepository.findAll();
-	}
+    public List<User> findAll() throws AccessDeniedException {
+        return userRepository.findAll();
+    }
 
-	public User save(RegistrationDTO registrationDTO) {
-		User u = new User();
-		u.setUsername(registrationDTO.getUsername());
-		// pre nego sto postavimo lozinku u atribut hesiramo je
-		u.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
-		u.setFirstName(registrationDTO.getFirstName());
-		u.setLastName(registrationDTO.getLastName());
-		u.setEmail(registrationDTO.getEmail());
-		u.setEnabled(false);
+    public User save(RegistrationDTO registrationDTO) {
+        User u = new User();
+        u.setUsername(registrationDTO.getUsername());
+        // pre nego sto postavimo lozinku u atribut hesiramo je
+        u.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
+        u.setFirstName(registrationDTO.getFirstName());
+        u.setLastName(registrationDTO.getLastName());
+        u.setEmail(registrationDTO.getEmail());
+        u.setEnabled(false);
 
-		List<Authority> auth = authService.findByname("ROLE_USER");
-		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
-		u.setAuthorities(auth);
-		
-		return this.userRepository.save(u);
-	}
+        List<Authority> auth = authService.findByname("ROLE_USER");
+        // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
+        u.setAuthorities(auth);
+
+        return this.userRepository.save(u);
+    }
 
 }

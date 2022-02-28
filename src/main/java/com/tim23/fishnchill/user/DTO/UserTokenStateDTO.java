@@ -2,7 +2,7 @@ package com.tim23.fishnchill.user.DTO;
 
 // DTO koji enkapsulira generisani JWT i njegovo trajanje koji se vracaju klijentu
 public class UserTokenStateDTO {
-	
+
     private String accessToken;
     private Long expiresIn;
 

@@ -1,23 +1,21 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import SvgIcon from '@mui/material/SvgIcon';
-import TextField from '@mui/material/TextField'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FormControl, InputBase } from '@mui/material';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import CssBaseline from '@mui/material/CssBaseline'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import SvgIcon from '@mui/material/SvgIcon'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { InputBase } from '@mui/material'
 
-const theme = createTheme();
+const theme = createTheme()
 
 const AllCottages = ({ cottages, handleChange }) => {
   return (
@@ -48,9 +46,7 @@ const AllCottages = ({ cottages, handleChange }) => {
           <Grid container spacing={4}>
             {cottages.map((cottage) => (
               <Grid item key={cottage.id} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
+                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardMedia
                     component="img"
                     sx={{
@@ -63,12 +59,12 @@ const AllCottages = ({ cottages, handleChange }) => {
                     <Typography gutterBottom variant="h5" component="h2">
                       {cottage.name}
                     </Typography>
-                    <Typography>
-                      {cottage.description}
-                    </Typography>
+                    <Typography>{cottage.description}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" href={"cottage/" + cottage.id}>View</Button>
+                    <Button size="small" href={'cottage/' + cottage.id}>
+                      View
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -76,9 +72,8 @@ const AllCottages = ({ cottages, handleChange }) => {
           </Grid>
         </Container>
       </main>
-      
     </ThemeProvider>
-  );
+  )
 }
 
 export default AllCottages

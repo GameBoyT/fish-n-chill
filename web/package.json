@@ -6,8 +6,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint ./components/** ./pages/** -c .eslintrc.json --fix --ext js,jsx",
     "eslint": "eslint --cache \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint:fix": "eslint --cache --fix \"src/**/*.{js,jsx,ts,tsx}\""
+    "next:lint": "eslint ./components/** ./pages/** -c .eslintrc.json --ext js,jsx"
+  
   },
   "dependencies": {
     "@emotion/cache": "^11.6.0",
