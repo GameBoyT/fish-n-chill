@@ -46,7 +46,7 @@ public class UserService {
         u.setEmail(registrationDTO.getEmail());
         u.setEnabled(false);
 
-        List<Authority> auth = authService.findByname("ROLE_USER");
+        List<Authority> auth = authService.findByName("ROLE_USER");
         // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
         u.setAuthorities(auth);
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import AllCottages from '../components/AllCottages'
-import cottageService from '../services/cottage'
+import AllCottages from '../../components/AllCottages'
+import cottageService from '../../services/cottage'
 
 const Cottages = () => {
   const [cottages, setCottages] = useState([])
