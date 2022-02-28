@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.general.service;
 
-import com.tim23.fishnchill.general.DTO.ReservationDto;
+import com.tim23.fishnchill.general.dto.ReservationDto;
 import com.tim23.fishnchill.general.repository.ReservationRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

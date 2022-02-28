@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.user.DTO;
+package com.tim23.fishnchill.user.dto;
 
 // DTO koji enkapsulira generisani JWT i njegovo trajanje koji se vracaju klijentu
 public class UserTokenStateDto {

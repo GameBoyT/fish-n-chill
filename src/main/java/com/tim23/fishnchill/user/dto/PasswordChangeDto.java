@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.user.DTO;
+package com.tim23.fishnchill.user.dto;
 
 public class PasswordChangeDto {
     private String oldPassword;

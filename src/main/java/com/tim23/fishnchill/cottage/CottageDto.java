@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.cottage;
 
-import com.tim23.fishnchill.general.DTO.ImageDto;
+import com.tim23.fishnchill.general.dto.ImageDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

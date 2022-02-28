@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.user.service;
 
-import com.tim23.fishnchill.user.DTO.RegistrationDto;
+import com.tim23.fishnchill.user.dto.RegistrationDto;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;

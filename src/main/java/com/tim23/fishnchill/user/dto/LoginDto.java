@@ -1,4 +1,5 @@
-package com.tim23.fishnchill.user.DTO;
+package com.tim23.fishnchill.user.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,17 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistrationDto {
-
-    private Long id;
+public class LoginDto {
 
     private String username;
 
     private String password;
-
-    private String firstName;
-
-    private String lastName;
-
-    private String email;
 }

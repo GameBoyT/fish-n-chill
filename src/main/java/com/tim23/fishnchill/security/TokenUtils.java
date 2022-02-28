@@ -33,12 +33,12 @@ public class TokenUtils {
 
     // Moguce je generisati JWT za razlicite klijente (npr. web i mobilni klijenti nece imati isto trajanje JWT, JWT za mobilne klijente ce trajati duze jer se mozda aplikacija redje koristi na taj nacin)
 //    private static final String AUDIENCE_UNKNOWN = "unknown";
-    private static final String audienceWeb = "web";
-    private static final String audienceMobile = "mobile";
-    private static final String audienceTablet = "tablet";
+    private static final String AUDIENCE_WEB = "web";
+    private static final String AUDIENCE_MOBILE = "mobile";
+    private static final String AUDIENCE_TABLET = "tablet";
 
     // Algoritam za potpisivanje JWT
-    private static final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
+    private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
     // Funkcija za generisanje JWT token
     public String generateToken(String username) {
@@ -49,7 +49,7 @@ public class TokenUtils {
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
                 // .claim("key", value) //moguce je postavljanje proizvoljnih podataka u telo JWT tokena
-                .signWith(signatureAlgorithm, secret).compact();
+                .signWith(SIGNATURE_ALGORITHM, secret).compact();
     }
 
     private String generateAudience() {
@@ -57,13 +57,13 @@ public class TokenUtils {
 
 //		String audience = AUDIENCE_UNKNOWN;
 //		if (device.isNormal()) {
-//			audience = audienceWeb;
+//			audience = AUDIENCE_WEB;
 //		} else if (device.isTablet()) {
-//			audience = audienceTablet;
+//			audience = AUDIENCE_TABLET;
 //		} else if (device.isMobile()) {
-//			audience = audienceMobile;
+//			audience = AUDIENCE_MOBILE;
 //		}
-        return audienceWeb;
+        return AUDIENCE_WEB;
     }
 
     private Date generateExpirationDate() {
@@ -79,7 +79,7 @@ public class TokenUtils {
             refreshedToken = Jwts.builder()
                     .setClaims(claims)
                     .setExpiration(generateExpirationDate())
-                    .signWith(signatureAlgorithm, secret).compact();
+                    .signWith(SIGNATURE_ALGORITHM, secret).compact();
         } catch (Exception e) {
             refreshedToken = null;
         }
@@ -178,7 +178,7 @@ public class TokenUtils {
 
     private Boolean ignoreTokenExpiration(String token) {
         String audience = this.getAudienceFromToken(token);
-        return (audience.equals(audienceTablet) || audience.equals(audienceMobile));
+        return (audience.equals(AUDIENCE_TABLET) || audience.equals(AUDIENCE_MOBILE));
     }
 
     // Funkcija za citanje svih podataka iz JWT tokena

@@ -1,10 +1,10 @@
 package com.tim23.fishnchill.user.controller;
 
 import com.tim23.fishnchill.security.TokenUtils;
-import com.tim23.fishnchill.user.DTO.LoginDto;
-import com.tim23.fishnchill.user.DTO.PasswordChangeDto;
-import com.tim23.fishnchill.user.DTO.RegistrationDto;
-import com.tim23.fishnchill.user.DTO.UserTokenStateDto;
+import com.tim23.fishnchill.user.dto.LoginDto;
+import com.tim23.fishnchill.user.dto.PasswordChangeDto;
+import com.tim23.fishnchill.user.dto.RegistrationDto;
+import com.tim23.fishnchill.user.dto.UserTokenStateDto;
 import com.tim23.fishnchill.user.exception.ResourceConflictException;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;

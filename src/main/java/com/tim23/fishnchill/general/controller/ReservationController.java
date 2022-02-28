@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.general.controller;
 
-import com.tim23.fishnchill.general.DTO.ReservationDto;
+import com.tim23.fishnchill.general.dto.ReservationDto;
 import com.tim23.fishnchill.general.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
