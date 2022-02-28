@@ -18,7 +18,7 @@ public class CottageController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<CottageDTO> findAll () {
+    public List<CottageDTO> findAll() {
         return cottageService.findAll();
     }
 
@@ -26,8 +26,14 @@ public class CottageController {
 //    @PreAuthorize("hasRole('BUSINESS')")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public CottageDTO findOne (@PathVariable("id") Long id) {
+    public CottageDTO findOne(@PathVariable("id") Long id) {
         return cottageService.findOne(id);
     }
 
+    @GetMapping(value = "/name/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<CottageDTO> findByNameContaining(@PathVariable("name") String name) {
+        return cottageService.findByNameContaining(name);
+    }
 }

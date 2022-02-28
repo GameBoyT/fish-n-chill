@@ -28,4 +28,10 @@ public class CottageService {
     {
         return modelMapper.map(cottageRepository.getById(id), CottageDTO.class);
     }
+
+    public List<CottageDTO> findByNameContaining(String name)
+    {
+        TypeToken<List<CottageDTO>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(cottageRepository.findByNameContainingIgnoreCase(name), typeToken.getType());
+    }
 }
