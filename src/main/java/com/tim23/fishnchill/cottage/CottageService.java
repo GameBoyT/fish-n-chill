@@ -1,19 +1,18 @@
 package com.tim23.fishnchill.cottage;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class CottageService {
-    @Autowired
     private CottageRepository cottageRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
+
 
     public List<CottageDto> findAll() {
         TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};

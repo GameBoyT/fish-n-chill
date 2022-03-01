@@ -9,7 +9,7 @@ import com.tim23.fishnchill.user.exception.ResourceConflictException;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;
 import com.tim23.fishnchill.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,37 +18,35 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
 //Kontroler zaduzen za autentifikaciju korisnika
+@AllArgsConstructor
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
 
-    @Autowired
-    private TokenUtils tokenUtils;
+    private final TokenUtils tokenUtils;
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService userDetailsService;
+    private final UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
-    @Autowired
-    private UserService userService;
 
     // Prvi endpoint koji pogadja korisnik kada se loguje.
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
     @PostMapping("/login")
-    public ResponseEntity<UserTokenStateDto> createAuthenticationToken(@RequestBody LoginDto loginDTO) {
-
+    public ResponseEntity<UserTokenStateDto> createAuthenticationToken(@Valid @RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
-                        loginDTO.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(),
+                        loginDto.getPassword()));
 
         // Ubaci korisnika u trenutni security kontekst
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -64,11 +62,10 @@ public class AuthenticationController {
 
     // Endpoint za registraciju novog korisnika
     @PostMapping("/signup")
-    public ResponseEntity<User> addUser(@RequestBody RegistrationDto registrationDTO) {
-
+    public ResponseEntity<User> addUser(@Valid @RequestBody RegistrationDto registrationDTO) {
         User existUser = this.userService.findByUsername(registrationDTO.getUsername());
         if (existUser != null) {
-            throw new ResourceConflictException(registrationDTO.getId(), "Username already exists");
+            throw new ResourceConflictException(existUser.getId(), "Username already exists");
         }
 
         User user = this.userService.save(registrationDTO);

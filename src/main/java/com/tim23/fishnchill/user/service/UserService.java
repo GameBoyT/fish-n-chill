@@ -44,7 +44,8 @@ public class UserService {
         u.setFirstName(registrationDTO.getFirstName());
         u.setLastName(registrationDTO.getLastName());
         u.setEmail(registrationDTO.getEmail());
-        u.setEnabled(false);
+        // Djole - Ovo je bilo disable-ovano
+        u.setEnabled(true);
 
         List<Authority> auth = authService.findByName("ROLE_USER");
         // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
