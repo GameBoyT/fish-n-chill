@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
+
 import static javax.persistence.InheritanceType.JOINED;
 
 @Getter
@@ -20,9 +22,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    private LocalDateTime start;
-//
-//    private LocalDateTime end;
+    private LocalDateTime reservationStart;
+
+    private LocalDateTime reservationEnd;
 
     private Integer duration;
 

@@ -32,7 +32,7 @@ INSERT INTO IMAGE (entity_id, url) VALUES (1, '/images/cottage1.jpg');
 
 INSERT INTO COTTAGE (id, owner_id, address) VALUES (1, 2, 'adresa');
 
-INSERT INTO RESERVATION (duration, maximal_guests, price) VALUES (235, 5, 35);
+INSERT INTO RESERVATION (duration, maximal_guests, price, reservation_start, reservation_end) VALUES (235, 5, 35, '2022-04-06T03:45:42', '2022-04-09T03:45:42');
 
 INSERT INTO COTTAGE_RESERVATION (id, client_id, cottage_id) VALUES (1, 1, 1);
 
