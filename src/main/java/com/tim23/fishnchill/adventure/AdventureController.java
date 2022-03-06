@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.fishing;
+package com.tim23.fishnchill.adventure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/fishing", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FishingController {
+@RequestMapping(value = "/api/adventures", produces = MediaType.APPLICATION_JSON_VALUE)
+public class AdventureController {
     @Autowired
-    private FishingService fishingService;
+    private AdventureService adventureService;
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<FishingDto> findAll() {
-        return fishingService.findAll();
+    public List<AdventureDto> findAll() {
+        return adventureService.findAll();
     }
 }

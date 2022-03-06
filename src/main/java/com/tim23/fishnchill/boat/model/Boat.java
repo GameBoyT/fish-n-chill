@@ -1,15 +1,13 @@
 package com.tim23.fishnchill.boat.model;
 
 import com.tim23.fishnchill.general.model.BaseEntity;
+import com.tim23.fishnchill.user.model.BoatOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @Getter
@@ -29,6 +27,9 @@ public class Boat extends BaseEntity {
     private String vhf;
 
     private String fishFinder;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private BoatOwner owner;
 
     //TODO Pecaroska oprema
 }

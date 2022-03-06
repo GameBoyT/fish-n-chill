@@ -1,6 +1,5 @@
 package com.tim23.fishnchill.general.model;
 
-import com.tim23.fishnchill.user.model.BusinessOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,9 +37,6 @@ public class BaseEntity {
     //TODO mozda neki availability za dostupnoste, kao neka lista parova datuma od kojeg do kojeg je slobodan
 
     //TODO Cjenovnik
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private BusinessOwner owner;
 
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Rating> ratings = new HashSet<>();

@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.fishing;
+package com.tim23.fishnchill.adventure;
 
 import com.tim23.fishnchill.general.model.Image;
 import com.tim23.fishnchill.general.model.Tag;
@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FishingDto {
+public class AdventureDto {
     private Long id;
 
     private String name;

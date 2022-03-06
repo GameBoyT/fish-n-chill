@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.user.model;
 
-import com.tim23.fishnchill.general.model.BaseEntity;
+import com.tim23.fishnchill.adventure.Adventure;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class BusinessOwner extends User {
-
+public class AdventureOwner extends User {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BaseEntity> entities = new HashSet<>();
+    private Set<Adventure> adventures = new HashSet<>();
 }
