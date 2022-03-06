@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SignupAndLoginIntegrationTest {
@@ -90,12 +90,5 @@ class SignupAndLoginIntegrationTest {
                         .content(loginDtoJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").exists());
-    }
-
-
-    @Test
-    @Order(6)
-    @Disabled
-    void shouldRefreshAuthenticationToken() {
     }
 }

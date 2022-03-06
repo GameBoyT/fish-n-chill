@@ -1,14 +1,14 @@
 package com.tim23.fishnchill.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tim23.fishnchill.general.model.Rating;
-import com.tim23.fishnchill.general.model.Reservation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.InheritanceType.JOINED;
 
@@ -56,12 +56,6 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings = new HashSet<Rating>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Reservation> reservations = new HashSet<Reservation>();
 
     public Long getId() {
         return id;
@@ -137,22 +131,6 @@ public class User implements UserDetails {
 
     public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
-    }
-
-    public Set<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public Set<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
     }
 
     @JsonIgnore

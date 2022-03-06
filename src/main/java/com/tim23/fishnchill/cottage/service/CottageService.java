@@ -1,5 +1,7 @@
-package com.tim23.fishnchill.cottage;
+package com.tim23.fishnchill.cottage.service;
 
+import com.tim23.fishnchill.cottage.CottageDto;
+import com.tim23.fishnchill.cottage.repository.CottageRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

@@ -1,5 +1,7 @@
-package com.tim23.fishnchill.cottage;
+package com.tim23.fishnchill.cottage.controller;
 
+import com.tim23.fishnchill.cottage.CottageDto;
+import com.tim23.fishnchill.cottage.service.CottageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

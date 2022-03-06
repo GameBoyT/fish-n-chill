@@ -1,6 +1,5 @@
-package com.tim23.fishnchill.general.model;
+package com.tim23.fishnchill.reservation.model;
 
-import com.tim23.fishnchill.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.InheritanceType.JOINED;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Inheritance(strategy = JOINED)
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +29,4 @@ public class Reservation {
     private Integer maximalGuests;
 
     private Double price;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private User user;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private BaseEntity entity;
 }

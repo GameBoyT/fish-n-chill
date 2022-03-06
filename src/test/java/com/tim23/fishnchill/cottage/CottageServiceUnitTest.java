@@ -1,5 +1,7 @@
 package com.tim23.fishnchill.cottage;
 
+import com.tim23.fishnchill.cottage.repository.CottageRepository;
+import com.tim23.fishnchill.cottage.service.CottageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

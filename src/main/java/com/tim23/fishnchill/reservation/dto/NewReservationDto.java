@@ -1,4 +1,4 @@
-package com.tim23.fishnchill.general.dto;
+package com.tim23.fishnchill.reservation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,16 +9,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationDto {
-    private Long id;
-
+public class NewReservationDto {
     private Integer duration;
 
     private Integer maximalGuests;
 
     private Double price;
 
-    private Long userId;
+    private Long clientId;
 
     private Long entityId;
 }
