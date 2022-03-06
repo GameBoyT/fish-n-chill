@@ -2,17 +2,18 @@ package com.tim23.fishnchill.cottage.controller;
 
 import com.tim23.fishnchill.cottage.CottageDto;
 import com.tim23.fishnchill.cottage.service.CottageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/cottages", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CottageController {
-    @Autowired
+
     private CottageService cottageService;
 
     @GetMapping()

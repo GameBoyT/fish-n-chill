@@ -4,7 +4,7 @@ import com.tim23.fishnchill.user.dto.RegistrationDto;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,17 +12,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private AuthorityService authService;
+
 
     public User findByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);

@@ -11,7 +11,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -23,8 +22,8 @@ public class Client extends User {
     private Integer PenaltyCount;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings = new HashSet<>();
+    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CottageReservation> cottageReservations = new HashSet<>();
+    private Set<CottageReservation> cottageReservations;
 }

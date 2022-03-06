@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class ClientCottageReservationDto {
 
     private Integer maximalGuests;
 
-    private Double price;
+    private BigDecimal price;
 
     private CottageDto cottage;
 }

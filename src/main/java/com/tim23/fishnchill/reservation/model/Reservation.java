@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static javax.persistence.InheritanceType.JOINED;
@@ -30,5 +30,5 @@ public class Reservation {
 
     private Integer maximalGuests;
 
-    private Double price;
+    private BigDecimal price;
 }

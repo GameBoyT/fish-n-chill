@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -33,7 +32,7 @@ public class AdventureDto {
 
     private Long ownerId;
 
-    private Set<Image> images = new HashSet<>();
+    private Set<Image> images;
 
-    private Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags;
 }

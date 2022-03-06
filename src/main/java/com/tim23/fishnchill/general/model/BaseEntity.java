@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 
@@ -39,12 +38,12 @@ public class BaseEntity {
     //TODO Cjenovnik
 
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings = new HashSet<>();
+    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags;
 
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Image> images = new HashSet<>();
+    private Set<Image> images;
 }
 

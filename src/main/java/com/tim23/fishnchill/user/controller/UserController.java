@@ -2,7 +2,7 @@ package com.tim23.fishnchill.user.controller;
 
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +14,11 @@ import java.security.Principal;
 import java.util.List;
 
 // Primer kontrolera cijim metodama mogu pristupiti samo autorizovani korisnici
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
-    @Autowired
     private UserService userService;
 
     // Za pristup ovoj metodi neophodno je da ulogovani korisnik ima ADMIN ulogu

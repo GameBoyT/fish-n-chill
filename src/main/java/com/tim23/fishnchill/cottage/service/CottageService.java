@@ -12,8 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class CottageService {
-    private CottageRepository cottageRepository;
+
     private ModelMapper modelMapper;
+    private CottageRepository cottageRepository;
 
 
     public List<CottageDto> findAll() {
