@@ -2,16 +2,16 @@ package com.tim23.fishnchill.user.service;
 
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.repository.AuthorityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class AuthorityService {
 
-    @Autowired
     private AuthorityRepository authorityRepository;
 
     public List<Authority> findById(Long id) {

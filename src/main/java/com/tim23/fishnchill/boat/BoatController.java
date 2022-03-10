@@ -1,16 +1,17 @@
 package com.tim23.fishnchill.boat;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/boats", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BoatController {
-    @Autowired
+
     private BoatService boatService;
 
     @GetMapping()

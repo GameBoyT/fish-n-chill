@@ -3,7 +3,10 @@ package com.tim23.fishnchill.user.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tim23.fishnchill.user.dto.LoginDto;
 import com.tim23.fishnchill.user.dto.RegistrationDto;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SignupAndLoginIntegrationTest {
@@ -90,12 +93,5 @@ class SignupAndLoginIntegrationTest {
                         .content(loginDtoJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").exists());
-    }
-
-
-    @Test
-    @Order(6)
-    @Disabled
-    void shouldRefreshAuthenticationToken() {
     }
 }

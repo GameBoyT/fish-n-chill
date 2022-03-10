@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.general.model;
 
-import com.tim23.fishnchill.user.model.User;
+import com.tim23.fishnchill.user.model.Client;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class Rating {
     private Double rating;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private User user;
+    private Client client;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private BaseEntity entity;

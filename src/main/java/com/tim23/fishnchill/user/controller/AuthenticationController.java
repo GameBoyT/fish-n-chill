@@ -1,11 +1,8 @@
 package com.tim23.fishnchill.user.controller;
 
+import com.tim23.fishnchill.general.exception.ResourceConflictException;
 import com.tim23.fishnchill.security.TokenUtils;
-import com.tim23.fishnchill.user.dto.LoginDto;
-import com.tim23.fishnchill.user.dto.PasswordChangeDto;
-import com.tim23.fishnchill.user.dto.RegistrationDto;
-import com.tim23.fishnchill.user.dto.UserTokenStateDto;
-import com.tim23.fishnchill.user.exception.ResourceConflictException;
+import com.tim23.fishnchill.user.dto.*;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;
 import com.tim23.fishnchill.user.service.UserService;
@@ -63,9 +60,9 @@ public class AuthenticationController {
     // Endpoint za registraciju novog korisnika
     @PostMapping("/signup")
     public ResponseEntity<User> addUser(@Valid @RequestBody RegistrationDto registrationDTO) {
-        User existUser = this.userService.findByUsername(registrationDTO.getUsername());
+        UserDto existUser = this.userService.findByUsername(registrationDTO.getUsername());
         if (existUser != null) {
-            throw new ResourceConflictException(existUser.getId(), "Username already exists");
+            throw new ResourceConflictException("Username already exists");
         }
 
         User user = this.userService.save(registrationDTO);

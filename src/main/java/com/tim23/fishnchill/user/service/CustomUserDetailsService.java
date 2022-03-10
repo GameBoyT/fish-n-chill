@@ -2,9 +2,8 @@ package com.tim23.fishnchill.user.service;
 
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,19 +16,14 @@ import org.springframework.stereotype.Service;
 
 // Ovaj servis je namerno izdvojen kao poseban u ovom primeru.
 // U opstem slucaju UserServiceImpl klasa bi mogla da implementira UserDetailService interfejs.
+@AllArgsConstructor
+@Slf4j
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    protected final Log logger = LogFactory.getLog(getClass());
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     // Funkcija koja na osnovu username-a iz baze vraca objekat User-a
     @Override
@@ -50,16 +44,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         String username = currentUser.getName();
 
         if (authenticationManager != null) {
-            logger.debug("Re-authenticating user '" + username + "' for password change request.");
+            log.debug("Re-authenticating user '" + username + "' for password change request.");
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
         } else {
-            logger.debug("No authentication manager set. can't change Password!");
+            log.debug("No authentication manager set. can't change Password!");
 
             return;
         }
 
-        logger.debug("Changing password for user '" + username + "'");
+        log.debug("Changing password for user '" + username + "'");
 
         User user = (User) loadUserByUsername(username);
 

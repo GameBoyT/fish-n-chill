@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,5 +21,5 @@ public class CottageDto {
 
     private String description;
 
-    private Set<ImageDto> images = new HashSet<>();
+    private Set<ImageDto> images;
 }

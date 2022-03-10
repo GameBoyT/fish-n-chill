@@ -1,25 +1,25 @@
 package com.tim23.fishnchill.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tim23.fishnchill.general.model.Rating;
-import com.tim23.fishnchill.general.model.Reservation;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.InheritanceType.JOINED;
 
 // POJO koji implementira Spring Security UserDetails interfejs koji specificira
 // osnovne osobine Spring korisnika (koje role ima, da li je nalog zakljucan, istekao, da li su kredencijali istekli)
+@NoArgsConstructor
 @Entity
 @Table(name = "USERS")
 @Inheritance(strategy = JOINED)
 public class User implements UserDetails {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id")
@@ -48,20 +48,11 @@ public class User implements UserDetails {
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 
-    public User() {
-    }
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings = new HashSet<Rating>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Reservation> reservations = new HashSet<Reservation>();
 
     public Long getId() {
         return id;
@@ -137,22 +128,6 @@ public class User implements UserDetails {
 
     public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
-    }
-
-    public Set<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public Set<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
     }
 
     @JsonIgnore
