@@ -1,6 +1,6 @@
 package com.tim23.fishnchill.user.controller;
 
-import com.tim23.fishnchill.user.model.User;
+import com.tim23.fishnchill.user.dto.UserDto;
 import com.tim23.fishnchill.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -21,24 +21,22 @@ public class UserController {
 
     private UserService userService;
 
-    // Za pristup ovoj metodi neophodno je da ulogovani korisnik ima ADMIN ulogu
-    // Ukoliko nema, server ce vratiti gresku 403 Forbidden
-    // Korisnik jeste autentifikovan, ali nije autorizovan da pristupi resursu
-    @GetMapping("/users/{userId}")
-//    @PreAuthorize("hasRole('ADMIN')")
-    public User loadById(@PathVariable Long userId) {
-        return this.userService.findById(userId);
-    }
 
     @GetMapping("/users")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public List<User> loadAll() {
+    public List<UserDto> loadAll() {
         return this.userService.findAll();
     }
 
+    @GetMapping("/users/{userId}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public UserDto loadById(@PathVariable Long userId) {
+        return this.userService.findById(userId);
+    }
+
     @GetMapping("/whoami")
-    @PreAuthorize("hasRole('USER')")
-    public User user(Principal user) {
+    @PreAuthorize("hasRole('CLIENT')")
+    public UserDto user(Principal user) {
         return this.userService.findByUsername(user.getName());
     }
 

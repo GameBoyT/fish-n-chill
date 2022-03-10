@@ -1,6 +1,7 @@
 package com.tim23.fishnchill.reservation.service;
 
 import com.tim23.fishnchill.cottage.repository.CottageRepository;
+import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
 import com.tim23.fishnchill.reservation.dto.ClientCottageReservationDto;
 import com.tim23.fishnchill.reservation.dto.CottageReservationDto;
 import com.tim23.fishnchill.reservation.dto.NewReservationDto;
@@ -39,8 +40,10 @@ public class CottageReservationService {
         return modelMapper.map(cottageReservationRepository.findAllByCottageId(cottageId), typeToken.getType());
     }
 
-    public CottageReservationDto findOne(Long id) {
-        return modelMapper.map(cottageReservationRepository.getById(id), CottageReservationDto.class);
+    public CottageReservationDto findById(Long id) {
+        CottageReservation cottageReservation = cottageReservationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("CottageReservation", id));
+        return modelMapper.map(cottageReservation, CottageReservationDto.class);
     }
 
     public CottageReservationDto save(NewReservationDto newReservationDto) {

@@ -1,7 +1,9 @@
 package com.tim23.fishnchill.user.service;
 
+import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
 import com.tim23.fishnchill.user.dto.ClientDto;
 import com.tim23.fishnchill.user.dto.ClientProfileDto;
+import com.tim23.fishnchill.user.model.Client;
 import com.tim23.fishnchill.user.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,9 +25,10 @@ public class ClientService {
         return modelMapper.map(clientRepository.findAll(), typeToken.getType());
     }
 
-    public ClientProfileDto findOne(Long id) {
-        ClientProfileDto client = modelMapper.map(clientRepository.getById(id), ClientProfileDto.class);
-        return client;
+    public ClientProfileDto findById(Long id) {
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Client", id));
+        return modelMapper.map(client, ClientProfileDto.class);
     }
 
 }

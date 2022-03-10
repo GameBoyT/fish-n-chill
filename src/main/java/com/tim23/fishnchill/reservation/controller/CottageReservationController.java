@@ -27,8 +27,8 @@ public class CottageReservationController {
     @GetMapping("/cottages/reservations/{reservationId}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public CottageReservationDto findOne(@PathVariable("reservationId") Long reservationId) {
-        return cottageReservationService.findOne(reservationId);
+    public CottageReservationDto findById(@PathVariable("reservationId") Long reservationId) {
+        return cottageReservationService.findById(reservationId);
     }
 
     @GetMapping("/cottages/{cottageId}/reservations")

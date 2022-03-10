@@ -27,8 +27,8 @@ public class ReservationController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public NewReservationDto findOne(@PathVariable("id") Long id) {
-        return reservationService.findOne(id);
+    public NewReservationDto findById(@PathVariable("id") Long id) {
+        return reservationService.findById(id);
     }
 
 }

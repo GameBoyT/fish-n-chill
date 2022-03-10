@@ -25,7 +25,7 @@ public class ClientController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ClientProfileDto findOne(@PathVariable("id") Long id) {
-        return clientService.findOne(id);
+    public ClientProfileDto findById(@PathVariable("id") Long id) {
+        return clientService.findById(id);
     }
 }

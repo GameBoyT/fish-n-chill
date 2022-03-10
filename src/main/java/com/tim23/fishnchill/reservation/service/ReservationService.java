@@ -1,6 +1,8 @@
 package com.tim23.fishnchill.reservation.service;
 
+import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
 import com.tim23.fishnchill.reservation.dto.NewReservationDto;
+import com.tim23.fishnchill.reservation.model.Reservation;
 import com.tim23.fishnchill.reservation.repository.ReservationRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,8 +25,10 @@ public class ReservationService {
         return modelMapper.map(reservationRepository.findAll(), typeToken.getType());
     }
 
-    public NewReservationDto findOne(Long id) {
-        return modelMapper.map(reservationRepository.getById(id), NewReservationDto.class);
+    public NewReservationDto findById(Long id) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Reservation", id));
+        return modelMapper.map(reservation, NewReservationDto.class);
     }
 
 }
