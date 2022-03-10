@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Client extends User {
-    private Integer PenaltyCount;
+    private Integer penaltyCount;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Rating> ratings;

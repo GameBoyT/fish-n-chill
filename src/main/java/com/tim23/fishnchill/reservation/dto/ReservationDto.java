@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationDto {
-    private Long Id;
+    private Long id;
 
     private Integer duration;
 
