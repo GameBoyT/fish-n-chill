@@ -4,9 +4,11 @@ import cottageService from "../services/cottage"
 
 const Cottages = () => {
   const [cottages, setCottages] = useState([])
+  const [loggedInUser, setLoggedInUser] = useState([])
 
   useEffect(() => {
     fetchData();
+    setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
   }, []);
 
   function handleChange(e) {
@@ -23,7 +25,7 @@ const Cottages = () => {
 
   return (
     <>
-      <AllCottages cottages={cottages} handleChange={(e) => handleChange(e)} />
+      <AllCottages loggedInUser={loggedInUser} cottages={cottages} handleChange={(e) => handleChange(e)} />
     </>
   )
 }

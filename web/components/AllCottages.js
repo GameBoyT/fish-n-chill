@@ -5,41 +5,29 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import SvgIcon from '@mui/material/SvgIcon';
-import TextField from '@mui/material/TextField'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FormControl, InputBase } from '@mui/material';
+import { InputBase } from '@mui/material';
+import UnregNavBar from './UnregNavBar';
+import RegNavBar from './RegNavBar';
 
-const theme = createTheme();
 
-const AllCottages = ({ cottages, handleChange }) => {
+const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <AppBar position="relative">
-        <Toolbar>
-          <SvgIcon>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
-          <Typography variant="h6" color="inherit" noWrap>
-            All cottages
-          </Typography>
-        </Toolbar>
+        {loggedInUser ? <RegNavBar /> : <UnregNavBar />}
       </AppBar>
       <main>
         {/* Hero unit */}
         <Box>
           <InputBase
-            sx={{ ml: 1, flex: 1 }}
+            sx={{ ml: 65, flex: 1, width: '25%' }}
+            size='large'
             placeholder="Search cottages"
-            inputProps={{ 'aria-label': 'search google maps' }}
+            inputProps={{ 'aria-label': 'search google maps', style: { textAlign: 'center', fontSize: 25 } }}
             onChange={(e) => handleChange(e)}
           />
         </Box>
@@ -63,7 +51,14 @@ const AllCottages = ({ cottages, handleChange }) => {
                     <Typography gutterBottom variant="h5" component="h2">
                       {cottage.name}
                     </Typography>
-                    <Typography>
+                    <Typography
+                      sx={{
+                        display: '-webkit-box',
+                        overflow: 'hidden',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 4,
+                      }}
+                    >
                       {cottage.description}
                     </Typography>
                   </CardContent>
@@ -76,8 +71,7 @@ const AllCottages = ({ cottages, handleChange }) => {
           </Grid>
         </Container>
       </main>
-      
-    </ThemeProvider>
+    </>
   );
 }
 
