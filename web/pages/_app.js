@@ -7,7 +7,6 @@ import createEmotionCache from '../styles/createEmotionCache'
 import '/styles/globals.css'
 import theme from '../styles/theme'
 import axios from 'axios'
-import { useEffect } from 'react'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
