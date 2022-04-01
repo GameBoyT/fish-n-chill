@@ -1,15 +1,15 @@
 import { Box, Divider, Typography, Container, Skeleton, Paper } from '@mui/material'
 import Image from 'next/image'
 import AppBar from '@mui/material/AppBar'
-import UnregNavBar from './UnregNavBar'
-import RegNavBar from './RegNavBar'
+import LoggedOutNavBar from './LoggedOutNavBar';
+import LoggedInNavBar from './LoggedInNavBar';
 
 
 const CottageProfile = ({ loggedInUser, cottage }) => {
   return (
     <>
       <AppBar position="relative">
-        {loggedInUser ? <RegNavBar /> : <UnregNavBar />}
+        {loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}
       </AppBar>
       <Container component="main" maxWidth="md">
         <Box

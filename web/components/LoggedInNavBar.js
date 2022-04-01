@@ -10,12 +10,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link'
 
 import { useState, useEffect } from 'react'
 
-const pages = ['cottages', 'boats', 'instructors'];
+const pages = ['cottage', 'boats', 'instructors'];
 
-const RegNavBar = () => {
+const LoggedInNavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -42,14 +43,13 @@ const RegNavBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+        <Link href="/"
+            underline="none"
+            color="inherit"
             variant="h5"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
             FishNChill
-          </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -112,4 +112,4 @@ const RegNavBar = () => {
     </AppBar>
   );
 };
-export default RegNavBar;
+export default LoggedInNavBar;

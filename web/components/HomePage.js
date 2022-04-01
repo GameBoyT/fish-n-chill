@@ -1,13 +1,13 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import UnregNavBar from './UnregNavBar';
-import RegNavBar from './RegNavBar';
+import LoggedOutNavBar from './LoggedOutNavBar';
+import LoggedInNavBar from './LoggedInNavBar';
 
 const HomePage = ({ loggedInUser }) => {
     return (
         <>
             <AppBar position="relative">
-                {loggedInUser ? <RegNavBar /> : <UnregNavBar />}
+                {loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}
             </AppBar>
         </>
     )

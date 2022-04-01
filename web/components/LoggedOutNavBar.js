@@ -3,26 +3,26 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link'
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
 
-const pages = ['cottages', 'boats', 'instructors'];
+const pages = ['cottage', 'boats', 'instructors'];
 const settings = ['login', 'signup'];
 
-const UnregNavBar = () => {
+const LoggedOutNavBar = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+          <Link href="/"
+            underline="none"
+            color="inherit"
             variant="h5"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
             FishNChill
-          </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -52,4 +52,4 @@ const UnregNavBar = () => {
     </AppBar>
   );
 };
-export default UnregNavBar;
+export default LoggedOutNavBar;

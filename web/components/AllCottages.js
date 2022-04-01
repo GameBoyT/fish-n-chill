@@ -10,15 +10,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { InputBase } from '@mui/material';
-import UnregNavBar from './UnregNavBar';
-import RegNavBar from './RegNavBar';
+import LoggedOutNavBar from './LoggedOutNavBar';
+import LoggedInNavBar from './LoggedInNavBar';
 
 
 const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
   return (
     <>
       <AppBar position="relative">
-        {loggedInUser ? <RegNavBar /> : <UnregNavBar />}
+        {loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}
       </AppBar>
       <main>
         {/* Hero unit */}
