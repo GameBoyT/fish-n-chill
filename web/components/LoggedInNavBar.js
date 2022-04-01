@@ -1,24 +1,24 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import Menu from '@mui/material/Menu'
+import Container from '@mui/material/Container'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import Tooltip from '@mui/material/Tooltip'
+import MenuItem from '@mui/material/MenuItem'
 import Link from '@mui/material/Link'
 
 import { useState } from 'react'
 
-const pages = ['cottage', 'boats', 'instructors'];
+const pages = ['cottages', 'boats', 'instructors']
 
 const LoggedInNavBar = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -36,28 +36,26 @@ const LoggedInNavBar = () => {
   }
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.clear()
   }
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <Link href="/"
+          <Link
+            href="/"
             underline="none"
             color="inherit"
             variant="h5"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+          >
             FishNChill
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                href={"/" + page}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
+              <Button key={page} href={'/' + page} sx={{ my: 2, color: 'white', display: 'block' }}>
                 {page}
               </Button>
             ))}
@@ -87,7 +85,7 @@ const LoggedInNavBar = () => {
             >
               <MenuItem>
                 <Button
-                  key='logout'
+                  key="logout"
                   style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
                   sx={{ color: 'blue' }}
                 >
@@ -96,7 +94,7 @@ const LoggedInNavBar = () => {
               </MenuItem>
               <MenuItem>
                 <Button
-                  key='logout'
+                  key="logout"
                   href="/"
                   style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
                   sx={{ color: 'blue' }}
@@ -110,6 +108,6 @@ const LoggedInNavBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  );
-};
-export default LoggedInNavBar;
+  )
+}
+export default LoggedInNavBar

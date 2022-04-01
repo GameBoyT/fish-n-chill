@@ -3,7 +3,9 @@
     "eslint:recommended",
     "next",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier",
+    "next/core-web-vitals"
   ],
   "plugins": [
     "prettier",

@@ -1,16 +1,7 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import LoggedOutNavBar from './LoggedOutNavBar';
-import LoggedInNavBar from './LoggedInNavBar';
+import * as React from 'react'
 
-const HomePage = ({ loggedInUser }) => {
-    return (
-        <>
-            <AppBar position="relative">
-                {loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}
-            </AppBar>
-        </>
-    )
+const HomePage = () => {
+  return <></>
 }
 
 export default HomePage

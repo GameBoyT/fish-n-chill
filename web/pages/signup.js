@@ -5,7 +5,7 @@ const Signup = () => {
   const handleSignup = async (credentials) => {
     try {
       await signupService.signup(credentials)
-      console.log('gud')
+      console.log('signed up')
     } catch (exception) {
       console.log(exception)
     }
@@ -19,4 +19,3 @@ const Signup = () => {
 }
 
 export default Signup
-  

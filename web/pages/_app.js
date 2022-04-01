@@ -3,6 +3,10 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider } from '@emotion/react'
 import createEmotionCache from '../styles/createEmotionCache'
+import { useState, useEffect } from 'react'
+import AppBar from '@mui/material/AppBar'
+import LoggedOutNavBar from '../components/LoggedOutNavBar'
+import LoggedInNavBar from '../components/LoggedInNavBar'
 
 import '/styles/globals.css'
 import theme from '../styles/theme'
@@ -14,6 +18,7 @@ const clientSideEmotionCache = createEmotionCache()
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
+  // Sending the JWT token on every request
   axios.interceptors.request.use(function (config) {
     const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
     if (loggedInUser) {
@@ -23,7 +28,13 @@ export default function MyApp(props) {
     }
     return config
   })
-  
+
+  // Finding the logged in user for showing the AppBar on every page
+  const [loggedInUser, setLoggedInUser] = useState([])
+  useEffect(() => {
+    setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
+  }, [])
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -33,6 +44,7 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        <AppBar position="relative">{loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}</AppBar>
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>

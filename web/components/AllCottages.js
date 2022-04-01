@@ -1,31 +1,24 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { InputBase } from '@mui/material';
-import LoggedOutNavBar from './LoggedOutNavBar';
-import LoggedInNavBar from './LoggedInNavBar';
+import * as React from 'react'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { InputBase } from '@mui/material'
 
-
-const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
+const AllCottages = ({ cottages, handleChange }) => {
   return (
     <>
-      <AppBar position="relative">
-        {loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}
-      </AppBar>
       <main>
         {/* Hero unit */}
         <Box>
           <InputBase
             sx={{ ml: 65, flex: 1, width: '25%' }}
-            size='large'
+            size="large"
             placeholder="Search cottages"
             inputProps={{ 'aria-label': 'search google maps', style: { textAlign: 'center', fontSize: 25 } }}
             onChange={(e) => handleChange(e)}
@@ -61,7 +54,7 @@ const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" href={'cottage/' + cottage.id}>
+                    <Button size="small" href={'cottages/' + cottage.id}>
                       View
                     </Button>
                   </CardActions>
@@ -72,7 +65,7 @@ const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
         </Container>
       </main>
     </>
-  );
+  )
 }
 
 export default AllCottages
