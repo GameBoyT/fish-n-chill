@@ -36,9 +36,7 @@ const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
           <Grid container spacing={4}>
             {cottages.map((cottage) => (
               <Grid item key={cottage.id} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
+                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardMedia
                     component="img"
                     sx={{
@@ -63,7 +61,9 @@ const AllCottages = ({ loggedInUser, cottages, handleChange }) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" href={"cottage/" + cottage.id}>View</Button>
+                    <Button size="small" href={'cottage/' + cottage.id}>
+                      View
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>

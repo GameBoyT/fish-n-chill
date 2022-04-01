@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FishNChillApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FishNChillApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FishNChillApplication.class, args);
+    }
 
 }

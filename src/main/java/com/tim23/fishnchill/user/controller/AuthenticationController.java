@@ -1,13 +1,12 @@
 package com.tim23.fishnchill.user.controller;
 
-import com.tim23.fishnchill.user.DTO.PasswordChangeDTO;
-import com.tim23.fishnchill.user.DTO.RegistrationDTO;
-import com.tim23.fishnchill.user.DTO.UserTokenStateDTO;
+import com.tim23.fishnchill.general.exception.ResourceConflictException;
+import com.tim23.fishnchill.security.TokenUtils;
+import com.tim23.fishnchill.user.dto.*;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;
 import com.tim23.fishnchill.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,94 +15,86 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-import com.tim23.fishnchill.user.exception.ResourceConflictException;
-import com.tim23.fishnchill.security.TokenUtils;
-import com.tim23.fishnchill.user.DTO.LoginDTO;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
 //Kontroler zaduzen za autentifikaciju korisnika
+@AllArgsConstructor
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
 
-	@Autowired
-	private TokenUtils tokenUtils;
+    private final TokenUtils tokenUtils;
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService userDetailsService;
+    private final UserService userService;
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
 
-	@Autowired
-	private CustomUserDetailsService userDetailsService;
-	
-	@Autowired
-	private UserService userService;
+    // Prvi endpoint koji pogadja korisnik kada se loguje.
+    // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
+    @PostMapping("/login")
+    public ResponseEntity<UserTokenStateDto> createAuthenticationToken(@Valid @RequestBody LoginDto loginDto) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(),
+                        loginDto.getPassword()));
 
-	// Prvi endpoint koji pogadja korisnik kada se loguje.
-	// Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
-	@PostMapping("/login")
-	public ResponseEntity<UserTokenStateDTO> createAuthenticationToken(@RequestBody LoginDTO loginDTO) {
+        // Ubaci korisnika u trenutni security kontekst
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
-						loginDTO.getPassword()));
+        // Kreiraj token za tog korisnika
+        User user = (User) authentication.getPrincipal();
+        String jwt = tokenUtils.generateToken(user.getUsername());
+        int expiresIn = tokenUtils.getExpiredIn();
 
-		// Ubaci korisnika u trenutni security kontekst
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Vrati token kao odgovor na uspesnu autentifikaciju
+        return ResponseEntity.ok(new UserTokenStateDto(jwt, expiresIn));
+    }
 
-		// Kreiraj token za tog korisnika
-		User user = (User) authentication.getPrincipal();
-		String jwt = tokenUtils.generateToken(user.getUsername());
-		int expiresIn = tokenUtils.getExpiredIn();
+    // Endpoint za registraciju novog korisnika
+    @PostMapping("/signup")
+    public ResponseEntity<User> addUser(@Valid @RequestBody RegistrationDto registrationDTO) {
+        UserDto existUser = this.userService.findByUsername(registrationDTO.getUsername());
+        if (existUser != null) {
+            throw new ResourceConflictException("Username already exists");
+        }
 
-		// Vrati token kao odgovor na uspesnu autentifikaciju
-		return ResponseEntity.ok(new UserTokenStateDTO(jwt, expiresIn));
-	}
+        User user = this.userService.save(registrationDTO);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
 
-	// Endpoint za registraciju novog korisnika
-	@PostMapping("/signup")
-	public ResponseEntity<User> addUser(@RequestBody RegistrationDTO registrationDTO) {
+    // U slucaju isteka vazenja JWT tokena, endpoint koji se poziva da se token osvezi
+    @PostMapping(value = "/refresh")
+    public ResponseEntity<UserTokenStateDto> refreshAuthenticationToken(HttpServletRequest request) {
 
-		User existUser = this.userService.findByUsername(registrationDTO.getUsername());
-		if (existUser != null) {
-			throw new ResourceConflictException(registrationDTO.getId(), "Username already exists");
-		}
+        String token = tokenUtils.getToken(request);
+        String username = this.tokenUtils.getUsernameFromToken(token);
+        User user = (User) this.userDetailsService.loadUserByUsername(username);
 
-		User user = this.userService.save(registrationDTO);
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
-	}
+        if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+            String refreshedToken = tokenUtils.refreshToken(token);
+            int expiresIn = tokenUtils.getExpiredIn();
 
-	// U slucaju isteka vazenja JWT tokena, endpoint koji se poziva da se token osvezi
-	@PostMapping(value = "/refresh")
-	public ResponseEntity<UserTokenStateDTO> refreshAuthenticationToken(HttpServletRequest request) {
+            return ResponseEntity.ok(new UserTokenStateDto(refreshedToken, expiresIn));
+        } else {
+            UserTokenStateDto userTokenStateDTO = new UserTokenStateDto();
+            return ResponseEntity.badRequest().body(userTokenStateDTO);
+        }
+    }
 
-		String token = tokenUtils.getToken(request);
-		String username = this.tokenUtils.getUsernameFromToken(token);
-		User user = (User) this.userDetailsService.loadUserByUsername(username);
+    @PostMapping(value = "/change-password")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDto passwordChangeDTO) {
+        userDetailsService.changePassword(passwordChangeDTO.getOldPassword(), passwordChangeDTO.getNewPassword());
 
-		if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
-			String refreshedToken = tokenUtils.refreshToken(token);
-			int expiresIn = tokenUtils.getExpiredIn();
-
-			return ResponseEntity.ok(new UserTokenStateDTO(refreshedToken, expiresIn));
-		} else {
-			UserTokenStateDTO userTokenStateDTO = new UserTokenStateDTO();
-			return ResponseEntity.badRequest().body(userTokenStateDTO);
-		}
-	}
-
-	@RequestMapping(value = "/change-password", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('USER')")
-	public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDTO passwordChangeDTO) {
-		userDetailsService.changePassword(passwordChangeDTO.getOldPassword(), passwordChangeDTO.getNewPassword());
-
-		Map<String, String> result = new HashMap<>();
-		result.put("result", "success");
-		return ResponseEntity.accepted().body(result);
-	}
+        Map<String, String> result = new HashMap<>();
+        result.put("result", "success");
+        return ResponseEntity.accepted().body(result);
+    }
 }

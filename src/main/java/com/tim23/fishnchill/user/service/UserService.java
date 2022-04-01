@@ -1,10 +1,14 @@
 package com.tim23.fishnchill.user.service;
 
-import com.tim23.fishnchill.user.DTO.RegistrationDTO;
+import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
+import com.tim23.fishnchill.user.dto.RegistrationDto;
+import com.tim23.fishnchill.user.dto.UserDto;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,45 +16,49 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
+    private AuthorityService authService;
+    private ModelMapper modelMapper;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private AuthorityService authService;
+    public List<UserDto> findAll() throws AccessDeniedException {
+        TypeToken<List<UserDto>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(userRepository.findAll(), typeToken.getType());
+    }
 
-	public User findByUsername(String username) throws UsernameNotFoundException {
-		return userRepository.findByUsername(username);
-	}
+    public UserDto findById(Long id) throws AccessDeniedException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", id));
+        return modelMapper.map(user, UserDto.class);
+    }
 
-	public User findById(Long id) throws AccessDeniedException {
-		return userRepository.findById(id).orElseGet(null);
-	}
+    public UserDto findByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) return null;
+        return modelMapper.map(user, UserDto.class);
+    }
 
-	public List<User> findAll() throws AccessDeniedException {
-		return userRepository.findAll();
-	}
+    public User save(RegistrationDto registrationDTO) {
+        User u = new User();
+        u.setUsername(registrationDTO.getUsername());
+        // pre nego sto postavimo lozinku u atribut hesiramo je
+        u.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
+        u.setFirstName(registrationDTO.getFirstName());
+        u.setLastName(registrationDTO.getLastName());
+        u.setEmail(registrationDTO.getEmail());
+        // Djole - Ovo je bilo disable-ovano
+        u.setEnabled(true);
 
-	public User save(RegistrationDTO registrationDTO) {
-		User u = new User();
-		u.setUsername(registrationDTO.getUsername());
-		// pre nego sto postavimo lozinku u atribut hesiramo je
-		u.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
-		u.setFirstName(registrationDTO.getFirstName());
-		u.setLastName(registrationDTO.getLastName());
-		u.setEmail(registrationDTO.getEmail());
-		u.setEnabled(false);
+        List<Authority> auth = authService.findByName("ROLE_CLIENT");
+        // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
+        u.setAuthorities(auth);
 
-		List<Authority> auth = authService.findByname("ROLE_USER");
-		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
-		u.setAuthorities(auth);
-		
-		return this.userRepository.save(u);
-	}
+        return this.userRepository.save(u);
+    }
 
 }
