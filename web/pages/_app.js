@@ -23,7 +23,7 @@ export default function MyApp(props) {
     }
     return config
   })
-
+  
   return (
     <CacheProvider value={emotionCache}>
       <Head>

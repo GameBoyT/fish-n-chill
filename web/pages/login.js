@@ -6,17 +6,16 @@ const Login = () => {
     try {
       const loggedInUser = await loginService.login(credentials)
       window.localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
-
-      console.log('login successful')
+      window.location.href = 'http://localhost:3000'
     } catch (exception) {
       console.log(exception)
     }
   }
 
   return (
-    <div>
+    <>
       <LoginForm handleLogin={handleLogin} />
-    </div>
+    </>
   )
 }
 

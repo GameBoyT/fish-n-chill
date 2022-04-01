@@ -8,16 +8,18 @@ const Cottage = () => {
   const { slug } = router.query
 
   const [cottage, setCottage] = useState({})
+  const [loggedInUser, setLoggedInUser] = useState([])
 
   useEffect(() => {
     const fetchData = async () => setCottage(await cottageService.getById(slug))
+    setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
 
     router.isReady ? fetchData() : console.log('router not ready')
   }, [slug])
 
   return (
     <>
-      <CottageProfile cottage={cottage} />
+      <CottageProfile loggedInUser={loggedInUser} cottage={cottage}/>
     </>
   )
 }

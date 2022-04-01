@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
-import AllCottages from '../../components/AllCottages'
-import cottageService from '../../services/cottage'
+import AllCottages from "../../components/AllCottages";
+import cottageService from "../../services/cottage"
 
 const Cottages = () => {
   const [cottages, setCottages] = useState([])
+  const [loggedInUser, setLoggedInUser] = useState([])
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+    setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
+  }, []);
 
   function handleChange(e) {
     if (e.target.value.length < 3) fetchData()
@@ -20,7 +22,7 @@ const Cottages = () => {
 
   return (
     <>
-      <AllCottages cottages={cottages} handleChange={(e) => handleChange(e)} />
+      <AllCottages loggedInUser={loggedInUser} cottages={cottages} handleChange={(e) => handleChange(e)} />
     </>
   )
 }
