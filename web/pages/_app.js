@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import AppBar from '@mui/material/AppBar'
 import LoggedOutNavBar from '../components/LoggedOutNavBar'
 import LoggedInNavBar from '../components/LoggedInNavBar'
+import Footer from '../components/Footer'
 
 import '/styles/globals.css'
 import theme from '../styles/theme'
@@ -41,12 +42,15 @@ export default function MyApp(props) {
         <title>FishNChill</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <AppBar position="relative">{loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}</AppBar>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <body>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <AppBar position="relative">{loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}</AppBar>
+          <Component {...pageProps} />
+          <Footer></Footer>
+        </ThemeProvider>
+      </body>
     </CacheProvider>
   )
 }

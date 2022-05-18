@@ -37,4 +37,18 @@ public class CottageController {
     public List<CottageDto> findByNameContaining(@PathVariable("name") String name) {
         return cottageService.findByNameContaining(name);
     }
+
+    @GetMapping(value = "/description/{description}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<CottageDto> findByDescriptionContaining(@PathVariable("description") String description) {
+        return cottageService.findByDescriptionContaining(description);
+    }
+
+    @GetMapping(value = "/nameordescription/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<CottageDto> findByNameOrDescriptionContainingIgnoreCase(@PathVariable("name") String name) {
+        return cottageService.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, name);
+    }
 }

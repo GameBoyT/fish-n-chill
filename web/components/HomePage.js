@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 const HomePage = () => {
-  return <></>
+  return <>lorem</>
 }
 
 export default HomePage
