@@ -34,4 +34,13 @@ public class CottageService {
         TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findByNameContainingIgnoreCase(name), typeToken.getType());
     }
+
+    public List<CottageDto> findByDescriptionContaining(String description) {
+        TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(cottageRepository.findByDescriptionContainingIgnoreCase(description), typeToken.getType());
+    }
+    public List<CottageDto> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description) {
+        TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(cottageRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, description), typeToken.getType());
+    }
 }
