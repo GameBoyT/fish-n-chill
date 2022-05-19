@@ -31,7 +31,9 @@ public class BaseEntity {
 
     private String cancellationTerms;
 
-    private Double rating;
+    private Double ratingAverage;
+
+    private Integer ratingCount;
 
     //TODO mozda neki availability za dostupnoste, kao neka lista parova datuma od kojeg do kojeg je slobodan
 

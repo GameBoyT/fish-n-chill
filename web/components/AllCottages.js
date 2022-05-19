@@ -8,12 +8,13 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { InputBase } from '@mui/material'
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import Rating from '@mui/material/Rating';
+import Divider from '@mui/material/Divider'
 
 const AllCottages = ({ cottages, handleChange, handleSelect }) => {
   return (
@@ -63,9 +64,13 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography borderBottom={1} gutterBottom variant="h5" component="h2" align="center">
                       {cottage.name}
                     </Typography>
+                    <Typography variant="subtitle2" align="center">
+                      {cottage.address}
+                    </Typography>
+                    <Divider variant="middle" sx={{mb:0.5}}/>
                     <Typography
                       sx={{
                         display: '-webkit-box',
@@ -78,9 +83,10 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" href={'cottages/' + cottage.id}>
+                    <Button size="small" href={'cottages/' + cottage.id} variant="contained">
                       View
                     </Button>
+                    <Rating name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly sx={{ml:7}}/>
                   </CardActions>
                 </Card>
               </Grid>
