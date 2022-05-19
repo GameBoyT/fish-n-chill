@@ -24,7 +24,7 @@ INSERT INTO COTTAGE_OWNER (id) VALUES (2);
 INSERT INTO BOAT_OWNER (id) VALUES (3);
 INSERT INTO ADVENTURE_OWNER (id) VALUES (4);
 
-INSERT INTO BASE_ENTITY (name, description) VALUES ('cottageName', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos, cupiditate! Odio, aliquam soluta vel, eum illum corrupti incidunt nobis porro mollitia itaque reiciendis. Aut, minus dolore! Delectus pariatur praesentium dolorem? In at, quibusdam vero eligendi provident veritatis ipsam suscipit nisi similique nulla est magni harum. Cumque maiores eos alias, aperiam ea deleniti voluptatem culpa a perferendis accusantium, necessitatibus velit laborum');
+INSERT INTO BASE_ENTITY (name, rating_average, rating_count, description) VALUES ('cottageName',1.5 ,1 , 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos, cupiditate! Odio, aliquam soluta vel, eum illum corrupti incidunt nobis porro mollitia itaque reiciendis. Aut, minus dolore! Delectus pariatur praesentium dolorem? In at, quibusdam vero eligendi provident veritatis ipsam suscipit nisi similique nulla est magni harum. Cumque maiores eos alias, aperiam ea deleniti voluptatem culpa a perferendis accusantium, necessitatibus velit laborum');
 INSERT INTO BASE_ENTITY (name, description) VALUES ('boat', 'boatDescription');
 INSERT INTO BASE_ENTITY (name, description) VALUES ('adventure', 'adventureDescription');
 
@@ -41,3 +41,5 @@ INSERT INTO BOAT_SPECIFICATION (boat_type, length, engine_id, engine_power, max_
 INSERT INTO BOAT (id, owner_id, boat_specification_id) VALUES (2, 3, 1);
 
 INSERT INTO ADVENTURE (id, owner_id, biography) VALUES (3, 4, 'biografija');
+
+INSERT INTO RATING (rating, client_id, entity_id) VALUES (1.5, 1, 1);
