@@ -8,6 +8,7 @@ import java.util.List;
 public interface CottageRepository extends JpaRepository<Cottage, Long> {
     List<Cottage> findByNameContainingIgnoreCase(String name);
     List<Cottage> findByDescriptionContainingIgnoreCase(String description);
-    List<Cottage> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
+    List<Cottage> findByAddressContainingIgnoreCase(String address);
+    List<Cottage> findByNameContainingIgnoreCaseOrAddressContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String address, String description);
 }
 

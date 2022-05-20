@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react'
 
 const CottageProfile = ({ cottage }) => {
   const [loggedInUser, setLoggedInUser] = useState([])
+
   useEffect(() => {
     setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
   }, [])
   return (
     <>
-      <Container component="main" maxWidth="md">
+      <Container component="main" maxWidth="lg">
         <Box
           sx={{
             marginTop: 8,
@@ -24,6 +25,9 @@ const CottageProfile = ({ cottage }) => {
             <Typography variant="h3" mx="auto" align="center" gutterBottom component="div" sx={{ ml: 1, mr: 1 }}>
               {cottage.name}
             </Typography>
+            <Box textAlign="center">
+              <Rating size="large" name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly/>
+            </Box>
             <div
               style={{
                 display: "flex",
@@ -46,7 +50,32 @@ const CottageProfile = ({ cottage }) => {
               {cottage.address}
             </Typography>
             <div></div>
-            <Rating name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly sx={{ ml: 2 }} display="inline" />
+            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }} display="inline">
+              Price:
+            </Typography>
+            <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
+              {cottage.price}€/day
+            </Typography>
+            <div></div>
+            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }} display="inline">
+              Available: 
+            </Typography>
+            <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
+              {cottage.availabilityStart[2] ?? "#Not available#"}.{cottage.availabilityStart[1]}.{cottage.availabilityStart[0]}
+            </Typography>
+            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ mr: 2 }} display="inline">
+              -
+            </Typography>
+            <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
+            {cottage.availabilityEnd[2] ?? "#Not available#"}.{cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
+            </Typography>
+            <div></div>
+            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }} display="inline">
+              Capacity:
+            </Typography>
+            <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
+              {cottage.capacity} people
+            </Typography>
             <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }}>
               Description:
             </Typography>
@@ -55,7 +84,7 @@ const CottageProfile = ({ cottage }) => {
             </Typography>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
             {loggedInUser ? <Button size="large" href='/' variant="contained" sx={{ml:3, mb:3}}>
-              Create Reservation
+              Schedule Reservation
             </Button> : <></>}
           </Paper>
         </Box>

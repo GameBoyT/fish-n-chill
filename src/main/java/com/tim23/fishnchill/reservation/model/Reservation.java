@@ -28,7 +28,7 @@ public class Reservation {
 
     private Integer duration;
 
-    private Integer maximalGuests;
-
     private BigDecimal price;
+
+    private Float rating;
 }

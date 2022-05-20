@@ -1,6 +1,5 @@
 package com.tim23.fishnchill.user.model;
 
-import com.tim23.fishnchill.general.model.Rating;
 import com.tim23.fishnchill.reservation.model.CottageReservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,9 +19,6 @@ import java.util.Set;
 @Entity
 public class Client extends User {
     private Integer penaltyCount;
-
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CottageReservation> cottageReservations;

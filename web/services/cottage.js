@@ -16,8 +16,13 @@ const getByDescriptionContaining = async (description) => {
   return res.data
 }
 
-const getByNameOrDescriptionContaining = async (name) => {
-  const res = await axios.get(baseUrl + 'nameordescription/' + name)
+const getByAddressContaining = async (address) => {
+  const res = await axios.get(baseUrl + 'address/' + address)
+  return res.data
+}
+
+const getByAnything = async (anything) => {
+  const res = await axios.get(baseUrl + 'anything/' + anything)
   return res.data
 }
 
@@ -44,7 +49,8 @@ const cottageService = {
   getAll,
   getByNameContaining,
   getByDescriptionContaining,
-  getByNameOrDescriptionContaining,
+  getByAddressContaining,
+  getByAnything,
   getById,
   create,
   update,

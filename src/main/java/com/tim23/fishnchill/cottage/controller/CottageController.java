@@ -45,10 +45,17 @@ public class CottageController {
         return cottageService.findByDescriptionContaining(description);
     }
 
-    @GetMapping(value = "/nameordescription/{name}")
+    @GetMapping(value = "/address/{address}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<CottageDto> findByNameOrDescriptionContainingIgnoreCase(@PathVariable("name") String name) {
-        return cottageService.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, name);
+    public List<CottageDto> findByAddressContaining(@PathVariable("address") String address) {
+        return cottageService.findByAddressContaining(address);
+    }
+
+    @GetMapping(value = "/anything/{anything}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<CottageDto> findByAnything(@PathVariable("anything") String anything) {
+        return cottageService.findByAnything(anything, anything, anything);
     }
 }
