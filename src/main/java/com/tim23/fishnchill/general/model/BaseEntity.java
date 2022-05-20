@@ -27,8 +27,6 @@ public class BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private Integer capacity;
-
     private String rules;
 
     private String cancellationTerms;

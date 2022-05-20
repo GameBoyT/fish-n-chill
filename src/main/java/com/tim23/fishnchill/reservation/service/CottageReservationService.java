@@ -50,7 +50,6 @@ public class CottageReservationService {
         CottageReservation cottageReservation = new CottageReservation();
         cottageReservation.setDuration(newReservationDto.getDuration());
         cottageReservation.setPrice(newReservationDto.getPrice());
-        cottageReservation.setMaximalGuests(newReservationDto.getMaximalGuests());
         cottageReservation.setCottage(cottageRepository.getById(newReservationDto.getEntityId()));
         cottageReservation.setClient(clientRepository.getById(newReservationDto.getClientId()));
 

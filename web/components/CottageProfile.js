@@ -51,23 +51,30 @@ const CottageProfile = ({ cottage }) => {
             </Typography>
             <div></div>
             <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }} display="inline">
-              Price per day:
+              Price:
             </Typography>
             <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
-              {cottage.price}
+              {cottage.price}€/day
             </Typography>
             <div></div>
             <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }} display="inline">
-              Available from 
+              Available: 
             </Typography>
             <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
               {cottage.availabilityStart[2] ?? "#Not available#"}.{cottage.availabilityStart[1]}.{cottage.availabilityStart[0]}
             </Typography>
-            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 1, mr: 3 }} display="inline">
-              to 
+            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ mr: 2 }} display="inline">
+              -
             </Typography>
             <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
             {cottage.availabilityEnd[2] ?? "#Not available#"}.{cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
+            </Typography>
+            <div></div>
+            <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }} display="inline">
+              Capacity:
+            </Typography>
+            <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
+              {cottage.capacity} people
             </Typography>
             <Typography variant="h5" fontWeight='fontWeightMedium' sx={{ ml: 3, mr: 3 }}>
               Description:

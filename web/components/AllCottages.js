@@ -75,7 +75,7 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                       {cottage.availabilityStart[2] ?? "#Not available#"}.{cottage.availabilityStart[1]}.{cottage.availabilityStart[0]} - {cottage.availabilityEnd[2] ?? "#Not available#"}.{cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
                     </Typography>
                     <Divider variant="middle" sx={{ mb: 0.5 }} />
-                    
+
                     <Typography
                       sx={{
                         display: '-webkit-box',
@@ -86,7 +86,15 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     >
                       {cottage.description}
                     </Typography>
+                    <Divider variant="middle" />
                   </CardContent>
+                  <Box><Typography variant="subtitle2" align="left" sx={{ ml: 1 }} display="inline">
+                    {cottage.price}€/day
+                  </Typography>
+                  <Typography variant="subtitle2" display="inline" sx={{ ml: 18 }}>
+                    {cottage.capacity}&#128100;
+                  </Typography></Box>
+                  
                   <CardActions>
                     <Button size="small" href={'cottages/' + cottage.id} variant="contained">
                       View

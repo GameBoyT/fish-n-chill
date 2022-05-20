@@ -34,4 +34,6 @@ public class CottageDto {
     private LocalDateTime availabilityEnd;
 
     private BigDecimal price;
+
+    private Integer capacity;
 }

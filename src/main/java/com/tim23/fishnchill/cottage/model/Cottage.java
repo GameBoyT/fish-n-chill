@@ -20,6 +20,8 @@ public class Cottage extends BaseEntity {
 
     private String address;
 
+    private Integer capacity;
+
     @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CottageReservation> cottageReservations;
 
