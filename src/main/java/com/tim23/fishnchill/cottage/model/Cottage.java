@@ -1,6 +1,7 @@
 package com.tim23.fishnchill.cottage.model;
 
 import com.tim23.fishnchill.general.model.BaseEntity;
+import com.tim23.fishnchill.reservation.model.CottageReservation;
 import com.tim23.fishnchill.user.model.CottageOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,9 @@ import java.util.Set;
 public class Cottage extends BaseEntity {
 
     private String address;
+
+    @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<CottageReservation> cottageReservations;
 
     @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Room> rooms;

@@ -10,9 +10,12 @@ const Cottage = () => {
 
   useEffect(() => {
     const fetchData = async () => setCottage(await cottageService.getById(slug))
-
     router.isReady ? fetchData() : console.log('router not ready')
   }, [slug])
+
+  if (Object.keys(cottage).length === 0) {
+    return (<div>Loading....</div>)
+  }
 
   return (
     <>

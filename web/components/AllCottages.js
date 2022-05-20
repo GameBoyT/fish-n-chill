@@ -20,7 +20,7 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
   return (
     <>
       <main>
-        <Box sx={{backgroundColor: 'grey.300', width: '100%' }}>
+        <Box sx={{ backgroundColor: 'grey.300', width: '100%' }}>
           <TextField
             id="searchCottages"
             sx={{ mt: 0.5, ml: 55, flex: 1, width: '25%' }}
@@ -34,6 +34,7 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
             sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
             <InputLabel >Search by</InputLabel>
             <Select
+              defaultValue=""
               size="large"
               labelId="searchFilter"
               id="searchFilter"
@@ -47,7 +48,6 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
             </Select>
           </FormControl>
           <Box sx={{ minWidth: 120 }}>
-
           </Box>
         </Box>
 
@@ -71,7 +71,11 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     <Typography variant="subtitle2" align="center">
                       {cottage.address}
                     </Typography>
-                    <Divider variant="middle" sx={{mb:0.5}}/>
+                    <Typography variant="subtitle2" component="div" align="center">
+                      {cottage.availabilityStart[2] ?? "#Not available#"}.{cottage.availabilityStart[1]}.{cottage.availabilityStart[0]} - {cottage.availabilityEnd[2] ?? "#Not available#"}.{cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
+                    </Typography>
+                    <Divider variant="middle" sx={{ mb: 0.5 }} />
+                    
                     <Typography
                       sx={{
                         display: '-webkit-box',
@@ -87,7 +91,7 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     <Button size="small" href={'cottages/' + cottage.id} variant="contained">
                       View
                     </Button>
-                    <Rating name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly sx={{ml:7}}/>
+                    <Rating name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly sx={{ ml: 7 }} />
                   </CardActions>
                 </Card>
               </Grid>

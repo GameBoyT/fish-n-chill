@@ -1,13 +1,13 @@
 package com.tim23.fishnchill.cottage;
 
 import com.tim23.fishnchill.general.dto.ImageDto;
-import com.tim23.fishnchill.general.dto.RatingDto;
-import com.tim23.fishnchill.general.model.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -28,4 +28,10 @@ public class CottageDto {
     private Double ratingAverage;
 
     private Integer ratingCount;
+
+    private LocalDateTime availabilityStart;
+
+    private LocalDateTime availabilityEnd;
+
+    private BigDecimal price;
 }

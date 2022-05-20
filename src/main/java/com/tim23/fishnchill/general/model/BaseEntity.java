@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 
@@ -35,12 +37,15 @@ public class BaseEntity {
 
     private Integer ratingCount;
 
+    private LocalDateTime availabilityStart;
+
+    private LocalDateTime availabilityEnd;
+
+    private BigDecimal price;
+
     //TODO mozda neki availability za dostupnoste, kao neka lista parova datuma od kojeg do kojeg je slobodan
 
     //TODO Cjenovnik
-
-    @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tag> tags;
