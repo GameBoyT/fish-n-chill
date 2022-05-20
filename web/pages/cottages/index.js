@@ -15,7 +15,8 @@ const Cottages = () => {
     if (e.value.length < 3) fetchData()
     else if (filter == 'name') fetchByName(e.value)
     else if (filter == 'description') fetchByDescription(e.value)
-    else if (filter == 'anything') fetchByNameOrDescription(e.value)
+    else if (filter == 'address') fetchByAddress(e.value)
+    else if (filter == 'anything') fetchByAnything(e.value)
   }
 
   function handleSelect(e) {
@@ -24,8 +25,9 @@ const Cottages = () => {
 
   const fetchData = async () => setCottages(await cottageService.getAll())
   const fetchByName = async (name) => setCottages(await cottageService.getByNameContaining(name))
+  const fetchByAddress = async (address) => setCottages(await cottageService.getByAddressContaining(address))
   const fetchByDescription = async (description) => setCottages(await cottageService.getByDescriptionContaining(description))
-  const fetchByNameOrDescription = async (name) => setCottages(await cottageService.getByNameOrDescriptionContaining(name))
+  const fetchByAnything = async (anything) => setCottages(await cottageService.getByAnything(anything))
 
   return (
     <>

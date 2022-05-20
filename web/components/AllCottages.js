@@ -42,6 +42,7 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
+              <MenuItem value={'address'}>Adress</MenuItem>
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
