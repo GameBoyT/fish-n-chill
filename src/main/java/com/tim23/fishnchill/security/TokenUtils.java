@@ -38,13 +38,14 @@ public class TokenUtils {
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
     // Funkcija za generisanje JWT token
-    public String generateToken(String username) {
+    public String generateToken(String username, String id) {
         return Jwts.builder()
                 .setIssuer(appName)
                 .setSubject(username)
                 .setAudience(AUDIENCE_WEB)
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
+                .setId(id)
                 // .claim("key", value) //moguce je postavljanje proizvoljnih podataka u telo JWT tokena
                 .signWith(SIGNATURE_ALGORITHM, secret).compact();
     }
@@ -83,6 +84,16 @@ public class TokenUtils {
 
         return (username != null && username.equals(userDetails.getUsername())
                 && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
+    }
+    public String getIdFromToken(String token) {
+        String id;
+        try {
+            final Claims claims = this.getAllClaimsFromToken(token);
+            id = claims.getId();
+        } catch (Exception e) {
+            id = null;
+        }
+        return id;
     }
 
     public String getUsernameFromToken(String token) {

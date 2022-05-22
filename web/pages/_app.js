@@ -24,7 +24,6 @@ export default function MyApp(props) {
     const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
     if (loggedInUser) {
       const token = `Bearer ${loggedInUser.accessToken}`
-      console.log(token)
       config.headers['Authorization'] = token
     }
     return config

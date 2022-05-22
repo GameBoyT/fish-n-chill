@@ -88,8 +88,9 @@ const LoggedInNavBar = () => {
                   key="logout"
                   style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
                   sx={{ color: 'blue' }}
+                  href={'/' + 'users/profile'}
                 >
-                  account
+                  profile
                 </Button>
               </MenuItem>
               <MenuItem>
@@ -97,7 +98,7 @@ const LoggedInNavBar = () => {
                   key="logout"
                   href="/"
                   style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
-                  sx={{ color: 'blue' }}
+                  sx={{ color: 'red' }}
                   onClick={handleLogout}
                 >
                   logout
