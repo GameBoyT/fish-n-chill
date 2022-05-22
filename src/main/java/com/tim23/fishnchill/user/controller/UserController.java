@@ -1,5 +1,6 @@
 package com.tim23.fishnchill.user.controller;
 
+import com.tim23.fishnchill.security.TokenUtils;
 import com.tim23.fishnchill.user.dto.UserDto;
 import com.tim23.fishnchill.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
-
+    private TokenUtils tokenUtils;
 
     @GetMapping("/users")
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -34,10 +36,13 @@ public class UserController {
         return this.userService.findById(userId);
     }
 
-    @GetMapping("/whoami")
+    @GetMapping("/users/whoami")
     @PreAuthorize("hasRole('CLIENT')")
-    public UserDto user(Principal user) {
-        return this.userService.findByUsername(user.getName());
+    public UserDto user(HttpServletRequest request){
+
+        String token = tokenUtils.getToken(request);
+        Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
+        return this.userService.findById(id);
     }
 
 }
