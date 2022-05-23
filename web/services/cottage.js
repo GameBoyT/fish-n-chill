@@ -1,6 +1,14 @@
 import axios from 'axios'
 const baseUrl = process.env.NEXT_PUBLIC_API_URL + 'cottages/'
 
+
+
+const scheduleReservation = async () =>{
+  const response = await axios.post('http://localhost:8080/api/cottages/reservations', JSON.stringify({},null,2))
+  return response.data
+}
+
+
 const getAll = async () => {
   const res = await axios.get(baseUrl)
   return res.data
@@ -55,6 +63,7 @@ const cottageService = {
   create,
   update,
   remove,
+  scheduleReservation
 }
 
 export default cottageService

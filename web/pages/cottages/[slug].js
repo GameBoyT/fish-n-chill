@@ -7,6 +7,12 @@ const Cottage = () => {
   const router = useRouter()
   const { slug } = router.query
   const [cottage, setCottage] = useState({})
+  const [loggedInUser, setLoggedInUser] = useState([])
+
+  useEffect(() => {
+    setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
+  }, [])
+
 
   useEffect(() => {
     const fetchData = async () => setCottage(await cottageService.getById(slug))
@@ -17,9 +23,18 @@ const Cottage = () => {
     return (<div>Loading....</div>)
   }
 
+  const scheduleReservation = async () => {
+    try {
+      await cottageService.scheduleReservation()
+      console.log('proslo')
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   return (
     <>
-      <CottageProfile cottage={cottage} />
+      <CottageProfile cottage={cottage} scheduleReservation={() => scheduleReservation()} />
     </>
   )
 }
