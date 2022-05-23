@@ -14,7 +14,7 @@ import Link from '@mui/material/Link'
 
 import { useState } from 'react'
 
-const pages = ['cottages', 'boats', 'instructors']
+const pages = ['cottages', 'boats', 'adventures']
 
 const LoggedInNavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)

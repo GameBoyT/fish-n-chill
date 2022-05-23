@@ -6,7 +6,7 @@ import Link from '@mui/material/Link'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 
-const pages = ['cottages', 'boats', 'instructors']
+const pages = ['cottages', 'boats', 'adventures']
 const settings = ['login', 'signup']
 
 const LoggedOutNavBar = () => {

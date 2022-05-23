@@ -16,17 +16,17 @@ import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider'
 
-const AllCottages = ({ cottages, handleChange, handleSelect }) => {
+const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
   return (
     <>
       <main>
         <Box sx={{ backgroundColor: 'grey.300', width: '100%' }}>
           <TextField
-            id="searchCottages"
+            id="searchAdventures"
             sx={{ mt: 0.5, ml: 55, flex: 1, width: '25%' }}
             variant="filled"
             size="small"
-            placeholder="Search cottages"
+            placeholder="Search adventures"
             inputProps={{ 'aria-label': 'search google maps', style: { textAlign: 'center', fontSize: 22 } }}
             onChange={(e) => handleChange(e.target)}
           />
@@ -39,11 +39,10 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
               labelId="searchFilter"
               id="searchFilter"
               label="Search by"
-              onChange={(e) => { handleSelect(e); searchCottages.value = ''; handleChange(searchCottages); }}
+              onChange={(e) => { handleSelect(e); searchAdventures.value = ''; handleChange(searchAdventures); }}
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
-              <MenuItem value={'address'}>Adress</MenuItem>
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
@@ -53,26 +52,23 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
 
         <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
-            {cottages.map((cottage) => (
-              <Grid item key={cottage.id} xs={12} sm={6} md={4}>
+            {adventures.map((adventure) => (
+              <Grid item key={adventure.id} xs={12} sm={6} md={4}>
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardMedia
                     component="img"
                     sx={{
                       pt: '0%',
                     }}
-                    image={cottage.images[0].url}
+                    image={adventure.images[0].url}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography borderBottom={1} gutterBottom variant="h5" component="h2" align="center">
-                      {cottage.name}
-                    </Typography>
-                    <Typography variant="subtitle2" align="center">
-                      {cottage.address}
+                      {adventure.name}
                     </Typography>
                     <Typography variant="subtitle2" component="div" align="center">
-                      {cottage.availabilityStart[2] ?? "#Not available#"}.{cottage.availabilityStart[1]}.{cottage.availabilityStart[0]} - {cottage.availabilityEnd[2] ?? "#Not available#"}.{cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
+                      {adventure.availabilityStart[2] ?? "#Not available#"}.{adventure.availabilityStart[1]}.{adventure.availabilityStart[0]} - {adventure.availabilityEnd[2] ?? "#Not available#"}.{adventure.availabilityEnd[1]}.{adventure.availabilityEnd[0]}
                     </Typography>
                     <Divider variant="middle" sx={{ mb: 0.5 }} />
 
@@ -84,22 +80,24 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                         WebkitLineClamp: 4,
                       }}
                     >
-                      {cottage.description}
+                      {adventure.description}
                     </Typography>
                     <Divider variant="middle" />
                   </CardContent>
-                  <Box><Typography variant="subtitle2" align="left" sx={{ ml: 1 }} display="inline">
-                    {cottage.price}€/day
-                  </Typography>
-                    <Typography variant="subtitle2" display="inline" sx={{ ml: 18 }}>
-                      {cottage.capacity}&#128100;
+                  <Box>
+                    <Typography variant="subtitle2" align="left" sx={{ ml: 1 }} display="inline">
+                      {adventure.price}€
+                    </Typography>
+                    <Typography variant="subtitle2" display="inline" sx={{ ml: 21 }}>
+                      {adventure.capacity}&#128100;
                     </Typography>
                   </Box>
+
                   <CardActions>
-                    <Button size="small" href={'cottages/' + cottage.id} variant="contained">
+                    <Button size="small" href={'adventures/' + adventure.id} variant="contained">
                       View
                     </Button>
-                    <Rating name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly sx={{ ml: 7 }} />
+                    <Rating name="read-only" value={adventure.ratingAverage ?? 0} precision={0.5} readOnly sx={{ ml: 7 }} />
                   </CardActions>
                 </Card>
               </Grid>
@@ -111,4 +109,4 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
   )
 }
 
-export default AllCottages
+export default AllAdventures

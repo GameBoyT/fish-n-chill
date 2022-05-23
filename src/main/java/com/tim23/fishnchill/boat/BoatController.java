@@ -1,5 +1,6 @@
 package com.tim23.fishnchill.boat;
 
+import com.tim23.fishnchill.cottage.CottageDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,5 +20,33 @@ public class BoatController {
     @ResponseBody
     public List<BoatDto> findAll() {
         return boatService.findAll();
+    }
+
+    @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public BoatDto findById(@PathVariable("id") Long id) {
+        return boatService.findById(id);
+    }
+
+    @GetMapping(value = "/name/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<BoatDto> findByNameContaining(@PathVariable("name") String name) {
+        return boatService.findByNameContaining(name);
+    }
+
+    @GetMapping(value = "/description/{description}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<BoatDto> findByDescriptionContaining(@PathVariable("description") String description) {
+        return boatService.findByDescriptionContaining(description);
+    }
+
+    @GetMapping(value = "/anything/{anything}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<BoatDto> findByAnything(@PathVariable("anything") String anything) {
+        return boatService.findByAnything(anything, anything);
     }
 }
