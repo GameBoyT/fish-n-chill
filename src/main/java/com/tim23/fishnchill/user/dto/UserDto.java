@@ -25,6 +25,14 @@ public class UserDto {
 
     private String email;
 
+    private String address;
+
+    private String city;
+
+    private String country;
+
+    private String phoneNumber;
+
     private Boolean enabled;
 
     private List<Authority> authorities;

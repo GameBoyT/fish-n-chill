@@ -42,6 +42,18 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @Column(name = "enabled")
     private boolean enabled;
 
@@ -99,6 +111,24 @@ public class User implements UserDetails {
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
+
+    public String getAddress() {return address;}
+
+    public void setAddress(String address) {this.address = address;}
+
+    public String getCity() {return city;}
+
+    public void setCity(String city) {this.country = city;}
+
+    public String getCountry() {return country;}
+
+    public void setCountry(String country) {this.country = country;}
+
+    public String getPhoneNumber() {return phoneNumber;}
+
+    public void setPhoneNumber(String phoneNumber) {this.country = phoneNumber;}
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

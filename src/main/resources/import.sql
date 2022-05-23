@@ -1,7 +1,7 @@
 -- Lozinke su hesovane pomocu BCrypt algoritma https://www.dailycred.com/article/bcrypt-calculator
 -- Lozinka za oba user-a je 123
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES ('user', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07');
+INSERT INTO USERS (username, password, first_name, last_name, email, address, city, country, phone_number, enabled, last_password_reset_date) VALUES ('user', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', 'Jug Bogdana 22/7', 'Novi Sad', 'Serbia', '+381665059512', true, '2017-10-01 21:58:58.508-07');
 INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES ('cottageUser', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Simo', 'Simic', 'cottageUser@example.com', true, '2017-10-01 21:58:58.508-07');
 INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES ('boatUser', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Boto', 'Botic', 'boatUser@example.com', true, '2017-10-01 21:58:58.508-07');
 INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES ('adventureUser', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Advo', 'Advic', 'adventureUser@example.com', true, '2017-10-01 21:58:58.508-07');
@@ -24,13 +24,23 @@ INSERT INTO COTTAGE_OWNER (id) VALUES (2);
 INSERT INTO BOAT_OWNER (id) VALUES (3);
 INSERT INTO ADVENTURE_OWNER (id) VALUES (4);
 
-INSERT INTO BASE_ENTITY (name, rating_average, rating_count,price, availability_start, availability_end, description) VALUES ('cottageName', 1.5, 1, 250, '2022-05-06', '2022-05-30', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos, cupiditate! Odio, aliquam soluta vel, eum illum corrupti incidunt nobis porro mollitia itaque reiciendis. Aut, minus dolore! Delectus pariatur praesentium dolorem? In at, quibusdam vero eligendi provident veritatis ipsam suscipit nisi similique nulla est magni harum. Cumque maiores eos alias, aperiam ea deleniti voluptatem culpa a perferendis accusantium, necessitatibus velit laborum');
+INSERT INTO BASE_ENTITY (name, rating_average, rating_count,price, availability_start, availability_end, description) VALUES ('Cottage 1', 1.5, 1, 250, '2022-05-06', '2022-05-30', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos, cupiditate! Odio, aliquam soluta vel, eum illum corrupti incidunt nobis porro mollitia itaque reiciendis. Aut, minus dolore! Delectus pariatur praesentium dolorem? In at, quibusdam vero eligendi provident veritatis ipsam suscipit nisi similique nulla est magni harum. Cumque maiores eos alias, aperiam ea deleniti voluptatem culpa a perferendis accusantium, necessitatibus velit laborum');
+INSERT INTO BASE_ENTITY (name, rating_average, rating_count,price, availability_start, availability_end, description) VALUES ('Cottage 2', 4.5, 1, 300, '2022-07-06', '2022-07-25', 'Najbolji gas od vikendice ikada KEKEKEKEKE');
+INSERT INTO BASE_ENTITY (name, rating_average, rating_count,price, availability_start, availability_end, description) VALUES ('Cottage 4', 3.5, 1, 220, '2022-06-06', '2022-06-18', 'Dobra vikendica i nista vise!');
+INSERT INTO BASE_ENTITY (name, rating_average, rating_count,price, availability_start, availability_end, description) VALUES ('Cottage 3', 3, 1, 150, '2022-05-23', '2022-06-15', 'Dobra cijena, dobar provod!!!');
+
 INSERT INTO BASE_ENTITY (name, description) VALUES ('boat', 'boatDescription');
 INSERT INTO BASE_ENTITY (name, description) VALUES ('adventure', 'adventureDescription');
 
-INSERT INTO IMAGE (entity_id, url) VALUES (1, '/images/cottage1.jpg');
+INSERT INTO IMAGE (entity_id, url) VALUES (1, 'https://i.ibb.co/gRhpQYk/cottage1.jpg');
+INSERT INTO IMAGE (entity_id, url) VALUES (2, 'https://i.ibb.co/f9HDvs1/cottage2.jpg');
+INSERT INTO IMAGE (entity_id, url) VALUES (3, 'https://i.ibb.co/gRhpQYk/cottage1.jpg');
+INSERT INTO IMAGE (entity_id, url) VALUES (4, 'https://i.ibb.co/f9HDvs1/cottage2.jpg');
 
-INSERT INTO COTTAGE (id, owner_id, capacity, address) VALUES (1, 2, 7, 'Sremska Kamenica, Novi Sad');
+INSERT INTO COTTAGE (id, owner_id, capacity, address) VALUES (1, 2, 7, 'Sremska Kamenica 13, Novi Sad');
+INSERT INTO COTTAGE (id, owner_id, capacity, address) VALUES (2, 2, 13, 'Svetozara Miletica 2, Veternik(Novi Sad)');
+INSERT INTO COTTAGE (id, owner_id, capacity, address) VALUES (3, 2, 15, 'Sremska Kamenica 13, Novi Sad');
+INSERT INTO COTTAGE (id, owner_id, capacity, address) VALUES (4, 2, 10 , 'Svetozara Miletica 2, Veternik(Novi Sad)');
 
 INSERT INTO RESERVATION (duration, price, reservation_start, reservation_end) VALUES (2, 500, '2022-05-08', '2022-05-10');
 
