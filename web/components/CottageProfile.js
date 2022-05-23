@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
 
-const CottageProfile = ({ cottage }) => {
+const CottageProfile = ({ cottage, scheduleReservation }) => {
   const [loggedInUser, setLoggedInUser] = useState([])
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const CottageProfile = ({ cottage }) => {
               {cottage.description}
             </Typography>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
-            {loggedInUser ? <Button size="large" href='/' variant="contained" sx={{ml:3, mb:3}}>
+            {loggedInUser ? <Button onClick={scheduleReservation}  size="large" href='/' variant="contained" sx={{ml:3, mb:3}}>
               Schedule Reservation
             </Button> : <></>}
           </Paper>
