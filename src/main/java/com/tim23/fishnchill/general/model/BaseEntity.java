@@ -41,10 +41,6 @@ public class BaseEntity {
 
     private BigDecimal price;
 
-    //TODO mozda neki availability za dostupnoste, kao neka lista parova datuma od kojeg do kojeg je slobodan
-
-    //TODO Cjenovnik
-
     @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tag> tags;
 

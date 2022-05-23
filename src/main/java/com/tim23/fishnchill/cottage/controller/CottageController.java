@@ -24,7 +24,6 @@ public class CottageController {
     }
 
     @GetMapping(value = "/{id}")
-//    @PreAuthorize("hasRole('BUSINESS')")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public CottageDto findById(@PathVariable("id") Long id) {

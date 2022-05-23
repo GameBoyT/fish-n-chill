@@ -2,7 +2,6 @@ import { Box, Divider, Typography, Container, Skeleton, Paper, Rating, Button } 
 
 
 const UserProfile = ({ user }) => {
-console.log(user)
   return (
     <>
       <Container component="main" maxWidth="sm">
@@ -31,6 +30,34 @@ console.log(user)
             </Typography>
             <Typography variant="h5" display="inline" align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
               {user.firstName} {user.lastName}
+            </Typography>
+            <Divider></Divider>
+            <Typography variant="h6" display="inline"  align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              Country:
+            </Typography>
+            <Typography variant="h5" display="inline" align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              {user.country}
+            </Typography>
+            <Divider></Divider>
+            <Typography variant="h6" display="inline"  align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              City:
+            </Typography>
+            <Typography variant="h5" display="inline" align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              {user.city}
+            </Typography>
+            <Divider></Divider>
+            <Typography variant="h6" display="inline"  align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              Address:
+            </Typography>
+            <Typography variant="h5" display="inline" align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              {user.address}
+            </Typography>
+            <Divider></Divider>
+            <Typography variant="h6" display="inline"  align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              Phone number:
+            </Typography>
+            <Typography variant="h5" display="inline" align="left"  component="div" sx={{ ml: 1, mr: 1 }}>
+              {user.phoneNumber}
             </Typography>
             <Divider></Divider>
             <Button size="small" href='/' variant="contained" sx={{ml:2, mb:2, mt:2}}>

@@ -28,6 +28,10 @@ public class Boat extends BaseEntity {
 
     private String fishFinder;
 
+    private String address;
+
+    private Integer capacity;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private BoatOwner owner;
 

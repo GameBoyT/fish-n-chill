@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -24,9 +26,17 @@ public class BoatDto {
 
     private String rules;
 
+    private BigDecimal price;
+
     private String cancellationTerms;
 
-    private Double rating;
+    private Double ratingAverage;
+
+    private Integer ratingCount;
+
+    private LocalDateTime availabilityStart;
+
+    private LocalDateTime availabilityEnd;
 
     private Long ownerId;
 
@@ -37,4 +47,6 @@ public class BoatDto {
     private Set<Image> images;
 
     private Set<Tag> tags;
+
+    private String boatType;
 }

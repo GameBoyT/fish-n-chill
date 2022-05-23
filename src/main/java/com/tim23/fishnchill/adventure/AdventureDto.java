@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -26,11 +28,19 @@ public class AdventureDto {
 
     private String cancellationTerms;
 
-    private Double rating;
+    private Double ratingAverage;
+
+    private Integer ratingCount;
 
     private String biography;
 
+    private BigDecimal price;
+
     private Long ownerId;
+
+    private LocalDateTime availabilityStart;
+
+    private LocalDateTime availabilityEnd;
 
     private Set<Image> images;
 
