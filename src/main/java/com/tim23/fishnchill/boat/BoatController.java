@@ -36,6 +36,13 @@ public class BoatController {
         return boatService.findByNameContaining(name);
     }
 
+    @GetMapping(value = "/address/{address}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<BoatDto> findByAddressContaining(@PathVariable("address") String address) {
+        return boatService.findByAddressContaining(address);
+    }
+
     @GetMapping(value = "/description/{description}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -47,6 +54,6 @@ public class BoatController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<BoatDto> findByAnything(@PathVariable("anything") String anything) {
-        return boatService.findByAnything(anything, anything);
+        return boatService.findByAnything(anything, anything, anything);
     }
 }

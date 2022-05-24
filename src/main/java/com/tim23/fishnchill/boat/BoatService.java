@@ -34,13 +34,18 @@ public class BoatService {
         return modelMapper.map(boatRepository.findByNameContainingIgnoreCase(name), typeToken.getType());
     }
 
+    public List<BoatDto> findByAddressContaining(String address) {
+        TypeToken<List<BoatDto>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(boatRepository.findByAddressContainingIgnoreCase(address), typeToken.getType());
+    }
+
     public List<BoatDto> findByDescriptionContaining(String description) {
         TypeToken<List<BoatDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(boatRepository.findByDescriptionContainingIgnoreCase(description), typeToken.getType());
     }
 
-    public List<BoatDto> findByAnything(String name, String description) {
+    public List<BoatDto> findByAnything(String name, String address, String description) {
         TypeToken<List<BoatDto>> typeToken = new TypeToken<>() {};
-        return modelMapper.map(boatRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, description), typeToken.getType());
+        return modelMapper.map(boatRepository.findByNameContainingIgnoreCaseOrAddressContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, address, description), typeToken.getType());
     }
 }

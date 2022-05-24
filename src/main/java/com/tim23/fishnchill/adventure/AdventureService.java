@@ -32,13 +32,18 @@ public class AdventureService {
         return modelMapper.map(adventureRepository.findByNameContainingIgnoreCase(name), typeToken.getType());
     }
 
+    public List<AdventureDto> findByAddressContaining(String address) {
+        TypeToken<List<AdventureDto>> typeToken = new TypeToken<>() {};
+        return modelMapper.map(adventureRepository.findByAddressContainingIgnoreCase(address), typeToken.getType());
+    }
+
     public List<AdventureDto> findByDescriptionContaining(String description) {
         TypeToken<List<AdventureDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(adventureRepository.findByDescriptionContainingIgnoreCase(description), typeToken.getType());
     }
 
-    public List<AdventureDto> findByAnything(String name, String description) {
+    public List<AdventureDto> findByAnything(String name, String address, String description) {
         TypeToken<List<AdventureDto>> typeToken = new TypeToken<>() {};
-        return modelMapper.map(adventureRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, description), typeToken.getType());
+        return modelMapper.map(adventureRepository.findByNameContainingIgnoreCaseOrAddressContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, address, description), typeToken.getType());
     }
 }

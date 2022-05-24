@@ -27,6 +27,9 @@ const BoatProfile = ({ boat }) => {
             </Typography>
             <Box textAlign="center">
               <Rating size="large" name="read-only" value={boat.ratingAverage ?? 0} precision={0.5} readOnly />
+              <Typography variant="subtitle1" mx="auto" align="center" gutterBottom component="div" sx={{ ml: 1, mr: 1 }}>
+                ({boat.ratingCount} ratings)
+              </Typography>
             </Box>
             <div
               style={{

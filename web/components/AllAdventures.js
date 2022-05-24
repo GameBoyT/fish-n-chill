@@ -43,6 +43,7 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
+              <MenuItem value={'address'}>Address</MenuItem>
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
@@ -66,6 +67,9 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography borderBottom={1} gutterBottom variant="h5" component="h2" align="center">
                       {adventure.name}
+                    </Typography>
+                    <Typography variant="subtitle2" align="center">
+                      {adventure.address}
                     </Typography>
                     <Typography variant="subtitle2" component="div" align="center">
                       {adventure.availabilityStart[2] ?? "#Not available#"}.{adventure.availabilityStart[1]}.{adventure.availabilityStart[0]} - {adventure.availabilityEnd[2] ?? "#Not available#"}.{adventure.availabilityEnd[1]}.{adventure.availabilityEnd[0]}

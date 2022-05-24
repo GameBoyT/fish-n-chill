@@ -49,4 +49,6 @@ public class BoatDto {
     private Set<Tag> tags;
 
     private String boatType;
+
+    private String address;
 }

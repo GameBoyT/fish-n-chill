@@ -42,6 +42,8 @@ public class AdventureDto {
 
     private LocalDateTime availabilityEnd;
 
+    private String address;
+
     private Set<Image> images;
 
     private Set<Tag> tags;

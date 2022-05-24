@@ -7,6 +7,7 @@ import java.util.List;
 public interface AdventureRepository extends JpaRepository<Adventure, Long> {
     List<Adventure> findByNameContainingIgnoreCase(String name);
     List<Adventure> findByDescriptionContainingIgnoreCase(String description);
-    List<Adventure> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
+    List<Adventure> findByAddressContainingIgnoreCase(String address);
+    List<Adventure> findByNameContainingIgnoreCaseOrAddressContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String address, String description);
 
 }
