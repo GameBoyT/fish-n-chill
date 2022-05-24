@@ -35,6 +35,13 @@ public class AdventureController {
         return adventureService.findByNameContaining(name);
     }
 
+    @GetMapping(value = "/address/{address}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<AdventureDto> findByAddressContaining(@PathVariable("address") String address) {
+        return adventureService.findByAddressContaining(address);
+    }
+
     @GetMapping(value = "/description/{description}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -46,6 +53,6 @@ public class AdventureController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<AdventureDto> findByAnything(@PathVariable("anything") String anything) {
-        return adventureService.findByAnything(anything, anything);
+        return adventureService.findByAnything(anything, anything, anything);
     }
 }

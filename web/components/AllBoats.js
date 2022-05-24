@@ -17,7 +17,6 @@ import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider'
 
 const AllBoats = ({ boats, handleChange, handleSelect }) => {
-  console.log(boats)
   return (
     <>
       <main>
@@ -44,6 +43,7 @@ const AllBoats = ({ boats, handleChange, handleSelect }) => {
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
+              <MenuItem value={'address'}>Address</MenuItem>
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
@@ -67,6 +67,9 @@ const AllBoats = ({ boats, handleChange, handleSelect }) => {
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography borderBottom={1} gutterBottom variant="h5" component="h2" align="center">
                       {boat.name}
+                    </Typography>
+                    <Typography variant="subtitle2" align="center">
+                      {boat.address}
                     </Typography>
                     <Typography variant="subtitle2" component="div" align="center">
                       {boat.availabilityStart[2] ?? "#Not available#"}.{boat.availabilityStart[1]}.{boat.availabilityStart[0]} - {boat.availabilityEnd[2] ?? "#Not available#"}.{boat.availabilityEnd[1]}.{boat.availabilityEnd[0]}

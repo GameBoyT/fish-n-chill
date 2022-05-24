@@ -27,6 +27,9 @@ const CottageProfile = ({ cottage, scheduleReservation }) => {
             </Typography>
             <Box textAlign="center">
               <Rating size="large" name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly />
+              <Typography variant="subtitle1" mx="auto" align="center" gutterBottom component="div" sx={{ ml: 1, mr: 1 }}>
+                ({cottage.ratingCount} ratings)
+              </Typography>
             </Box>
             <div
               style={{
@@ -83,7 +86,7 @@ const CottageProfile = ({ cottage, scheduleReservation }) => {
               {cottage.description}
             </Typography>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
-            {loggedInUser ? <Button onClick={scheduleReservation}  size="large" href='/' variant="contained" sx={{ml:3, mb:3}}>
+            {loggedInUser ? <Button onClick={scheduleReservation} size="large" href='/' variant="contained" sx={{ ml: 3, mb: 3 }}>
               Schedule Reservation
             </Button> : <></>}
           </Paper>
