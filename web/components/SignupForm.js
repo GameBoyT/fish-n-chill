@@ -34,8 +34,6 @@ const SignupForm = ({ handleSignup }) => (
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values) => {
-          alert(JSON.stringify(values, null, 2))
-          console.log(values)
           handleSignup(values)
         }}
       >

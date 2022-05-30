@@ -1,6 +1,7 @@
 package com.tim23.fishnchill.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tim23.fishnchill.general.model.VerificationToken;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,6 +66,10 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private VerificationToken verificationToken;
 
     public Long getId() {
         return id;
