@@ -52,13 +52,23 @@ public class UserService {
         u.setLastName(registrationDTO.getLastName());
         u.setEmail(registrationDTO.getEmail());
         // Djole - Ovo je bilo disable-ovano
-        u.setEnabled(true);
+        u.setEnabled(false);
 
         List<Authority> auth = authService.findByName("ROLE_CLIENT");
         // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
         u.setAuthorities(auth);
 
         return this.userRepository.save(u);
+    }
+
+    public UserDto findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) return null;
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    public User saveUser(User user) {
+        return this.userRepository.save(user);
     }
 
 }

@@ -1,12 +1,18 @@
 package com.tim23.fishnchill.user.controller;
 
 import com.tim23.fishnchill.general.exception.ResourceConflictException;
+import com.tim23.fishnchill.general.model.VerificationToken;
+import com.tim23.fishnchill.general.service.MailService;
+import com.tim23.fishnchill.general.service.VerificationTokenService;
 import com.tim23.fishnchill.security.TokenUtils;
 import com.tim23.fishnchill.user.dto.*;
+import com.tim23.fishnchill.user.model.Client;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;
 import com.tim23.fishnchill.user.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +21,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.net.URI;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 //Kontroler zaduzen za autentifikaciju korisnika
 @AllArgsConstructor
@@ -36,6 +42,11 @@ public class AuthenticationController {
     private final CustomUserDetailsService userDetailsService;
     private final UserService userService;
 
+    @Autowired
+    private MailService emailService;
+
+    @Autowired
+    private VerificationTokenService verificationTokenService;
 
     // Prvi endpoint koji pogadja korisnik kada se loguje.
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
@@ -60,13 +71,41 @@ public class AuthenticationController {
     // Endpoint za registraciju novog korisnika
     @PostMapping("/signup")
     public ResponseEntity<User> addUser(@Valid @RequestBody RegistrationDto registrationDTO) {
-        UserDto existUser = this.userService.findByUsername(registrationDTO.getUsername());
+        UserDto existUser = this.userService.findByEmail(registrationDTO.getEmail());
         if (existUser != null) {
-            throw new ResourceConflictException("Username already exists");
+            throw new ResourceConflictException("User already registered on this email!");
         }
 
         User user = this.userService.save(registrationDTO);
+        VerificationToken verificationToken = new VerificationToken(String.valueOf(UUID.randomUUID()), user);
+        this.verificationTokenService.save(verificationToken);
+        try {
+            emailService.sendVerificationEmail(verificationToken);
+        }catch( Exception e ){
+            e.printStackTrace();
+        }
+        
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value="/verify-account", method= {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity<User> confirmUserAccount(@RequestParam("token")String verificationToken) throws Exception {
+        VerificationToken token = verificationTokenService.findByToken(verificationToken);
+        if (verificationToken == null) {
+            throw new Exception("auth.message.invalidToken");
+        }
+
+        User user = token.getUser();
+        Calendar cal = Calendar.getInstance();
+        if ((token.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            throw new Exception("auth.message.expired");
+        }
+        user.setEnabled(true);
+        user = this.userService.saveUser(user);
+        URI frontend = new URI("http://localhost:3000/signup/success/");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(frontend);
+        return new ResponseEntity<>(user,httpHeaders, HttpStatus.SEE_OTHER);
     }
 
     // U slucaju isteka vazenja JWT tokena, endpoint koji se poziva da se token osvezi
