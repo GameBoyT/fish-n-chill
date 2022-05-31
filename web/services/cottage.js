@@ -1,13 +1,34 @@
 import axios from 'axios'
 const baseUrl = process.env.NEXT_PUBLIC_API_URL + 'cottages/'
 
-
-
-const scheduleReservation = async () =>{
-  const response = await axios.post('http://localhost:8080/api/cottages/reservations', JSON.stringify({},null,2))
-  return response.data
+async function getUserId(token) {
+  const loggedInUser = await axios.get(
+    'http://localhost:8080/api/users/whoami',
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  )
+  console.log(loggedInUser.data.id)
+  return loggedInUser.data.id
 }
 
+const scheduleReservation = async (token, cottage) => {
+  //const userId = await getUserId(token)
+  const body = {
+    duration: 1,
+    capacity: cottage.capacity,
+    clientId: 1,
+    entityId: cottage.id,
+  }
+  await axios.post('http://localhost:8080/api/cottages/reservations', body, {
+    headers: {
+      Authorization: token,
+    },
+  })
+}
 
 const getAll = async () => {
   const res = await axios.get(baseUrl)
@@ -63,7 +84,7 @@ const cottageService = {
   create,
   update,
   remove,
-  scheduleReservation
+  scheduleReservation,
 }
 
 export default cottageService
