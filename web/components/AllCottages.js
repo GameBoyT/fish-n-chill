@@ -8,12 +8,12 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Rating from '@mui/material/Rating';
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
+import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 
 const AllCottages = ({ cottages, handleChange, handleSelect }) => {
@@ -30,16 +30,19 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
             inputProps={{ 'aria-label': 'search google maps', style: { textAlign: 'center', fontSize: 22 } }}
             onChange={(e) => handleChange(e.target)}
           />
-          <FormControl variant='filled'
-            sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
-            <InputLabel >Search by</InputLabel>
+          <FormControl variant="filled" sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
+            <InputLabel>Search by</InputLabel>
             <Select
               defaultValue=""
               size="large"
               labelId="searchFilter"
               id="searchFilter"
               label="Search by"
-              onChange={(e) => { handleSelect(e); searchCottages.value = ''; handleChange(searchCottages); }}
+              onChange={(e) => {
+                handleSelect(e)
+                searchCottages.value = ''
+                handleChange(searchCottages)
+              }}
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
@@ -47,8 +50,7 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
-          <Box sx={{ minWidth: 120 }}>
-          </Box>
+          <Box sx={{ minWidth: 120 }}></Box>
         </Box>
 
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -72,7 +74,9 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                       {cottage.address}
                     </Typography>
                     <Typography variant="subtitle2" component="div" align="center">
-                      {cottage.availabilityStart[2] ?? "#Not available#"}.{cottage.availabilityStart[1]}.{cottage.availabilityStart[0]} - {cottage.availabilityEnd[2] ?? "#Not available#"}.{cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
+                      {cottage.availabilityStart[2] ?? '#Not available#'}.{cottage.availabilityStart[1]}.
+                      {cottage.availabilityStart[0]} - {cottage.availabilityEnd[2] ?? '#Not available#'}.
+                      {cottage.availabilityEnd[1]}.{cottage.availabilityEnd[0]}
                     </Typography>
                     <Divider variant="middle" sx={{ mb: 0.5 }} />
 
@@ -88,9 +92,10 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     </Typography>
                     <Divider variant="middle" />
                   </CardContent>
-                  <Box><Typography variant="subtitle2" align="left" sx={{ ml: 1 }} display="inline">
-                    {cottage.price}€/day
-                  </Typography>
+                  <Box>
+                    <Typography variant="subtitle2" align="left" sx={{ ml: 1 }} display="inline">
+                      {cottage.price}€/day
+                    </Typography>
                     <Typography variant="subtitle2" display="inline" sx={{ ml: 18 }}>
                       {cottage.capacity}&#128100;
                     </Typography>
@@ -99,7 +104,13 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
                     <Button size="small" href={'cottages/' + cottage.id} variant="contained">
                       View
                     </Button>
-                    <Rating name="read-only" value={cottage.ratingAverage ?? 0} precision={0.5} readOnly sx={{ ml: 7 }} />
+                    <Rating
+                      name="read-only"
+                      value={cottage.ratingAverage ?? 0}
+                      precision={0.5}
+                      readOnly
+                      sx={{ ml: 7 }}
+                    />
                   </CardActions>
                 </Card>
               </Grid>
