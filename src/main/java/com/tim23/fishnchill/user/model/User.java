@@ -2,6 +2,7 @@ package com.tim23.fishnchill.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tim23.fishnchill.general.model.VerificationToken;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import static javax.persistence.InheritanceType.JOINED;
 
 // POJO koji implementira Spring Security UserDetails interfejs koji specificira
 // osnovne osobine Spring korisnika (koje role ima, da li je nalog zakljucan, istekao, da li su kredencijali istekli)
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "USERS")
@@ -67,9 +69,20 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private VerificationToken verificationToken;
+    public User(User u) {
+        this.id = u.id;
+        this.password = u.password;
+        this.username = u.username;
+        this.firstName = u.firstName;
+        this.lastName = u.lastName;
+        this.email = u.email;
+        this.address = u.address;
+        this.city = u.city;
+        this.country = u.country;
+        this.phoneNumber = u.phoneNumber;
+        this.enabled = u.enabled;
+        this.lastPasswordResetDate = u.lastPasswordResetDate;
+    }
 
     public Long getId() {
         return id;

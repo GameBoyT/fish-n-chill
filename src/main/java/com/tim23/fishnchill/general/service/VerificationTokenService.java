@@ -13,8 +13,8 @@ public class VerificationTokenService {
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
 
-    public void DeleteTokenByUser(User user){
-        verificationTokenRepository.delete(verificationTokenRepository.findByUser(user));
+    public void DeleteTokenByUser(Client client){
+        verificationTokenRepository.delete(verificationTokenRepository.findByClient(client));
     }
 
     public VerificationToken findByToken(String name){
@@ -23,6 +23,10 @@ public class VerificationTokenService {
 
     public void save(VerificationToken verificationToken) {
         verificationTokenRepository.save(verificationToken);
+    }
+
+    public void delete(VerificationToken token) {
+        verificationTokenRepository.delete(token);
     }
 }
 

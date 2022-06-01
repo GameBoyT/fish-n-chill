@@ -31,10 +31,10 @@ public class MailService {
         System.out.println("Sending email...");
 
         SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(verificationToken.getUser().getEmail());
+        mail.setTo(verificationToken.getClient().getEmail());
         mail.setFrom(env.getProperty("spring.mail.username"));
         mail.setSubject("Account verification");
-        mail.setText("Hello " + verificationToken.getUser().getFirstName()
+        mail.setText("Hello " + verificationToken.getClient().getFirstName()
                 + ",\n\nPlease click the following link to verify your account: \n"
                 + "http://localhost:8080/auth/verify-account?token=" + verificationToken.getToken());
         javaMailSender.send(mail);

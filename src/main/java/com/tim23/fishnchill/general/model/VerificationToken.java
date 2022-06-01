@@ -15,21 +15,21 @@ public class VerificationToken {
     private static final int EXPIRATION = 60 * 24;
 
     @Id
-    @Column(name="user_id")
+    @Column(name="client_id")
     private Long id;
 
     private String token;
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     private Date expiryDate;
 
-    public VerificationToken(String token, User user) {
+    public VerificationToken(String token, Client client) {
         this.token=token;
-        this.user=user;
+        this.client=client;
         this.expiryDate=calculateExpiryDate(180);
     }
 
@@ -44,9 +44,6 @@ public class VerificationToken {
         return new Date(cal.getTime().getTime());
     }
 
-    public static int getEXPIRATION() {
-        return EXPIRATION;
-    }
 
     public Long getId() {
         return id;
@@ -64,12 +61,12 @@ public class VerificationToken {
         this.token = token;
     }
 
-    public User getUser() {
-        return user;
+    public Client getClient() {
+        return client;
     }
 
-    public void setUser(Client client) {
-        this.user = client;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Date getExpiryDate() {

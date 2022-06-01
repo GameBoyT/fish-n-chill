@@ -10,5 +10,5 @@ import java.util.List;
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
     VerificationToken findByToken(String token);
 
-    VerificationToken findByUser(User user);
+    VerificationToken findByClient(Client client);
 }
