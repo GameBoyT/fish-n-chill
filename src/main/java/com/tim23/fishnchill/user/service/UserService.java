@@ -71,4 +71,7 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
+    public void deleteUser(User user) {
+        this.userRepository.delete(user);
+    }
 }

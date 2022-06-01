@@ -8,6 +8,7 @@ import com.tim23.fishnchill.security.TokenUtils;
 import com.tim23.fishnchill.user.dto.*;
 import com.tim23.fishnchill.user.model.Client;
 import com.tim23.fishnchill.user.model.User;
+import com.tim23.fishnchill.user.service.ClientService;
 import com.tim23.fishnchill.user.service.CustomUserDetailsService;
 import com.tim23.fishnchill.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,7 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService userDetailsService;
     private final UserService userService;
+    private final ClientService clientService;
 
     @Autowired
     private MailService emailService;
@@ -69,15 +71,15 @@ public class AuthenticationController {
     }
 
     // Endpoint za registraciju novog korisnika
-    @PostMapping("/signup")
+    @PostMapping("/signup/client")
     public ResponseEntity<User> addUser(@Valid @RequestBody RegistrationDto registrationDTO) {
         UserDto existUser = this.userService.findByEmail(registrationDTO.getEmail());
         if (existUser != null) {
             throw new ResourceConflictException("User already registered on this email!");
         }
 
-        User user = this.userService.save(registrationDTO);
-        VerificationToken verificationToken = new VerificationToken(String.valueOf(UUID.randomUUID()), user);
+        Client client = this.clientService.save(registrationDTO);
+        VerificationToken verificationToken = new VerificationToken(String.valueOf(UUID.randomUUID()), client);
         this.verificationTokenService.save(verificationToken);
         try {
             emailService.sendVerificationEmail(verificationToken);
@@ -85,27 +87,35 @@ public class AuthenticationController {
             e.printStackTrace();
         }
         
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/verify-account", method= {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<User> confirmUserAccount(@RequestParam("token")String verificationToken) throws Exception {
         VerificationToken token = verificationTokenService.findByToken(verificationToken);
-        if (verificationToken == null) {
-            throw new Exception("auth.message.invalidToken");
+        if (token == null) {
+            URI frontend = new URI("http://localhost:3000/signup/invalid/");
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(frontend);
+            return new ResponseEntity<>(null, httpHeaders, HttpStatus.SEE_OTHER);
         }
-
-        User user = token.getUser();
+        Client client = token.getClient();
         Calendar cal = Calendar.getInstance();
         if ((token.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-            throw new Exception("auth.message.expired");
+            this.clientService.deleteClient(client);
+            URI frontend = new URI("http://localhost:3000/signup/expired/");
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(frontend);
+            return new ResponseEntity<>(null, httpHeaders, HttpStatus.SEE_OTHER);
         }
-        user.setEnabled(true);
-        user = this.userService.saveUser(user);
+
+        client.setEnabled(true);
+        client = this.clientService.saveClient(client);
+        this.verificationTokenService.delete(token);
         URI frontend = new URI("http://localhost:3000/signup/success/");
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(frontend);
-        return new ResponseEntity<>(user,httpHeaders, HttpStatus.SEE_OTHER);
+        return new ResponseEntity<>(client, httpHeaders, HttpStatus.SEE_OTHER);
     }
 
     // U slucaju isteka vazenja JWT tokena, endpoint koji se poziva da se token osvezi
