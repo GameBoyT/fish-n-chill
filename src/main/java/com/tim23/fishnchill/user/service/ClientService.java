@@ -4,9 +4,9 @@ import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
 import com.tim23.fishnchill.user.dto.ClientDto;
 import com.tim23.fishnchill.user.dto.ClientProfileDto;
 import com.tim23.fishnchill.user.dto.RegistrationDto;
+import com.tim23.fishnchill.user.dto.UpdateDto;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.Client;
-import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -14,7 +14,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -35,6 +37,12 @@ public class ClientService {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Client", id));
         return modelMapper.map(client, ClientProfileDto.class);
+    }
+
+    public Client findByIdPure(Long id) {
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Client", id));
+        return client;
     }
 
     public Client saveClient(Client c) {
@@ -64,5 +72,26 @@ public class ClientService {
 
     public void deleteClient(Client client) {
         this.clientRepository.delete(client);
+    }
+
+    public Client update(UpdateDto updateDto, Client client) {
+        updateDto.printInfo();
+        if (!client.getUsername().equals(updateDto.getUsername()) & updateDto.getUsername() != null)
+            client.setUsername(updateDto.getUsername());
+        if (!client.getFirstName().equals(updateDto.getFirstName()) & updateDto.getFirstName() != null)
+            client.setFirstName(updateDto.getFirstName());
+        if (!client.getLastName().equals(updateDto.getLastName()) & updateDto.getLastName() != null)
+            client.setLastName(updateDto.getLastName());
+        if (!client.getCountry().equals(updateDto.getCountry()) & updateDto.getCountry() != null)
+            client.setCountry(updateDto.getCountry());
+        if (!client.getCity().equals(updateDto.getCity()) & updateDto.getCity() != null)
+            client.setCity(updateDto.getCity());
+        if (!client.getAddress().equals(updateDto.getAddress()) & updateDto.getAddress() != null)
+            client.setAddress(updateDto.getAddress());
+        if (!client.getPhoneNumber().equals(updateDto.getPhoneNumber()) & updateDto.getPhoneNumber() != null)
+            client.setPhoneNumber(updateDto.getPhoneNumber());
+
+        client.printInfo();
+        return this.clientRepository.save(client);
     }
 }

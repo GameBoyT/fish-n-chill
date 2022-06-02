@@ -1,17 +1,24 @@
 package com.tim23.fishnchill.user.controller;
 
 import com.tim23.fishnchill.security.TokenUtils;
+import com.tim23.fishnchill.user.dto.RegistrationDto;
+import com.tim23.fishnchill.user.dto.UpdateDto;
 import com.tim23.fishnchill.user.dto.UserDto;
 import com.tim23.fishnchill.user.model.Authority;
+import com.tim23.fishnchill.user.model.Client;
+import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.AuthorityService;
+import com.tim23.fishnchill.user.service.ClientService;
 import com.tim23.fishnchill.user.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +32,7 @@ import java.util.Map;
 public class UserController {
 
     private UserService userService;
+    private ClientService clientService;
     private TokenUtils tokenUtils;
     private AuthorityService authorityService;
 
@@ -69,6 +77,21 @@ public class UserController {
     }
 
 
+    @PostMapping("/users/update")
+    public ResponseEntity<User> addUser(@Valid @RequestBody UpdateDto updateDto, HttpServletRequest request) {
+        if(updateDto.getRole().equalsIgnoreCase("client")) {
+            String token = tokenUtils.getToken(request);
+            Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
+            Client client = this.clientService.findByIdPure(id);
+            client = this.clientService.update(updateDto, client);
+
+            return new ResponseEntity<>(client, HttpStatus.CREATED);
+        }
+        else{
+            //TODO dio za ownere
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        }
+    }
 
 
 
