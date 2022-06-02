@@ -46,7 +46,6 @@ public class UserController {
 
         String token = tokenUtils.getToken(request);
         Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
-        System.out.println(this.tokenUtils.getIdFromToken(token));
         return this.userService.findById(id);
     }
 
