@@ -71,23 +71,27 @@ public class AuthenticationController {
     }
 
     // Endpoint za registraciju novog korisnika
-    @PostMapping("/signup/client")
+    @PostMapping("/signup")
     public ResponseEntity<User> addUser(@Valid @RequestBody RegistrationDto registrationDTO) {
         UserDto existUser = this.userService.findByEmail(registrationDTO.getEmail());
         if (existUser != null) {
             throw new ResourceConflictException("User already registered on this email!");
         }
-
-        Client client = this.clientService.save(registrationDTO);
-        VerificationToken verificationToken = new VerificationToken(String.valueOf(UUID.randomUUID()), client);
-        this.verificationTokenService.save(verificationToken);
-        try {
-            emailService.sendVerificationEmail(verificationToken);
-        }catch( Exception e ){
-            e.printStackTrace();
+        if(registrationDTO.getRole().equalsIgnoreCase("client")){
+            Client client = this.clientService.save(registrationDTO);
+            VerificationToken verificationToken = new VerificationToken(String.valueOf(UUID.randomUUID()), client);
+            this.verificationTokenService.save(verificationToken);
+            try {
+                emailService.sendVerificationEmail(verificationToken);
+            }catch( Exception e ){
+                e.printStackTrace();
+            }
+            return new ResponseEntity<>(client, HttpStatus.CREATED);
         }
-        
-        return new ResponseEntity<>(client, HttpStatus.CREATED);
+        else{
+            //TODO... DIO ZA OWNER-E
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        }
     }
 
     @RequestMapping(value="/verify-account", method= {RequestMethod.GET, RequestMethod.POST})

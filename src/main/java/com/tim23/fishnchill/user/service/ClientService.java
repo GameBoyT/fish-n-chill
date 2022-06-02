@@ -49,6 +49,10 @@ public class ClientService {
         c.setFirstName(registrationDTO.getFirstName());
         c.setLastName(registrationDTO.getLastName());
         c.setEmail(registrationDTO.getEmail());
+        c.setCountry(registrationDTO.getCountry());
+        c.setCity(registrationDTO.getCity());
+        c.setAddress(registrationDTO.getAddress());
+        c.setPhoneNumber(registrationDTO.getPhoneNumber());
         c.setPenaltyCount(0);
         c.setEnabled(false);
 

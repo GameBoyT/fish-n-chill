@@ -1,7 +1,6 @@
 package com.tim23.fishnchill.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tim23.fishnchill.general.model.VerificationToken;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,14 +44,14 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "country")
+    private String country;
 
     @Column(name = "city")
     private String city;
 
-    @Column(name = "country")
-    private String country;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -136,7 +135,7 @@ public class User implements UserDetails {
 
     public String getCity() {return city;}
 
-    public void setCity(String city) {this.country = city;}
+    public void setCity(String city) {this.city = city;}
 
     public String getCountry() {return country;}
 
@@ -144,7 +143,7 @@ public class User implements UserDetails {
 
     public String getPhoneNumber() {return phoneNumber;}
 
-    public void setPhoneNumber(String phoneNumber) {this.country = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 
 
 

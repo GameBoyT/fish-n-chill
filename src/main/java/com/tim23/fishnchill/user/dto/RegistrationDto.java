@@ -24,6 +24,31 @@ public class RegistrationDto {
 
     private String lastName;
 
+    private String country;
+
+    private String city;
+
+    private String address;
+
+    private String phoneNumber;
+
     @Email
     private String email;
+
+
+
+    private String role;
+
+    public void printInfo(){
+        System.out.println(
+                        "username: " + this.username +
+                        "\nfn: " + this.firstName +
+                        "\nln: " + this.lastName +
+                        "\nemail: " + this.email +
+                        "\ncountry: " + this.country +
+                        "\ncity: " + this.city +
+                        "\naddress: " + this.address +
+                        "\nphone: " + this.phoneNumber +
+                        "\nrole: " + this.role);
+    }
 }
