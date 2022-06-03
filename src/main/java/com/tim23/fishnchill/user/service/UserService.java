@@ -74,4 +74,6 @@ public class UserService {
     public void deleteUser(User user) {
         this.userRepository.delete(user);
     }
+
+
 }
