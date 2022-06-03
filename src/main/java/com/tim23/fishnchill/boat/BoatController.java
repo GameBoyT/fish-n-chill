@@ -4,9 +4,12 @@ import com.tim23.fishnchill.cottage.CottageDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -55,5 +58,14 @@ public class BoatController {
     @ResponseBody
     public List<BoatDto> findByAnything(@PathVariable("anything") String anything) {
         return boatService.findByAnything(anything, anything, anything);
+    }
+
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<?> update(@RequestBody BoatDto newBoatDto) throws Exception {
+        boatService.update(newBoatDto);
+        Map<String, String> result = new HashMap<>();
+        result.put("result", "success");
+        return ResponseEntity.accepted().body(result);
     }
 }

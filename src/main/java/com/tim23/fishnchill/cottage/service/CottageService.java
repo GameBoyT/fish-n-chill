@@ -19,6 +19,12 @@ public class CottageService {
     private ModelMapper modelMapper;
 
 
+    public Cottage update(CottageDto newCottage){
+        Cottage cottage = cottageRepository.getById(newCottage.getId());
+        modelMapper.map(newCottage, cottage);
+        return cottageRepository.save(cottage);
+    }
+
     public List<CottageDto> findAll() {
         TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findAll(), typeToken.getType());
