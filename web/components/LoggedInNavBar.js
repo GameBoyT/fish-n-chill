@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
@@ -11,24 +10,20 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import Link from '@mui/material/Link'
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const pages = ['cottages', 'boats', 'adventures']
 
 const LoggedInNavBar = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
+  const [userRole, setUserRole] = useState([])
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
+  useEffect(() => {
+    setUserRole(window.localStorage.getItem('role'))
+  }, [])
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
-  }
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
   }
 
   const handleCloseUserMenu = () => {
@@ -93,6 +88,20 @@ const LoggedInNavBar = () => {
                   profile
                 </Button>
               </MenuItem>
+              {userRole === 'ROLE_COTTAGE_OWNER' ? (
+                <MenuItem>
+                  <Button
+                    key="logout"
+                    style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
+                    sx={{ color: 'blue' }}
+                    href={'/' + 'users/profile'}
+                  >
+                    Cottages
+                  </Button>
+                </MenuItem>
+              ) : (
+                <></>
+              )}
               <MenuItem>
                 <Button
                   key="logout"
