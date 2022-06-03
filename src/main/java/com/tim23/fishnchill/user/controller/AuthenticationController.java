@@ -93,7 +93,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(client, HttpStatus.CREATED);
         }
         else{
-            //TODO... DIO ZA OWNER-E
+            User user = this.userService.save(registrationDTO);
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }
     }

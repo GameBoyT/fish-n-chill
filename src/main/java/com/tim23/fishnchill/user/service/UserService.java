@@ -2,8 +2,10 @@ package com.tim23.fishnchill.user.service;
 
 import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
 import com.tim23.fishnchill.user.dto.RegistrationDto;
+import com.tim23.fishnchill.user.dto.UpdateDto;
 import com.tim23.fishnchill.user.dto.UserDto;
 import com.tim23.fishnchill.user.model.Authority;
+import com.tim23.fishnchill.user.model.Client;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -51,12 +54,25 @@ public class UserService {
         u.setFirstName(registrationDTO.getFirstName());
         u.setLastName(registrationDTO.getLastName());
         u.setEmail(registrationDTO.getEmail());
-        // Djole - Ovo je bilo disable-ovano
-        u.setEnabled(false);
-
-        List<Authority> auth = authService.findByName("ROLE_CLIENT");
-        // u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
-        u.setAuthorities(auth);
+        u.setCountry(registrationDTO.getCountry());
+        u.setCity(registrationDTO.getCity());
+        u.setAddress(registrationDTO.getAddress());
+        u.setPhoneNumber(registrationDTO.getPhoneNumber());
+        // TODO-treba napraviti dio za request ownera koji se salje adminu
+        u.setEnabled(true);
+        List<Authority> auth;
+        if(registrationDTO.getRole().equalsIgnoreCase("cottage_owner")){
+            auth = authService.findByName("ROLE_COTTAGE_OWNER");
+            u.setAuthorities(auth);
+        }
+        if(registrationDTO.getRole().equalsIgnoreCase("boat_owner")){
+            auth = authService.findByName("ROLE_BOAT_OWNER");
+            u.setAuthorities(auth);
+        }
+        if(registrationDTO.getRole().equalsIgnoreCase("adventure_owner")){
+            auth = authService.findByName("ROLE_ADVENTURE_OWNER");
+            u.setAuthorities(auth);
+        }
 
         return this.userRepository.save(u);
     }
@@ -76,4 +92,34 @@ public class UserService {
     }
 
 
+    public User changePassword(String newPassword, User user) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        return this.userRepository.save(user);
+    }
+
+    public User findByIdPure(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", id));
+        return user;
+    }
+
+    public User update(UpdateDto updateDto, User user) {
+        if (!user.getUsername().equals(updateDto.getUsername()) & updateDto.getUsername() != null)
+            user.setUsername(updateDto.getUsername());
+        if (!user.getFirstName().equals(updateDto.getFirstName()) & updateDto.getFirstName() != null)
+            user.setFirstName(updateDto.getFirstName());
+        if (!user.getLastName().equals(updateDto.getLastName()) & updateDto.getLastName() != null)
+            user.setLastName(updateDto.getLastName());
+        if (!user.getCountry().equals(updateDto.getCountry()) & updateDto.getCountry() != null)
+            user.setCountry(updateDto.getCountry());
+        if (!user.getCity().equals(updateDto.getCity()) & updateDto.getCity() != null)
+            user.setCity(updateDto.getCity());
+        if (!user.getAddress().equals(updateDto.getAddress()) & updateDto.getAddress() != null)
+            user.setAddress(updateDto.getAddress());
+        if (!user.getPhoneNumber().equals(updateDto.getPhoneNumber()) & updateDto.getPhoneNumber() != null)
+            user.setPhoneNumber(updateDto.getPhoneNumber());
+
+        return this.userRepository.save(user);
+    }
 }

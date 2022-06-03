@@ -40,5 +40,33 @@ public class ClientDto {
     private Boolean enabled;
 
     private List<Authority> authorities;
+
+    public ClientDto(UserDto userDto, Integer penaltyCount){
+        this.id = userDto.getId();
+        this.password = userDto.getPassword();
+        this.username = userDto.getUsername();
+        this.firstName = userDto.getFirstName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.country = userDto.getCountry();
+        this.city = userDto.getCity();
+        this.address = userDto.getAddress();
+        this.phoneNumber = userDto.getPhoneNumber();
+        this.enabled = userDto.getEnabled();
+        this.penaltyCount = penaltyCount;
+        this.authorities = userDto.getAuthorities();
+    }
+    public void printInfo(){
+        System.out.println(
+                "username: " + this.getUsername() +
+                        "\nfn: " + this.getFirstName() +
+                        "\nln: " + this.getLastName() +
+                        "\nemail: " + this.getEmail() +
+                        "\ncountry: " + this.getCountry() +
+                        "\ncity: " + this.getCity() +
+                        "\naddress: " + this.getAddress() +
+                        "\nphone: " + this.getPhoneNumber() +
+                        "\npenalty: " + this.getPenaltyCount());
+    }
 }
 

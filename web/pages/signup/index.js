@@ -5,7 +5,13 @@ const Signup = () => {
   const handleSignup = async (credentials) => {
     try {
       await signupService.signup(credentials)
-      alert('Successfully signed up. Check your email to verify your account!')
+      if (credentials.role === 'client') {
+        alert('Successfully signed up. Check your email to verify your account!')
+      }
+      else {
+        alert('Successfully signed up. You can now log in!')
+      }
+
       window.location.href = 'http://localhost:3000'
     } catch (exception) {
       if (exception.message.includes('code 409')) {
