@@ -11,9 +11,15 @@ const updateUser = async (credentials) => {
   return response.data
 }
 
+const updatePassword = async (credentials) => {
+  const response = await axios.post(baseUrl + 'change-password/', credentials)
+  return response.data
+}
+
 const userService = {
   getMe,
-  updateUser
+  updateUser,
+  updatePassword
 }
 
 export default userService

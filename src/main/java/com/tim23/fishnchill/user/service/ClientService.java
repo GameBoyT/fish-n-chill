@@ -1,10 +1,7 @@
 package com.tim23.fishnchill.user.service;
 
 import com.tim23.fishnchill.general.exception.ResourceNotFoundException;
-import com.tim23.fishnchill.user.dto.ClientDto;
-import com.tim23.fishnchill.user.dto.ClientProfileDto;
-import com.tim23.fishnchill.user.dto.RegistrationDto;
-import com.tim23.fishnchill.user.dto.UpdateDto;
+import com.tim23.fishnchill.user.dto.*;
 import com.tim23.fishnchill.user.model.Authority;
 import com.tim23.fishnchill.user.model.Client;
 import com.tim23.fishnchill.user.repository.ClientRepository;
@@ -75,7 +72,6 @@ public class ClientService {
     }
 
     public Client update(UpdateDto updateDto, Client client) {
-        updateDto.printInfo();
         if (!client.getUsername().equals(updateDto.getUsername()) & updateDto.getUsername() != null)
             client.setUsername(updateDto.getUsername());
         if (!client.getFirstName().equals(updateDto.getFirstName()) & updateDto.getFirstName() != null)
@@ -91,7 +87,12 @@ public class ClientService {
         if (!client.getPhoneNumber().equals(updateDto.getPhoneNumber()) & updateDto.getPhoneNumber() != null)
             client.setPhoneNumber(updateDto.getPhoneNumber());
 
-        client.printInfo();
+        return this.clientRepository.save(client);
+    }
+
+    public Client changePassword(String newPassword, Client client) {
+        client.setPassword(passwordEncoder.encode(newPassword));
+
         return this.clientRepository.save(client);
     }
 }

@@ -77,6 +77,10 @@ public class AuthenticationController {
         if (existUser != null) {
             throw new ResourceConflictException("User already registered on this email!");
         }
+        existUser = this.userService.findByUsername(registrationDTO.getUsername());
+        if (existUser != null) {
+            throw new ResourceConflictException("User already registered on this username!");
+        }
         if(registrationDTO.getRole().equalsIgnoreCase("client")){
             Client client = this.clientService.save(registrationDTO);
             VerificationToken verificationToken = new VerificationToken(String.valueOf(UUID.randomUUID()), client);
@@ -139,15 +143,5 @@ public class AuthenticationController {
             UserTokenStateDto userTokenStateDTO = new UserTokenStateDto();
             return ResponseEntity.badRequest().body(userTokenStateDTO);
         }
-    }
-
-    @PostMapping(value = "/change-password")
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDto passwordChangeDTO) {
-        userDetailsService.changePassword(passwordChangeDTO.getOldPassword(), passwordChangeDTO.getNewPassword());
-
-        Map<String, String> result = new HashMap<>();
-        result.put("result", "success");
-        return ResponseEntity.accepted().body(result);
     }
 }

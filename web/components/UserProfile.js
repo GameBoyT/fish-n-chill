@@ -63,7 +63,7 @@ const UserProfile = ({ user }) => {
             <Button size="small" href='profile/changeInfo' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change account information
             </Button>
-            <Button size="small" href='/' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
+            <Button size="small" href='profile/changePassword' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change password
             </Button>
           </Paper>

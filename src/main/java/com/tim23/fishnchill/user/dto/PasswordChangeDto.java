@@ -1,31 +1,29 @@
 package com.tim23.fishnchill.user.dto;
 
-public class PasswordChangeDto {
-    private String oldPassword;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.validation.constraints.NotNull;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class PasswordChangeDto {
+    @NotNull
+    private String oldPassword;
+    @NotNull
     private String newPassword;
 
-    public PasswordChangeDto(String oldPassword, String newPassword) {
-        this.oldPassword = oldPassword;
-        this.newPassword = newPassword;
-    }
+    private String role;
 
-    public PasswordChangeDto() {
-    }
-
-    public String getOldPassword() {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void printInfo(){
+        System.out.println(
+                        "opw: " + this.oldPassword +
+                        "\nnpw: " + this.newPassword +
+                        "\nrole: " + this.role);
     }
 }

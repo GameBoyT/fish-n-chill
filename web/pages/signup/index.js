@@ -8,7 +8,13 @@ const Signup = () => {
       alert('Successfully signed up. Check your email to verify your account!')
       window.location.href = 'http://localhost:3000'
     } catch (exception) {
-      alert('There is already a user registered on this email:\n' + credentials.email + '.\nPlease try again')
+      if (exception.message.includes('code 409')) {
+        alert('There is already a user registered on this username or email:\n' + '\nPlease try again')
+      }
+      else {
+        alert('SOME OTHER ERROR')
+      }
+
     }
   }
 
