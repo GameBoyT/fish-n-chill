@@ -30,10 +30,10 @@ public class ClientService {
         return modelMapper.map(clientRepository.findAll(), typeToken.getType());
     }
 
-    public ClientProfileDto findById(Long id) {
+    public ClientDto findById(Long id) {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Client", id));
-        return modelMapper.map(client, ClientProfileDto.class);
+        return modelMapper.map(client, ClientDto.class);
     }
 
     public Client findByIdPure(Long id) {

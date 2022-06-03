@@ -2,6 +2,7 @@ import { Box, Divider, Typography, Container, Paper, Button } from '@mui/materia
 
 
 const UserProfile = ({ user }) => {
+  console.log(user)
   return (
     <>
       <Container component="main" maxWidth="sm">
@@ -60,6 +61,33 @@ const UserProfile = ({ user }) => {
               {user.phoneNumber}
             </Typography>
             <Divider></Divider>
+            {user.authorities[0].authority === 'ROLE_CLIENT' ? (
+              <>
+                <Typography variant="h6" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
+                  Penalty count:
+                </Typography>
+                <Typography variant="h5" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
+                  {user.penaltyCount}
+                </Typography>
+                <Divider></Divider>
+                <Typography variant="h6" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
+                  User type:
+                </Typography>
+                <Typography variant="h5" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
+                  {user.authorities[0].authority}
+                </Typography>
+              </>
+
+            ) : (
+              <>
+                <Typography variant="h6" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
+                  User type:
+                </Typography>
+                <Typography variant="h5" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
+                  {user.authorities[0].authority}
+                </Typography>
+              </>
+            )}
             <Button size="small" href='profile/changeInfo' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change account information
             </Button>
