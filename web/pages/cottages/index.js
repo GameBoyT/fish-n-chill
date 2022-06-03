@@ -3,6 +3,7 @@ import AllCottages from '../../components/AllCottages'
 import cottageService from '../../services/cottage'
 
 let filter = 'anything';
+let sortF = 'nothing';
 
 const Cottages = () => {
   const [cottages, setCottages] = useState([])
@@ -23,6 +24,17 @@ const Cottages = () => {
     filter = e.target.value
   }
 
+  function compare(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  }
+  function handleSort() { }
+
   const fetchData = async () => setCottages(await cottageService.getAll())
   const fetchByName = async (name) => setCottages(await cottageService.getByNameContaining(name))
   const fetchByAddress = async (address) => setCottages(await cottageService.getByAddressContaining(address))
@@ -31,7 +43,7 @@ const Cottages = () => {
 
   return (
     <>
-      <AllCottages cottages={cottages} handleChange={(e) => handleChange(e)} handleSelect={(e) => handleSelect(e)} />
+      <AllCottages cottages={cottages} handleChange={(e) => handleChange(e)} handleSelect={(e) => handleSelect(e)} handleSort={(e) => handleSort(e)} />
     </>
   )
 }

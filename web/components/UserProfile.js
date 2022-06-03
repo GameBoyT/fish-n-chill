@@ -1,11 +1,10 @@
 import { Box, Divider, Typography, Container, Paper, Button } from '@mui/material'
 
 
-const UserProfile = ({ user }) => {
-  console.log(user)
+const UserProfile = ({ user, handleDelete }) => {
   return (
     <>
-      <Container component="main" maxWidth="sm">
+      <Container component="main" maxWidth="md">
         <Box
           sx={{
             marginTop: 8,
@@ -88,11 +87,16 @@ const UserProfile = ({ user }) => {
                 </Typography>
               </>
             )}
+            <Divider></Divider>
             <Button size="small" href='profile/changeInfo' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change account information
             </Button>
             <Button size="small" href='profile/changePassword' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change password
+            </Button>
+            <Button size="small" type="submit" variant="contained" sx={{ ml: 35, mb: 2, mt: 2 }} color="error"
+              onClick={async () => { handleDelete() }}>
+              Delete account
             </Button>
           </Paper>
         </Box>

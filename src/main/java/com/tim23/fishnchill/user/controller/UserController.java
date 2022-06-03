@@ -7,6 +7,7 @@ import com.tim23.fishnchill.user.dto.PasswordChangeDto;
 import com.tim23.fishnchill.user.dto.UpdateDto;
 import com.tim23.fishnchill.user.dto.UserDto;
 import com.tim23.fishnchill.user.model.Authority;
+import com.tim23.fishnchill.user.model.Client;
 import com.tim23.fishnchill.user.model.User;
 import com.tim23.fishnchill.user.service.AuthorityService;
 import com.tim23.fishnchill.user.service.ClientService;
@@ -15,7 +16,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -107,4 +107,18 @@ public class UserController {
                 throw new ResourceConflictException("Old pw incorrect");
     }
 
+    @PostMapping(value ="/deleteAccount")
+    public void deleteUser(HttpServletRequest request){
+        String token = tokenUtils.getToken(request);
+        Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
+
+        UserDto udto = this.userService.findById(id);
+
+        if(udto.getAuthorities().get(0).getAuthority().equals("ROLE_CLIENT")){
+            this.clientService.deleteClientById(id);
+        }
+        else{
+            this.userService.deleteUserById(id);
+        }
+    }
 }
