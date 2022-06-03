@@ -19,7 +19,7 @@ const updatePassword = async (credentials) => {
 const userService = {
   getMe,
   updateUser,
-  updatePassword
+  updatePassword,
 }
 
 export default userService
