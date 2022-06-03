@@ -95,4 +95,8 @@ public class ClientService {
 
         return this.clientRepository.save(client);
     }
+
+    public void deleteClientById(Long id) {
+        this.clientRepository.deleteById(id);
+    }
 }

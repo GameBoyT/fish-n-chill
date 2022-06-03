@@ -16,10 +16,15 @@ const updatePassword = async (credentials) => {
   return response.data
 }
 
+const deleteMe = async () => {
+  await axios.post(baseUrl + 'deleteAccount/')
+}
+
 const userService = {
   getMe,
   updateUser,
-  updatePassword
+  updatePassword,
+  deleteMe
 }
 
 export default userService

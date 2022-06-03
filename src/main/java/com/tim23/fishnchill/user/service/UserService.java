@@ -122,4 +122,8 @@ public class UserService {
 
         return this.userRepository.save(user);
     }
+
+    public void deleteUserById(Long id) {
+        this.userRepository.deleteById(id);
+    }
 }

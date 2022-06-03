@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField'
 import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 
-const AllCottages = ({ cottages, handleChange, handleSelect }) => {
+const AllCottages = ({ cottages, handleChange, handleSelect, handleSort }) => {
   return (
     <>
       <main>
@@ -48,6 +48,22 @@ const AllCottages = ({ cottages, handleChange, handleSelect }) => {
               <MenuItem value={'description'}>Description</MenuItem>
               <MenuItem value={'address'}>Address</MenuItem>
               <MenuItem value={'anything'}>Anything</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl variant="filled" sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
+            <InputLabel>Sort by</InputLabel>
+            <Select
+              defaultValue=""
+              size="large"
+              labelId="searchFilter"
+              id="searchFilter"
+              label="Search by"
+              onChange={(e) => { handleSort(e) }}
+            >
+              <MenuItem value={'name'}>Name</MenuItem>
+              <MenuItem value={'address'}>Address</MenuItem>
+              <MenuItem value={'rating'}>Rating</MenuItem>
+              <MenuItem value={'nothing'}>Nothing</MenuItem>
             </Select>
           </FormControl>
           <Box sx={{ minWidth: 120 }}></Box>
