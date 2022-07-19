@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import AllBoats from '../../components/AllBoats';
-import boatService from '../../services/boat';
+import AllBoats from '../../components/AllBoats'
+import boatService from '../../services/boat'
 
-
-let filter = 'anything';
+let filter = 'anything'
 
 const Boats = () => {
   const [boats, setBoats] = useState([])
@@ -14,10 +13,10 @@ const Boats = () => {
 
   function handleChange(e) {
     if (e.value.length < 3) fetchData()
-    else if (filter == 'name') fetchByName(e.value)
-    else if (filter == 'description') fetchByDescription(e.value)
-    else if (filter == 'address') fetchByAddress(e.value)
-    else if (filter == 'anything') fetchByAnything(e.value)
+    else if (filter === 'name') fetchByName(e.value)
+    else if (filter === 'description') fetchByDescription(e.value)
+    else if (filter === 'address') fetchByAddress(e.value)
+    else if (filter === 'anything') fetchByAnything(e.value)
   }
 
   function handleSelect(e) {

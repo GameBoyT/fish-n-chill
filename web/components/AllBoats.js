@@ -8,12 +8,12 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Rating from '@mui/material/Rating';
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
+import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 
 const AllBoats = ({ boats, handleChange, handleSelect }) => {
@@ -30,16 +30,19 @@ const AllBoats = ({ boats, handleChange, handleSelect }) => {
             inputProps={{ 'aria-label': 'search google maps', style: { textAlign: 'center', fontSize: 22 } }}
             onChange={(e) => handleChange(e.target)}
           />
-          <FormControl variant='filled'
-            sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
-            <InputLabel >Search by</InputLabel>
+          <FormControl variant="filled" sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
+            <InputLabel>Search by</InputLabel>
             <Select
               defaultValue=""
               size="large"
               labelId="searchFilter"
               id="searchFilter"
               label="Search by"
-              onChange={(e) => { handleSelect(e); searchBoats.value = ''; handleChange(searchBoats); }}
+              onChange={(e) => {
+                handleSelect(e)
+                searchBoats.value = ''
+                handleChange(searchBoats)
+              }}
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
@@ -47,8 +50,7 @@ const AllBoats = ({ boats, handleChange, handleSelect }) => {
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
-          <Box sx={{ minWidth: 120 }}>
-          </Box>
+          <Box sx={{ minWidth: 120 }}></Box>
         </Box>
 
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -72,7 +74,9 @@ const AllBoats = ({ boats, handleChange, handleSelect }) => {
                       {boat.address}
                     </Typography>
                     <Typography variant="subtitle2" component="div" align="center">
-                      {boat.availabilityStart[2] ?? "#Not available#"}.{boat.availabilityStart[1]}.{boat.availabilityStart[0]} - {boat.availabilityEnd[2] ?? "#Not available#"}.{boat.availabilityEnd[1]}.{boat.availabilityEnd[0]}
+                      {boat.availabilityStart[2] ?? '#Not available#'}.{boat.availabilityStart[1]}.
+                      {boat.availabilityStart[0]} - {boat.availabilityEnd[2] ?? '#Not available#'}.
+                      {boat.availabilityEnd[1]}.{boat.availabilityEnd[0]}
                     </Typography>
                     <Divider variant="middle" sx={{ mb: 0.5 }} />
 

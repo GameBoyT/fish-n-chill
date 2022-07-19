@@ -15,8 +15,8 @@ const SignupSchema = Yup.object({
 })
 
 const CustomizedSelectForFormik = ({ children, form, field }) => {
-  const { name, value } = field;
-  const { setFieldValue } = form;
+  const { name, value } = field
+  const { setFieldValue } = form
 
   return (
     <Select
@@ -26,14 +26,14 @@ const CustomizedSelectForFormik = ({ children, form, field }) => {
       name={name}
       value={value}
       required
-      onChange={e => {
-        setFieldValue(name, e.target.value);
+      onChange={(e) => {
+        setFieldValue(name, e.target.value)
       }}
     >
       {children}
     </Select>
-  );
-};
+  )
+}
 
 const SignupForm = ({ handleSignup }) => (
   <Container component="main" maxWidth="xs">
@@ -60,7 +60,7 @@ const SignupForm = ({ handleSignup }) => (
           city: '',
           address: '',
           phoneNumber: '',
-          role: ''
+          role: '',
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values) => {

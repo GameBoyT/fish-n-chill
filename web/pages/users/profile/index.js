@@ -3,7 +3,6 @@ import userService from '../../../services/user'
 import UserProfile from '../../../components/UserProfile'
 
 const User = () => {
-
   const handleDelete = async () => {
     try {
       await userService.deleteMe()
@@ -23,13 +22,12 @@ const User = () => {
 
   const fetchData = async () => setUser(await userService.getMe())
 
-
   if (Object.keys(user).length === 0) {
-    return (<div>Loading....</div>)
+    return <div>Loading....</div>
   }
   return (
     <>
-      <UserProfile user={user} handleDelete={handleDelete} ></UserProfile>
+      <UserProfile user={user} handleDelete={handleDelete}></UserProfile>
     </>
   )
 }

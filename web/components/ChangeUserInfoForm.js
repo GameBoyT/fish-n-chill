@@ -23,7 +23,7 @@ const ChangeUserInfoForm = ({ handleChange, user }) => (
           country: user.country,
           city: user.city,
           address: user.address,
-          phoneNumber: user.phoneNumber
+          phoneNumber: user.phoneNumber,
         }}
         onSubmit={async (values) => {
           handleChange(values)

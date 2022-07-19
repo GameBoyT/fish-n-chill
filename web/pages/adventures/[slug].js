@@ -14,7 +14,7 @@ const Adventure = () => {
   }, [slug])
 
   if (Object.keys(adventure).length === 0) {
-    return (<div>Loading....</div>)
+    return <div>Loading....</div>
   }
 
   return (

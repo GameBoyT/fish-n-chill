@@ -58,7 +58,9 @@ const AllCottages = ({ cottages, handleChange, handleSelect, handleSort }) => {
               labelId="searchFilter"
               id="searchFilter"
               label="Search by"
-              onChange={(e) => { handleSort(e) }}
+              onChange={(e) => {
+                handleSort(e)
+              }}
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'address'}>Address</MenuItem>

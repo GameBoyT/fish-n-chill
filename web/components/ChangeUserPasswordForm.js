@@ -29,7 +29,7 @@ const ChangeUserPasswordForm = ({ handleChange, user }) => (
         initialValues={{
           oldPassword: '',
           newPassword: '',
-          passwordConfirmation: ''
+          passwordConfirmation: '',
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values) => {

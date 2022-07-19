@@ -1,6 +1,5 @@
 import { Box, Divider, Typography, Container, Paper, Button } from '@mui/material'
 
-
 const UserProfile = ({ user, handleDelete }) => {
   return (
     <>
@@ -10,7 +9,7 @@ const UserProfile = ({ user, handleDelete }) => {
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            mb: 8
+            mb: 8,
           }}
         >
           <Paper>
@@ -76,7 +75,6 @@ const UserProfile = ({ user, handleDelete }) => {
                   {user.authorities[0].authority}
                 </Typography>
               </>
-
             ) : (
               <>
                 <Typography variant="h6" display="inline" align="left" component="div" sx={{ ml: 1, mr: 1 }}>
@@ -88,14 +86,22 @@ const UserProfile = ({ user, handleDelete }) => {
               </>
             )}
             <Divider></Divider>
-            <Button size="small" href='profile/changeInfo' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
+            <Button size="small" href="profile/changeInfo" variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change account information
             </Button>
-            <Button size="small" href='profile/changePassword' variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
+            <Button size="small" href="profile/changePassword" variant="contained" sx={{ ml: 2, mb: 2, mt: 2 }}>
               Change password
             </Button>
-            <Button size="small" type="submit" variant="contained" sx={{ ml: 35, mb: 2, mt: 2 }} color="error"
-              onClick={async () => { handleDelete() }}>
+            <Button
+              size="small"
+              type="submit"
+              variant="contained"
+              sx={{ ml: 35, mb: 2, mt: 2 }}
+              color="error"
+              onClick={async () => {
+                handleDelete()
+              }}
+            >
               Delete account
             </Button>
           </Paper>

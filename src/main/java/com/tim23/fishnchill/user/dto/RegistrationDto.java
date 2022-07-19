@@ -20,6 +20,13 @@ public class RegistrationDto {
     @NotNull
     private String password;
 
+    @Email
+    @NotNull
+    private String email;
+
+    @NotNull
+    private String role;
+
     private String firstName;
 
     private String lastName;
@@ -32,16 +39,9 @@ public class RegistrationDto {
 
     private String phoneNumber;
 
-    @Email
-    private String email;
-
-
-
-    private String role;
-
-    public void printInfo(){
+    public void printInfo() {
         System.out.println(
-                        "username: " + this.username +
+                "username: " + this.username +
                         "\nfn: " + this.firstName +
                         "\nln: " + this.lastName +
                         "\nemail: " + this.email +
