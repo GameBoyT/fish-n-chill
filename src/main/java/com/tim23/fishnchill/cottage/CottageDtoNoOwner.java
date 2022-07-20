@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CottageDto {
+public class CottageDtoNoOwner {
     private Long id;
 
     private String name;
@@ -38,6 +38,5 @@ public class CottageDto {
 
     private Integer capacity;
 
-    private CottageOwner cottageOwner;
 
 }

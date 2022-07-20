@@ -63,6 +63,13 @@ public class UserController {
         }
     }
 
+    public UserDto getUserFromRequest(HttpServletRequest request){
+        String token = tokenUtils.getToken(request);
+        Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
+        UserDto userDto = userService.findById(id);
+        return userDto;
+    }
+
     @GetMapping("/rolerequests")
     //@PreAuthorize("hasRole('ADMIN')")
     public List<UserDto> findOwnerRequests(){

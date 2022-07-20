@@ -10,5 +10,6 @@ public interface CottageRepository extends JpaRepository<Cottage, Long> {
     List<Cottage> findByDescriptionContainingIgnoreCase(String description);
     List<Cottage> findByAddressContainingIgnoreCase(String address);
     List<Cottage> findByNameContainingIgnoreCaseOrAddressContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String address, String description);
+    List<Cottage> findByOwner_Id(Long owner_id);
 }
 

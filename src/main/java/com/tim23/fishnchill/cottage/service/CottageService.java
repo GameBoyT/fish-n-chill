@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,7 +19,11 @@ public class CottageService {
     private CottageRepository cottageRepository;
     private ModelMapper modelMapper;
 
-
+    public Cottage add(CottageDto newCottage){
+        Cottage cottage = new Cottage();
+        modelMapper.map(newCottage, cottage);
+        return cottageRepository.save(cottage);
+    }
     public Cottage update(CottageDto newCottage){
         Cottage cottage = cottageRepository.getById(newCottage.getId());
         modelMapper.map(newCottage, cottage);
@@ -54,5 +59,11 @@ public class CottageService {
     public List<CottageDto> findByAnything(String name, String address, String description) {
         TypeToken<List<CottageDto>> typeToken = new TypeToken<>() {};
         return modelMapper.map(cottageRepository.findByNameContainingIgnoreCaseOrAddressContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, address, description), typeToken.getType());
+    }
+    public List<CottageDto> getAllForOwner(Long id){
+        List<Cottage>cottages = cottageRepository.findByOwner_Id(id);
+        List<CottageDto>cottageDtos = new ArrayList<CottageDto>();
+        modelMapper.map(cottages,cottageDtos);
+        return cottageDtos;
     }
 }
