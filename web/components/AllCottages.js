@@ -40,8 +40,6 @@ const AllCottages = ({ cottages, handleChange, handleSelect, handleSort }) => {
               label="Search by"
               onChange={(e) => {
                 handleSelect(e)
-                searchCottages.value = ''
-                handleChange(searchCottages)
               }}
             >
               <MenuItem value={'name'}>Name</MenuItem>

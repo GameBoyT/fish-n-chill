@@ -24,7 +24,7 @@ const userService = {
   getMe,
   updateUser,
   updatePassword,
-  deleteMe
+  deleteMe,
 }
 
 export default userService

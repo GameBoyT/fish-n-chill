@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import AllCottages from '../../components/AllCottages'
 import cottageService from '../../services/cottage'
 
-let filter = 'anything'
+// let filter = 'anything'
 
 const Cottages = () => {
   const [cottages, setCottages] = useState([])
+  const [filter, setFilter] = useState('')
 
   useEffect(() => {
     fetchData()
@@ -20,17 +21,7 @@ const Cottages = () => {
   }
 
   function handleSelect(e) {
-    filter = e.target.value
-  }
-
-  function compare(a, b) {
-    if (a.name < b.name) {
-      return -1
-    }
-    if (a.name > b.name) {
-      return 1
-    }
-    return 0
+    setFilter(e.target.value)
   }
 
   function handleSort() {}
