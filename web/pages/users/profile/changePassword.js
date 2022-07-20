@@ -3,7 +3,6 @@ import userService from '../../../services/user'
 import ChangeUserPasswordForm from '../../../components/ChangeUserPasswordForm'
 
 const ChangeInfo = () => {
-
   const [user, setUser] = useState({})
 
   useEffect(() => {
@@ -13,7 +12,7 @@ const ChangeInfo = () => {
   const fetchData = async () => setUser(await userService.getMe())
 
   if (Object.keys(user).length === 0) {
-    return (<div>Loading....</div>)
+    return <div>Loading....</div>
   }
 
   const handleChange = async (credentials) => {
@@ -22,9 +21,8 @@ const ChangeInfo = () => {
       credentials.role = 'client'
     }
     if (credentials.oldPassword === credentials.newPassword) {
-      alert("The old and new passwords are the same. Then will not change!")
-    }
-    else {
+      alert('The old and new passwords are the same. Then will not change!')
+    } else {
       try {
         await userService.updatePassword(credentials)
         alert('You changed your password successfully. You need to log in again with the new password!')

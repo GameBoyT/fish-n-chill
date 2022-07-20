@@ -78,9 +78,21 @@ const LoggedInNavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              {userRole === 'ROLE_COTTAGE_OWNER' ? (
+                <MenuItem>
+                  <Button
+                    key="cottages"
+                    style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
+                    sx={{ color: 'blue' }}
+                    href={'/' + ''}
+                  >
+                    Cottages
+                  </Button>
+                </MenuItem>
+              ) : null}
               <MenuItem>
                 <Button
-                  key="logout"
+                  key="profile"
                   style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
                   sx={{ color: 'blue' }}
                   href={'/' + 'users/profile'}
@@ -88,20 +100,6 @@ const LoggedInNavBar = () => {
                   profile
                 </Button>
               </MenuItem>
-              {userRole === 'ROLE_COTTAGE_OWNER' ? (
-                <MenuItem>
-                  <Button
-                    key="logout"
-                    style={{ maxWidth: '60px', maxHeight: '15', minWidth: '30px', minHeight: '15px' }}
-                    sx={{ color: 'blue' }}
-                    href={'/' + 'users/profile'}
-                  >
-                    Cottages
-                  </Button>
-                </MenuItem>
-              ) : (
-                <></>
-              )}
               <MenuItem>
                 <Button
                   key="logout"

@@ -8,12 +8,12 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Rating from '@mui/material/Rating';
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
+import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 
 const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
@@ -30,16 +30,19 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
             inputProps={{ 'aria-label': 'search google maps', style: { textAlign: 'center', fontSize: 22 } }}
             onChange={(e) => handleChange(e.target)}
           />
-          <FormControl variant='filled'
-            sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
-            <InputLabel >Search by</InputLabel>
+          <FormControl variant="filled" sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
+            <InputLabel>Search by</InputLabel>
             <Select
               defaultValue=""
               size="large"
               labelId="searchFilter"
               id="searchFilter"
               label="Search by"
-              onChange={(e) => { handleSelect(e); searchAdventures.value = ''; handleChange(searchAdventures); }}
+              onChange={(e) => {
+                handleSelect(e)
+                searchAdventures.value = ''
+                handleChange(searchAdventures)
+              }}
             >
               <MenuItem value={'name'}>Name</MenuItem>
               <MenuItem value={'description'}>Description</MenuItem>
@@ -47,8 +50,7 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
-          <Box sx={{ minWidth: 120 }}>
-          </Box>
+          <Box sx={{ minWidth: 120 }}></Box>
         </Box>
 
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -72,7 +74,9 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
                       {adventure.address}
                     </Typography>
                     <Typography variant="subtitle2" component="div" align="center">
-                      {adventure.availabilityStart[2] ?? "#Not available#"}.{adventure.availabilityStart[1]}.{adventure.availabilityStart[0]} - {adventure.availabilityEnd[2] ?? "#Not available#"}.{adventure.availabilityEnd[1]}.{adventure.availabilityEnd[0]}
+                      {adventure.availabilityStart[2] ?? '#Not available#'}.{adventure.availabilityStart[1]}.
+                      {adventure.availabilityStart[0]} - {adventure.availabilityEnd[2] ?? '#Not available#'}.
+                      {adventure.availabilityEnd[1]}.{adventure.availabilityEnd[0]}
                     </Typography>
                     <Divider variant="middle" sx={{ mb: 0.5 }} />
 
@@ -101,7 +105,13 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
                     <Button size="small" href={'adventures/' + adventure.id} variant="contained">
                       View
                     </Button>
-                    <Rating name="read-only" value={adventure.ratingAverage ?? 0} precision={0.5} readOnly sx={{ ml: 7 }} />
+                    <Rating
+                      name="read-only"
+                      value={adventure.ratingAverage ?? 0}
+                      precision={0.5}
+                      readOnly
+                      sx={{ ml: 7 }}
+                    />
                   </CardActions>
                 </Card>
               </Grid>

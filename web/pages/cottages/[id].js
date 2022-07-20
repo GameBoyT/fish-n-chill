@@ -5,18 +5,13 @@ import cottageService from '../../services/cottage'
 
 const Cottage = () => {
   const router = useRouter()
-  const { slug } = router.query
+  const { id } = router.query
   const [cottage, setCottage] = useState({})
-  const [loggedInUser, setLoggedInUser] = useState([])
 
   useEffect(() => {
-    setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
-  }, [])
-
-  useEffect(() => {
-    const fetchData = async () => setCottage(await cottageService.getById(slug))
+    const fetchData = async () => setCottage(await cottageService.getById(id))
     router.isReady ? fetchData() : console.log('router not ready')
-  }, [router.isReady, slug])
+  }, [router.isReady, id])
 
   if (Object.keys(cottage).length === 0) {
     return <div>Loading....</div>
@@ -24,7 +19,7 @@ const Cottage = () => {
 
   const scheduleReservation = async () => {
     try {
-      await cottageService.scheduleReservation(loggedInUser, cottage)
+      await cottageService.scheduleReservation(cottage)
       console.log('proslo')
     } catch (exception) {
       console.log(exception)
@@ -33,7 +28,7 @@ const Cottage = () => {
 
   return (
     <>
-      <CottageProfile cottage={cottage} scheduleReservation={() => scheduleReservation(loggedInUser, cottage)} />
+      <CottageProfile cottage={cottage} scheduleReservation={() => scheduleReservation(cottage)} />
     </>
   )
 }

@@ -7,8 +7,7 @@ const Signup = () => {
       await signupService.signup(credentials)
       if (credentials.role === 'client') {
         alert('Successfully signed up. Check your email to verify your account!')
-      }
-      else {
+      } else {
         alert('Successfully signed up. You can now log in!')
       }
 
@@ -16,11 +15,9 @@ const Signup = () => {
     } catch (exception) {
       if (exception.message.includes('code 409')) {
         alert('There is already a user registered on this username or email:\n' + '\nPlease try again')
-      }
-      else {
+      } else {
         alert('SOME OTHER ERROR')
       }
-
     }
   }
 

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @AllArgsConstructor
@@ -43,13 +44,12 @@ public class CottageReservationController {
     @PostMapping("/cottages/reservations")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public CottageReservationDto save(@RequestBody NewReservationDto newReservationDto, @RequestHeader ("Authorization") String authToken) {
-        authToken = authToken.replace("Bearer","");
-        //System.out.println(this.tokenUtils.getIdFromToken(authToken));
-        newReservationDto.setClientId(Long.parseLong(this.tokenUtils.getIdFromToken(authToken)));
+    public CottageReservationDto save(HttpServletRequest request, @RequestBody NewReservationDto newReservationDto) {
+        String token = tokenUtils.getToken(request);
+        Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
+        newReservationDto.setClientId(id);
 
         return cottageReservationService.save(newReservationDto);
-
     }
 
 }

@@ -5,16 +5,16 @@ import AdventureProfile from '../../components/AdventureProfile'
 
 const Adventure = () => {
   const router = useRouter()
-  const { slug } = router.query
+  const { id } = router.query
   const [adventure, setAdventure] = useState({})
 
   useEffect(() => {
-    const fetchData = async () => setAdventure(await adventureService.getById(slug))
+    const fetchData = async () => setAdventure(await adventureService.getById(id))
     router.isReady ? fetchData() : console.log('router not ready')
-  }, [slug])
+  }, [router.isReady, id])
 
   if (Object.keys(adventure).length === 0) {
-    return (<div>Loading....</div>)
+    return <div>Loading....</div>
   }
 
   return (
