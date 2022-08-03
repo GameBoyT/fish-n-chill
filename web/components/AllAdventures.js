@@ -16,7 +16,8 @@ import TextField from '@mui/material/TextField'
 import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 
-const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
+const AllAdventures = ({ adventures, handleChange, handleSelect, handleSort }) => {
+  console.log(adventures)
   return (
     <>
       <main>
@@ -50,6 +51,24 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
               <MenuItem value={'anything'}>Anything</MenuItem>
             </Select>
           </FormControl>
+          <FormControl variant="filled" sx={{ mt: 0.5, ml: 0, flex: 1, width: '10%' }}>
+            <InputLabel>Sort by</InputLabel>
+            <Select
+              defaultValue=""
+              size="large"
+              labelId="searchFilter"
+              id="searchFilter"
+              label="Search by"
+              onChange={(e) => {
+                handleSort(e)
+              }}
+            >
+              <MenuItem value={'name'}>Name</MenuItem>
+              <MenuItem value={'address'}>Address</MenuItem>
+              <MenuItem value={'rating'}>Rating</MenuItem>
+              <MenuItem value={'nothing'}>Nothing</MenuItem>
+            </Select>
+          </FormControl>
           <Box sx={{ minWidth: 120 }}></Box>
         </Box>
 
@@ -69,6 +88,9 @@ const AllAdventures = ({ adventures, handleChange, handleSelect }) => {
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography borderBottom={1} gutterBottom variant="h5" component="h2" align="center">
                       {adventure.name}
+                    </Typography>
+                    <Typography variant="h6" align="center">
+                      {`${adventure.owner.firstName}  ${adventure.owner.lastName}`}
                     </Typography>
                     <Typography variant="subtitle2" align="center">
                       {adventure.address}

@@ -22,9 +22,9 @@ public class AdventureService {
     }
 
     public AdventureDto findById(Long id) {
-        Adventure boat = adventureRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Boat", id));
-        return modelMapper.map(boat, AdventureDto.class);
+        Adventure adventure = adventureRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Adventure", id));
+        return modelMapper.map(adventure, AdventureDto.class);
     }
 
     public List<AdventureDto> findByNameContaining(String name) {

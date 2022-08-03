@@ -2,6 +2,7 @@ package com.tim23.fishnchill.boat;
 
 import com.tim23.fishnchill.general.model.Image;
 import com.tim23.fishnchill.general.model.Tag;
+import com.tim23.fishnchill.user.model.BoatOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,4 +52,6 @@ public class BoatDto {
     private String boatType;
 
     private String address;
+
+    private BoatOwner owner;
 }

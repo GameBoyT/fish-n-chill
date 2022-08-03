@@ -2,25 +2,74 @@ import { useState, useEffect } from 'react'
 import AllBoats from '../../components/AllBoats'
 import boatService from '../../services/boat'
 
-let filter = 'anything'
-
 const Boats = () => {
   const [boats, setBoats] = useState([])
+  const [filter, setFilter] = useState('')
+  const [sortFilter, setSortFilter] = useState('nothing')
 
   useEffect(() => {
     fetchData()
   }, [])
 
-  function handleChange(e) {
-    if (e.value.length < 3) fetchData()
-    else if (filter === 'name') fetchByName(e.value)
-    else if (filter === 'description') fetchByDescription(e.value)
-    else if (filter === 'address') fetchByAddress(e.value)
-    else if (filter === 'anything') fetchByAnything(e.value)
+  const handleChange = async (e) => {
+    if (e.value.length < 3) await fetchData()
+    else
+      switch (filter) {
+        case "name": {
+          await fetchByName(e.value)
+          break;
+        }
+        case "description": {
+          await fetchByDescription(e.value)
+          break;
+        }
+        case "address": {
+          await fetchByAddress(e.value)
+          break;
+        }
+        case "anything": {
+          await fetchByAnything(e.value)
+          break;
+        }
+        default: {
+          await fetchData()
+          break;
+        }
+      }
+    if (sortFilter !== "nothing") {
+      sortBoatsBy(sortFilter)
+    }
   }
 
-  function handleSelect(e) {
-    filter = e.target.value
+  const sortBoatsBy = (sortFilter) => {
+    switch (sortFilter) {
+      case "name": {
+        setBoats(boats.sort((a, b) => a.name.localeCompare(b.name)))
+        break;
+      }
+      case "address": {
+        setBoats(boats.sort((a, b) => a.address.localeCompare(b.address)))
+        break;
+      }
+      case "rating": {
+        setBoats(boats.sort((a, b) => b.ratingAverage - a.ratingAverage))
+        break;
+      }
+      default: {
+        fetchData()
+        break;
+      }
+    }
+  }
+
+  const handleSelect = (e) => {
+    setFilter(e.target.value)
+  }
+
+  const handleSort = (e
+  ) => {
+    setSortFilter(e.target.value)
+    sortBoatsBy(e.target.value)
   }
 
   const fetchData = async () => setBoats(await boatService.getAll())
@@ -31,7 +80,7 @@ const Boats = () => {
 
   return (
     <>
-      <AllBoats boats={boats} handleChange={(e) => handleChange(e)} handleSelect={(e) => handleSelect(e)} />
+      <AllBoats boats={boats} handleChange={(e) => handleChange(e)} handleSelect={(e) => handleSelect(e)} handleSort={(e) => handleSort(e)} />
     </>
   )
 }
