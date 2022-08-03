@@ -97,9 +97,15 @@ const CottageProfile = ({ cottage, scheduleReservation }) => {
             </Typography>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
             {loggedInUser ? (
-              <Button onClick={scheduleReservation} disabled={penalty >= 3} size="large" variant="contained" sx={{ ml: 3, mb: 3 }}>
+              <><Button onClick={scheduleReservation} disabled={penalty >= 3} size="large" variant="contained" sx={{ ml: 3 }}>
                 Schedule Reservation
               </Button>
+                {penalty >= 3 && <p style={{
+                  color: "red",
+                  fontSize: "13px",
+                  marginLeft: "25px",
+                  marginTop: "5px"
+                }}>You have 3 or more penalties and can't schedule reservations</p>}</>
             ) : (
               <></>
             )}

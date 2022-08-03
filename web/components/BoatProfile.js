@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react'
 
 const BoatProfile = ({ boat }) => {
   const [loggedInUser, setLoggedInUser] = useState([])
+  const [penalty, setPenalty] = useState([])
 
   useEffect(() => {
     setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
+    setPenalty(JSON.parse(window.localStorage.getItem('penalty')))
   }, [])
   return (
     <>
@@ -82,9 +84,15 @@ const BoatProfile = ({ boat }) => {
               {boat.description}
             </Typography>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
-            {loggedInUser ? <Button size="large" href='/' variant="contained" sx={{ ml: 3, mb: 3 }}>
+            {loggedInUser ? <><Button /*onClick={scheduleReservation}*/ disabled={penalty >= 3} size="large" variant="contained" sx={{ ml: 3 }}>
               Schedule Reservation
-            </Button> : <></>}
+            </Button>
+              {penalty >= 3 && <p style={{
+                color: "red",
+                fontSize: "13px",
+                marginLeft: "25px",
+                marginTop: "5px"
+              }}>You have 3 or more penalties and can't schedule reservations</p>}</> : <></>}
           </Paper>
         </Box>
       </Container>
