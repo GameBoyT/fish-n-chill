@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react'
 
 const AdventureProfile = ({ adventure }) => {
   const [loggedInUser, setLoggedInUser] = useState([])
-  console.log(adventure)
+  const [penalty, setPenalty] = useState([])
 
   useEffect(() => {
     setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
+    setPenalty(JSON.parse(window.localStorage.getItem('penalty')))
   }, [])
   return (
     <>
@@ -110,7 +111,7 @@ const AdventureProfile = ({ adventure }) => {
             </Box>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
             {loggedInUser ? (
-              <Button size="large" href="/" variant="contained" sx={{ ml: 3, mb: 3 }}>
+              <Button size="large" disabled={penalty >= 3} variant="contained" sx={{ ml: 3, mb: 3 }}>
                 Schedule Reservation
               </Button>
             ) : (
