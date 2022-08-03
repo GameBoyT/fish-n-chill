@@ -1,15 +1,32 @@
-import { Box, Divider, Typography, Container, Skeleton, Paper, Rating, Button } from '@mui/material'
+import { Box, Divider, Typography, Container, Skeleton, Paper, Rating, Button, TextField } from '@mui/material'
+import { DatePicker } from '@mui/x-date-pickers'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import dateUtils from '../utils/dateUtils'
 
 const CottageProfile = ({ cottage, scheduleReservation }) => {
-  const [loggedInUser, setLoggedInUser] = useState([])
+
+  const [loggedInUser, setLoggedInUser] = useState(null)
+  const [checkInDate, setCheckInDate] = useState(null)
+  const [checkOutDate, setCheckOutDate] = useState(null)
   const [penalty, setPenalty] = useState([])
+
 
   useEffect(() => {
     setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
     setPenalty(JSON.parse(window.localStorage.getItem('penalty')))
   }, [])
+
+  const onReservationButtonClick = () => {
+    const reservation = {
+      // Pomjera datum za vremensku zonu da bi bila UTC kad se salju na back
+      reservationStart: dateUtils.toUtcDate(checkInDate),
+      reservationEnd: dateUtils.toUtcDate(checkOutDate),
+      entityId: cottage.id,
+    }
+    scheduleReservation(reservation)
+  }
+
   return (
     <>
       <Container component="main" maxWidth="lg">
@@ -72,15 +89,13 @@ const CottageProfile = ({ cottage, scheduleReservation }) => {
               Available:
             </Typography>
             <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
-              {cottage.availabilityStart[2] ?? '#Not available#'}.{cottage.availabilityStart[1]}.
-              {cottage.availabilityStart[0]}
+              {cottage.availabilityStart.toLocaleDateString('en-UK')}
             </Typography>
             <Typography variant="h5" fontWeight="fontWeightMedium" sx={{ mr: 2 }} display="inline">
               -
             </Typography>
             <Typography variant="h5" gutterBottom component="div" sx={{ mr: 3 }} display="inline">
-              {cottage.availabilityEnd[2] ?? '#Not available#'}.{cottage.availabilityEnd[1]}.
-              {cottage.availabilityEnd[0]}
+              {cottage.availabilityEnd.toLocaleDateString('en-UK')}
             </Typography>
             <div></div>
             <Typography variant="h5" fontWeight="fontWeightMedium" sx={{ ml: 3, mr: 3 }} display="inline">
@@ -96,8 +111,40 @@ const CottageProfile = ({ cottage, scheduleReservation }) => {
               {cottage.description}
             </Typography>
             {/*Ako je ulogovan user prikazati dugme za rezervisanje*/}
+            <DatePicker
+              label="Check-in"
+              value={checkInDate}
+              disablePast={true}
+              onChange={(newValue) => {
+                setCheckInDate(newValue)
+              }}
+              shouldDisableDate={(dateParam) => {
+                return checkOutDate === null
+                  ? dateParam < cottage.availabilityStart || dateParam > cottage.availabilityEnd
+                  : dateParam < cottage.availabilityStart ||
+                      dateParam > cottage.availabilityEnd ||
+                      dateParam > checkOutDate
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <DatePicker
+              label="Check-out"
+              value={checkOutDate}
+              disablePast={true}
+              onChange={(newValue) => {
+                setCheckOutDate(newValue)
+              }}
+              shouldDisableDate={(dateParam) => {
+                return checkInDate === null
+                  ? dateParam < cottage.availabilityStart || dateParam > cottage.availabilityEnd
+                  : dateParam < cottage.availabilityStart ||
+                      dateParam > cottage.availabilityEnd ||
+                      dateParam < checkInDate
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
             {loggedInUser ? (
-              <><Button onClick={scheduleReservation} disabled={penalty >= 3} size="large" variant="contained" sx={{ ml: 3 }}>
+              <Button onClick={onReservationButtonClick} disabled={penalty >= 3} size="large" variant="contained" sx={{ ml: 3, mb: 3 }}>
                 Schedule Reservation
               </Button>
                 {penalty >= 3 && <p style={{

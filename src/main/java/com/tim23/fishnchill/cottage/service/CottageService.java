@@ -19,7 +19,7 @@ public class CottageService {
     private ModelMapper modelMapper;
 
 
-    public Cottage update(CottageDto newCottage){
+    public Cottage update(CottageDto newCottage) {
         Cottage cottage = cottageRepository.getById(newCottage.getId());
         modelMapper.map(newCottage, cottage);
         return cottageRepository.save(cottage);

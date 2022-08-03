@@ -85,6 +85,7 @@ public class TokenUtils {
         return (username != null && username.equals(userDetails.getUsername())
                 && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
     }
+
     public String getIdFromToken(String token) {
         String id;
         try {
@@ -147,6 +148,11 @@ public class TokenUtils {
 
     public String getAuthHeaderFromHeader(HttpServletRequest request) {
         return request.getHeader(authHeader);
+    }
+
+    public Long getUserIdFromRequest(HttpServletRequest request) {
+        String token = getToken(request);
+        return Long.parseLong(getIdFromToken(token));
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {

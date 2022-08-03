@@ -45,10 +45,8 @@ public class CottageReservationController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public CottageReservationDto save(HttpServletRequest request, @RequestBody NewReservationDto newReservationDto) {
-        String token = tokenUtils.getToken(request);
-        Long id = Long.parseLong(this.tokenUtils.getIdFromToken(token));
+        Long id = tokenUtils.getUserIdFromRequest(request);
         newReservationDto.setClientId(id);
-
         return cottageReservationService.save(newReservationDto);
     }
 
