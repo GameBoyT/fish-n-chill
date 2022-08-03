@@ -5,12 +5,16 @@ import { useState, useEffect } from 'react'
 import dateUtils from '../utils/dateUtils'
 
 const CottageProfile = ({ cottage, scheduleReservation }) => {
+
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
+  const [penalty, setPenalty] = useState([])
+
 
   useEffect(() => {
     setLoggedInUser(JSON.parse(window.localStorage.getItem('loggedInUser')))
+    setPenalty(JSON.parse(window.localStorage.getItem('penalty')))
   }, [])
 
   const onReservationButtonClick = () => {
@@ -140,9 +144,15 @@ const CottageProfile = ({ cottage, scheduleReservation }) => {
               renderInput={(params) => <TextField {...params} />}
             />
             {loggedInUser ? (
-              <Button onClick={onReservationButtonClick} size="large" variant="contained" sx={{ ml: 3, mb: 3 }}>
+              <Button onClick={onReservationButtonClick} disabled={penalty >= 3} size="large" variant="contained" sx={{ ml: 3, mb: 3 }}>
                 Schedule Reservation
               </Button>
+                {penalty >= 3 && <p style={{
+                  color: "red",
+                  fontSize: "13px",
+                  marginLeft: "25px",
+                  marginTop: "5px"
+                }}>You have 3 or more penalties and can't schedule reservations</p>}</>
             ) : (
               <></>
             )}

@@ -2,25 +2,74 @@ import { useState, useEffect } from 'react'
 import AllAdventures from '../../components/AllAdventures'
 import adventureService from '../../services/adventure'
 
-let filter = 'anything'
-
 const Adventures = () => {
   const [adventures, setAdventures] = useState([])
+  const [filter, setFilter] = useState('')
+  const [sortFilter, setSortFilter] = useState('nothing')
 
   useEffect(() => {
     fetchData()
   }, [])
 
-  function handleChange(e) {
-    if (e.value.length < 3) fetchData()
-    else if (filter === 'name') fetchByName(e.value)
-    else if (filter === 'description') fetchByDescription(e.value)
-    else if (filter === 'address') fetchByAddress(e.value)
-    else if (filter === 'anything') fetchByAnything(e.value)
+  const handleChange = async (e) => {
+    if (e.value.length < 3) await fetchData()
+    else
+      switch (filter) {
+        case "name": {
+          await fetchByName(e.value)
+          break;
+        }
+        case "description": {
+          await fetchByDescription(e.value)
+          break;
+        }
+        case "address": {
+          await fetchByAddress(e.value)
+          break;
+        }
+        case "anything": {
+          await fetchByAnything(e.value)
+          break;
+        }
+        default: {
+          await fetchData()
+          break;
+        }
+      }
+    if (sortFilter !== "nothing") {
+      sortAdventuresBy(sortFilter)
+    }
   }
 
-  function handleSelect(e) {
-    filter = e.target.value
+  const sortAdventuresBy = (sortFilter) => {
+    switch (sortFilter) {
+      case "name": {
+        setAdventures(adventures.sort((a, b) => a.name.localeCompare(b.name)))
+        break;
+      }
+      case "address": {
+        setAdventures(adventures.sort((a, b) => a.address.localeCompare(b.address)))
+        break;
+      }
+      case "rating": {
+        setAdventures(adventures.sort((a, b) => b.ratingAverage - a.ratingAverage))
+        break;
+      }
+      default: {
+        fetchData()
+        break;
+      }
+    }
+  }
+
+  const handleSelect = (e) => {
+    setFilter(e.target.value)
+  }
+
+  const handleSort = (e
+  ) => {
+    setSortFilter(e.target.value)
+    sortAdventuresBy(e.target.value)
   }
 
   const fetchData = async () => setAdventures(await adventureService.getAll())
@@ -36,6 +85,7 @@ const Adventures = () => {
         adventures={adventures}
         handleChange={(e) => handleChange(e)}
         handleSelect={(e) => handleSelect(e)}
+        handleSort={(e) => handleSort(e)}
       />
     </>
   )
