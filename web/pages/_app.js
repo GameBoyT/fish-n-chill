@@ -8,6 +8,8 @@ import AppBar from '@mui/material/AppBar'
 import LoggedOutNavBar from '../components/LoggedOutNavBar'
 import LoggedInNavBar from '../components/LoggedInNavBar'
 import Footer from '../components/Footer'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 import '/styles/globals.css'
 import theme from '../styles/theme'
@@ -45,9 +47,11 @@ export default function MyApp(props) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <AppBar position="relative">{loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}</AppBar>
-          <Component {...pageProps} />
-          <Footer></Footer>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <AppBar position="relative">{loggedInUser ? <LoggedInNavBar /> : <LoggedOutNavBar />}</AppBar>
+            <Component {...pageProps} />
+            <Footer></Footer>
+          </LocalizationProvider>
         </ThemeProvider>
       </body>
     </CacheProvider>

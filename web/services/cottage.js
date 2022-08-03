@@ -1,13 +1,8 @@
 import axios from 'axios'
 const baseUrl = process.env.NEXT_PUBLIC_API_URL + 'cottages/'
 
-const scheduleReservation = async (cottage) => {
-  const body = {
-    duration: 1,
-    capacity: cottage.capacity,
-    entityId: cottage.id,
-  }
-  await axios.post('http://localhost:8080/api/cottages/reservations', body)
+const scheduleReservation = async (reservation) => {
+  await axios.post('http://localhost:8080/api/cottages/reservations', reservation)
 }
 
 const getAll = async () => {
